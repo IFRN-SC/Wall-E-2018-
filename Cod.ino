@@ -50,7 +50,7 @@ void setup(){
 void loop(){
 
 /************************OBSTÁCULO**************************/
-    float valor_sensor_frontal = robo.lerSensorSonarFrontal(); 
+//    float valor_sensor_frontal = robo.lerSensorSonarFrontal(); 
 //    int velDir = 30; 
 //    int velEsq = 30;
     
@@ -96,7 +96,7 @@ void loop(){
   float RefletESQ2 = robo.lerSensorLinhaEsq2();
   float RefletDIR = robo.lerSensorLinhaDir();
   float RefletDIR2 = robo.lerSensorLinhaDir2();  
-  
+
   bool maisEsq_Branco = (RefletESQ2 > BRA_PRE_ESQ2); // Mais esquerdo branco
   bool maisEsq_Preto = (RefletESQ2 < BRA_PRE_ESQ2);  // Mais esquerdo preto
   bool Esq_Branco = (RefletESQ > BRA_PRE_ESQ);       // Esquerdo branco
