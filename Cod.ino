@@ -35,12 +35,11 @@
 #include <robo_hardware.h>  
 #include <Ultrasonic.h>
 
-#define BRA_PRE_DIR 44
-#define BRA_PRE_ESQ 13
-#define BRA_PRE_ESQ2 40
-#define BRA_PRE_DIR2 42
+#define BRA_PRE_DIR 27
+#define BRA_PRE_ESQ 26
+#define BRA_PRE_ESQ2 32
+#define BRA_PRE_DIR2 30
 
-#define multi 1.06
 
 
 void setup(){
@@ -108,22 +107,51 @@ void loop(){
   
   
   if(maisEsq_Branco && Esq_Branco && Dir_Branco && maisDir_Branco) { // Todos branco
-      robo.acionarMotores(25, 25);
+      robo.acionarMotores(40, 40);
   }
                                                                                                                   
   else if(maisEsq_Preto && Esq_Preto && Dir_Preto && maisDir_Preto) { // Todos preto
-      robo.acionarMotores(20, 20);
+      robo.acionarMotores(40, 40);
   }                                                                                                                
   
-  else if(Dir_Preto){
+  else if(Dir_Preto && maisDir_Preto){
     if(Esq_Branco){
-      robo.acionarMotores(30, -30);
+      robo.acionarMotores(50, -50);
     }
     else if(Esq_Preto){
-      robo.acionarMotores(30, -30);
+      robo.acionarMotores(50, -50);
     }
   }
-      
+   
+  else if(Esq_Preto && maisEsq_Preto){
+    if(Dir_Branco){
+      robo.acionarMotores(-50, 50);
+    }
+    else if(Esq_Preto){
+      robo.acionarMotores(-50, 50);
+    }
+  }
+
+   else if(Esq_Preto){
+    if(Dir_Branco){
+      robo.acionarMotores(-50, 50);
+    }
+    else if(Esq_Preto){
+      robo.acionarMotores(-50, 50);
+    }
+  }
+
+  else if(Dir_Preto){
+    if(Esq_Branco){
+      robo.acionarMotores(50, -50);
+    }
+    else if(Esq_Preto){
+      robo.acionarMotores(50, -50);
+    }
+  }
+   
+
+  
       
   
   
