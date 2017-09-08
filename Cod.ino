@@ -107,7 +107,6 @@ void loop(){
   bool maisDir_Preto = (RefletDIR2 < BRA_PRE_DIR);   // Mais direito preto
   
   
-  
   if(maisEsq_Branco && Esq_Branco && Dir_Branco && maisDir_Branco) { // Todos branco
       robo.acionarMotores(25, 25);
   }
@@ -116,42 +115,17 @@ void loop(){
       robo.acionarMotores(20, 20);
   }                                                                                                                
   
-  else if(maisEsq_Branco && Esq_Branco && Dir_Preto && maisDir_Branco) { // Direito interno preto 
-     robo.acionarMotores(-35, 35);
-     
-  }                                                                                                                 
+  else if(Dir_Preto){
+    if(Esq_Branco){
+      robo.acionarMotores(30, -30);
+    }
+    else if(Esq_Preto){
+      robo.acionarMotores(30, -30);
+    }
+  }
+      
+      
   
-  else if(maisEsq_Branco && Esq_Preto && Dir_Branco && maisDir_Branco) { // Esquerdo interno preto 
-      robo.acionarMotores(35, -35);
-      
-  }
-  
-  else if(maisEsq_Preto && Esq_Preto && Dir_Branco && maisDir_Branco) { // 2 esquerdo preto
-      robo.acionarMotores(35, -35);
-      
-      
-  }
-  
-  else if(maisEsq_Branco && Esq_Branco && Dir_Preto && maisDir_Preto) { // 2 direito preto
-      robo.acionarMotores(-35, 35);
-      
-  }
-
-  else if(maisEsq_Preto && Esq_Preto && Dir_Preto && maisEsq_Branco) { // 2 esquerdo e direito interno preto
-      robo.acionarMotores(-35, 35);
-      
-  }
-
-  else if(maisEsq_Branco && Esq_Preto && Dir_Preto && maisDir_Preto) { // 2 direito e esquerdo inteiro preto
-      robo.acionarMotores(35, -35);
-      
-  }
-
-  else if(maisEsq_Branco && Esq_Preto && Dir_Preto && maisDir_Branco) { // 2 internos preto
-      robo.acionarMotores(-40, -40); // TESTAR OS 2 PRA TRÁS
-      
-      
-  }
   
  }                                
                                                                                                                 
