@@ -127,7 +127,7 @@ void loop(){
     if(Dir_Branco){
       robo.acionarMotores(-50, 50);
     }
-    else if(Esq_Preto){
+    else if(Dir_Preto){
       robo.acionarMotores(-50, 50);
     }
   }
@@ -136,7 +136,7 @@ void loop(){
     if(Dir_Branco){
       robo.acionarMotores(-50, 50);
     }
-    else if(Esq_Preto){
+    else if(Dir_Preto){
       robo.acionarMotores(-50, 50);
     }
   }
