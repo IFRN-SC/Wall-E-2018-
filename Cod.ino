@@ -36,8 +36,8 @@
 #include <Ultrasonic.h>
 
 #define BRA_PRE_DIR 27
-#define BRA_PRE_ESQ 26
-#define BRA_PRE_ESQ2 32
+#define BRA_PRE_ESQ 25
+#define BRA_PRE_ESQ2 30
 #define BRA_PRE_DIR2 30
 
 
@@ -107,54 +107,38 @@ void loop(){
   
   
   if(maisEsq_Branco && Esq_Branco && Dir_Branco && maisDir_Branco) { // Todos branco
-      robo.acionarMotores(40, 40);
+      robo.acionarMotores(70, 70);
   }
                                                                                                                   
   else if(maisEsq_Preto && Esq_Preto && Dir_Preto && maisDir_Preto) { // Todos preto
-      robo.acionarMotores(40, 40);
+      robo.acionarMotores(70, 70);
   }                                                                                                                
   
-  else if(Dir_Preto && maisDir_Preto){
-    if(Esq_Branco){
-      robo.acionarMotores(50, -50);
-    }
-    else if(Esq_Preto){
-      robo.acionarMotores(50, -50);
-    }
+  else if(maisEsq_Branco && Esq_Branco && Dir_Preto && maisDir_Preto){
+      robo.acionarMotores(80, -80);
   }
    
-  else if(Esq_Preto && maisEsq_Preto){
-    if(Dir_Branco){
-      robo.acionarMotores(-50, 50);
+  else if(Esq_Preto && maisEsq_Preto && Dir_Branco && maisDir_Branco){
+      robo.acionarMotores(-80, 80);
     }
-    else if(Dir_Preto){
-      robo.acionarMotores(-50, 50);
-    }
-  }
 
    else if(Esq_Preto){
     if(Dir_Branco){
-      robo.acionarMotores(-50, 50);
+      robo.acionarMotores(-80, 80);
     }
     else if(Dir_Preto){
-      robo.acionarMotores(-50, 50);
+      robo.acionarMotores(80, 80);
     }
   }
 
   else if(Dir_Preto){
     if(Esq_Branco){
-      robo.acionarMotores(50, -50);
+      robo.acionarMotores(80, -80);
     }
     else if(Esq_Preto){
-      robo.acionarMotores(50, -50);
+      robo.acionarMotores(80, 80);
     }
   }
-   
-
-  
-      
-  
-  
- }                                
+}                                
                                                                                                                 
 
