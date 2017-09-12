@@ -122,23 +122,17 @@ void loop(){
       robo.acionarMotores(-80, 80);
     }
 
-   else if(Esq_Preto){
-    if(Dir_Branco){
+  else if(Esq_Branco && maisEsq_Preto && Dir_Branco && maisDir_Branco){
       robo.acionarMotores(-80, 80);
-    }
-    else if(Dir_Preto){
-      robo.acionarMotores(80, 80);
-    }
-  }
+   }
 
-  else if(Dir_Preto){
-    if(Esq_Branco){
+  else if(Esq_Branco && maisEsq_Branco && Dir_Preto && maisDir_Branco){
       robo.acionarMotores(80, -80);
     }
-    else if(Esq_Preto){
+
+  else if(Esq_Preto && maisEsq_Preto && Dir_Preto && maisDir_Branco){
       robo.acionarMotores(80, 80);
     }
-  }
 }                                
                                                                                                                 
 
