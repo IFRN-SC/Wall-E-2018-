@@ -13,15 +13,15 @@ private:
 	float valor_sensor_esq2;
 	float valor_sensor_dir2;
 
-	float minimoPreto_sensor_dir;
-	float minimoPreto_sensor_esq;
-	float minimoPreto_sensor_esq2;
-	float minimoPreto_sensor_dir2;
+	float maximoPreto_sensor_dir;
+	float maximoPreto_sensor_esq;
+	float maximoPreto_sensor_esq2;
+	float maximoPreto_sensor_dir2;
 
-	float maximoBranco_sensor_dir;
-	float maximoBranco_sensor_esq;
-	float maximoBranco_sensor_esq2;
-	float maximoBranco_sensor_dir2;
+	float minimoBranco_sensor_dir;
+	float minimoBranco_sensor_esq;
+	float minimoBranco_sensor_esq2;
+	float minimoBranco_sensor_dir2;
 
 	float valorPreto_sensor_dir;
 	float valorPreto_sensor_esq;

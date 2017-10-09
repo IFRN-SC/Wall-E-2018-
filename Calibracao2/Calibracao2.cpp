@@ -20,20 +20,20 @@ void Calibracao::calibrarBranco(){
       valorBranco_sensor_esq = robo.lerSensorLinhaEsq();
       valorBranco_sensor_esq2 = robo.lerSensorLinhaEsq2();
 
-      if (valorBranco_sensor_dir > maximoBranco_sensor_dir) {
-        maximoBranco_sensor_dir = valorBranco_sensor_dir;
+      if (valorBranco_sensor_dir < minimoBranco_sensor_dir) {
+        minimoBranco_sensor_dir = valorBranco_sensor_dir;
       }					
       
-      if (valorBranco_sensor_dir2 > maximoBranco_sensor_dir2) {
-        maximoBranco_sensor_dir2 = valorBranco_sensor_dir2;
+      if (valorBranco_sensor_dir2 < minimoBranco_sensor_dir2) {
+        minimoBranco_sensor_dir2 = valorBranco_sensor_dir2;
       }
 
-      if (valorBranco_sensor_esq > maximoBranco_sensor_esq) {
-        maximoBranco_sensor_esq = valorBranco_sensor_esq;
+      if (valorBranco_sensor_esq < minimoBranco_sensor_esq) {
+        minimoBranco_sensor_esq = valorBranco_sensor_esq;
       }
 
-      if (valorBranco_sensor_esq2 > maximoBranco_sensor_esq2) {
-        maximoBranco_sensor_esq2 = valorBranco_sensor_esq2;
+      if (valorBranco_sensor_esq2 < minimoBranco_sensor_esq2) {
+        minimoBranco_sensor_esq2 = valorBranco_sensor_esq2;
       }
       
           
@@ -56,20 +56,20 @@ void Calibracao::calibrarPreto(){
       valorPreto_sensor_esq = robo.lerSensorLinhaEsq();
       valorPreto_sensor_esq2 = robo.lerSensorLinhaEsq2();
 
-      if (valorPreto_sensor_dir < minimoPreto_sensor_dir) {
-        minimoPreto_sensor_dir = valorPreto_sensor_dir;
+      if (valorPreto_sensor_dir > maximoPreto_sensor_dir) {
+        maximoPreto_sensor_dir = valorPreto_sensor_dir;
       }
       
-      if (valorPreto_sensor_dir2 < minimoPreto_sensor_dir2) {
-        minimoPreto_sensor_dir2 = valorPreto_sensor_dir2;
+      if (valorPreto_sensor_dir2 > maximoPreto_sensor_dir2) {
+        maximoPreto_sensor_dir2 = valorPreto_sensor_dir2;
       }
 
-      if (valorPreto_sensor_esq < minimoPreto_sensor_esq) {
-        minimoPreto_sensor_esq = valorPreto_sensor_esq;
+      if (valorPreto_sensor_esq > maximoPreto_sensor_esq) {
+        maximoPreto_sensor_esq = valorPreto_sensor_esq;
       }
 
-      if (valorPreto_sensor_esq2 < minimoPreto_sensor_esq2) {
-        minimoPreto_sensor_esq2 = valorPreto_sensor_esq2;
+      if (valorPreto_sensor_esq2 > maximoPreto_sensor_esq2) {
+        maximoPreto_sensor_esq2 = valorPreto_sensor_esq2;
       }
       
           
@@ -105,9 +105,9 @@ void Calibracao::Menu_calibrar() {
     }
   }
 
-  BRA_PRE_DIR = (minimoPreto_sensor_dir + maximoBranco_sensor_dir)/2;
-  BRA_PRE_DIR2 = (minimoPreto_sensor_dir2 + maximoBranco_sensor_dir2)/2;
-  BRA_PRE_ESQ = (minimoPreto_sensor_esq + maximoBranco_sensor_esq)/2;
-  BRA_PRE_ESQ2 = (minimoPreto_sensor_esq2 + maximoBranco_sensor_esq2)/2;  
+  BRA_PRE_DIR = (maximoPreto_sensor_dir + minimoBranco_sensor_dir)/2;
+  BRA_PRE_DIR2 = (maximoPreto_sensor_dir2 + minimoBranco_sensor_dir2)/2;
+  BRA_PRE_ESQ = (maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
+  BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
 }
 
