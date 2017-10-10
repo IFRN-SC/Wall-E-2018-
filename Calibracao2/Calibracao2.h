@@ -2,7 +2,7 @@
 #include <Servo.h>
 
 
-class Calibracao {
+class Calibracao{
 private:
 	void esperarParaLer();
 	void calibrarBranco();
@@ -51,5 +51,5 @@ public:
 	void Menu_calibrar();
 
 
-}
+};
 

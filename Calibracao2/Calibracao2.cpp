@@ -1,9 +1,17 @@
 #include <Calibracao.h>
 
 
+Calibracao::Calibracao (){
+	escolhaMenu = '';
+	escolhaBrancoPreto = '';
+	escolhaBranco = '';
+	escolhaPreto = '';
+}
+
 void Calibracao::esperarParaLer (){
   while (!Serial.available()){}
 }
+
 
 void Calibracao::calibrarBranco(){
 
@@ -14,7 +22,7 @@ void Calibracao::calibrarBranco(){
     esperarParaLer();
     escolhaBranco = Serial.read();
 
-    if (escolhaBranco = 'C') {
+    if (escolhaBranco == 'C') {
       valorBranco_sensor_dir = robo.lerSensorLinhaDir();
       valorBranco_sensor_dir2 = robo.lerSensorLinhaDir2();
       valorBranco_sensor_esq = robo.lerSensorLinhaEsq();
@@ -22,7 +30,7 @@ void Calibracao::calibrarBranco(){
 
       if (valorBranco_sensor_dir < minimoBranco_sensor_dir) {
         minimoBranco_sensor_dir = valorBranco_sensor_dir;
-      }					
+      }
       
       if (valorBranco_sensor_dir2 < minimoBranco_sensor_dir2) {
         minimoBranco_sensor_dir2 = valorBranco_sensor_dir2;
@@ -38,19 +46,22 @@ void Calibracao::calibrarBranco(){
       
           
     }
+    else {
+      escolhaBranco = 'S';
+    }
   }
 }
 
 void Calibracao::calibrarPreto(){
 
-  while (escolhaPreto != 'S') {
-    Serial.println("Coloque todos os sensores no PRETO");
-    Serial.println("[C] Para CALIBRAR");
-    Serial.println("[S] Para SAIR");
-    esperarParaLer();
-    escolhaPreto = Serial.read();
-
-    if (escolhaPreto = 'C') {
+	while (escolhaPreto != 'S') {
+		Serial.println("Coloque todos os sensores no PRETO");
+		Serial.println("[C] Para CALIBRAR");
+		Serial.println("[S] Para SAIR");
+		esperarParaLer();
+		escolhaPreto = Serial.read();
+    
+    if (escolhaPreto == 'C') {
       valorPreto_sensor_dir = robo.lerSensorLinhaDir();
       valorPreto_sensor_dir2 = robo.lerSensorLinhaDir2();
       valorPreto_sensor_esq = robo.lerSensorLinhaEsq();
@@ -73,6 +84,9 @@ void Calibracao::calibrarPreto(){
       }
       
           
+    }
+    else {
+      escolhaPreto = 'S';
     }
   }
   
@@ -100,14 +114,20 @@ void Calibracao::Menu_calibrar() {
         else if (escolhaBrancoPreto == 'P') {
           calibrarPreto();
         }
+        else {
+          escolhaBrancoPreto = 'S';
+        }
         
       }
+      escolhaBrancoPreto = '.';
     }
   }
+
 
   BRA_PRE_DIR = (maximoPreto_sensor_dir + minimoBranco_sensor_dir)/2;
   BRA_PRE_DIR2 = (maximoPreto_sensor_dir2 + minimoBranco_sensor_dir2)/2;
   BRA_PRE_ESQ = (maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
   BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
+ 
 }
 

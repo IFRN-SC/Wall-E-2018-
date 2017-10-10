@@ -1,6 +1,6 @@
 #include <robo_hardware.h> 
 #include <Servo.h>
-
+#include <Calibracao2.h>
 //********PINOS PARA SENSORES REFLETANCIA***********//
 //
 //SENSOR_LINHA_DIREITO2  A0  //Define o pino do sensor de refletancia esquerdo 
@@ -10,6 +10,9 @@
 //
 //*********PINOS PARA SENSORES REFLETANCIA*********//
 
+
+
+/*
 float valor_sensor_dir;
 float valor_sensor_esq;
 float valor_sensor_esq2;
@@ -178,34 +181,18 @@ char escolhaBrancoPreto = "";
   BRA_PRE_ESQ = (maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
   BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
 }
+*/
 
+Calibracao cali;
 void setup(){
   Serial.begin(9600);
-	Menu_calibrar();
+	cali.Menu_calibrar();
   
 	robo.configurar(false);
 }
 
 void loop(){
-	valor_sensor_esq = robo.lerSensorLinhaEsq(); //le um valor do sensor. O sensor retornar um valor de 0 100
- 	valor_sensor_dir = robo.lerSensorLinhaDir(); //le um valor do sensor. O sensor retornar um valor de 0 100
-  valor_sensor_dir2 = robo.lerSensorLinhaDir2();
-  valor_sensor_esq2 = robo.lerSensorLinhaEsq2();
 
-  
-	Serial.print("     direito e: ");
-	Serial.print(valor_sensor_dir); //Imprime o valor do sensor pela porta serial
-
-  Serial.print("    + direito e: ");
-  Serial.print(valor_sensor_dir2); //Imprime o valor do sensor pela porta serial
-
-  Serial.print("    + esquerdo e: ");
-	Serial.print(valor_sensor_esq2); //Imprime o valor do sensor pela porta serial
-
-  Serial.print("     esquerdo e: ");
-  Serial.println(valor_sensor_esq); //Imprime o valor do sensor pela porta serial
-  
-	delay(500);
 
 }
 
