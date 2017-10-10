@@ -12,26 +12,26 @@
 
 
 
-/*
-float valor_sensor_dir;
-float valor_sensor_esq;
-float valor_sensor_esq2;
-float valor_sensor_dir2;
 
-float maximoPreto_sensor_dir;
-float maximoPreto_sensor_esq;
-float maximoPreto_sensor_esq2;
-float maximoPreto_sensor_dir2;
+float valor_sensor_dir = 0;
+float valor_sensor_esq = 0;
+float valor_sensor_esq2 = 0;
+float valor_sensor_dir2 = 0;
 
-float minimoBranco_sensor_dir;
-float minimoBranco_sensor_esq;
-float minimoBranco_sensor_esq2;
-float minimoBranco_sensor_dir2;
+float maximoPreto_sensor_dir = 0;
+float maximoPreto_sensor_esq = 0;
+float maximoPreto_sensor_esq2 = 0;
+float maximoPreto_sensor_dir2 = 0;
 
-float BRA_PRE_DIR;
-float BRA_PRE_DIR2;
-float BRA_PRE_ESQ;
-float BRA_PRE_ESQ2;
+float minimoBranco_sensor_dir = 100;
+float minimoBranco_sensor_esq = 100;
+float minimoBranco_sensor_esq2 = 100;
+float minimoBranco_sensor_dir2 = 100;
+
+float BRA_PRE_DIR = 0;
+float BRA_PRE_DIR2 = 0;
+float BRA_PRE_ESQ = 0;
+float BRA_PRE_ESQ2 = 0;
 
 
 
@@ -50,10 +50,10 @@ void calibrarBranco(){
 
   char escolhaBranco = "";
   
-  float valorBranco_sensor_dir;
-  float valorBranco_sensor_esq;
-  float valorBranco_sensor_esq2;
-  float valorBranco_sensor_dir2;
+  float valorBranco_sensor_dir = 0;
+  float valorBranco_sensor_esq = 0;
+  float valorBranco_sensor_esq2 = 0;
+  float valorBranco_sensor_dir2 = 0;
 
   while (escolhaBranco != 'S') {
     Serial.println("Coloque todos os sensores no BRANCO");
@@ -83,6 +83,17 @@ void calibrarBranco(){
       if (valorBranco_sensor_esq2 < minimoBranco_sensor_esq2) {
         minimoBranco_sensor_esq2 = valorBranco_sensor_esq2;
       }
+       
+      Serial.println("  ");
+      Serial.println("Valores lidos: ");
+      Serial.print(minimoBranco_sensor_dir);
+      Serial.print(" --- ");
+      Serial.print(minimoBranco_sensor_dir2);
+      Serial.print(" --- ");
+      Serial.print(minimoBranco_sensor_esq);
+      Serial.print(" --- ");
+      Serial.println(minimoBranco_sensor_esq2);
+      Serial.println(" ");
       
           
     }
@@ -96,10 +107,10 @@ void calibrarPreto(){
 
   char escolhaPreto = "";
   
-  float valorPreto_sensor_dir;
-  float valorPreto_sensor_esq;
-  float valorPreto_sensor_esq2;
-  float valorPreto_sensor_dir2;
+  float valorPreto_sensor_dir = 0;
+  float valorPreto_sensor_esq = 0;
+  float valorPreto_sensor_esq2 = 0;
+  float valorPreto_sensor_dir2 = 0;
 
   
   while (escolhaPreto != 'S') {
@@ -130,8 +141,16 @@ void calibrarPreto(){
       if (valorPreto_sensor_esq2 > maximoPreto_sensor_esq2) {
         maximoPreto_sensor_esq2 = valorPreto_sensor_esq2;
       }
-      
-          
+      Serial.println("  ");
+      Serial.println("Valores lidos: ");
+      Serial.print(maximoPreto_sensor_dir);
+      Serial.print(" --- ");
+      Serial.print(maximoPreto_sensor_dir2);
+      Serial.print(" --- ");
+      Serial.print(maximoPreto_sensor_esq);
+      Serial.print(" --- ");
+      Serial.println(maximoPreto_sensor_esq2);
+      Serial.println(" ");          
     }
     else {
       escolhaPreto = 'S';
@@ -180,14 +199,32 @@ char escolhaBrancoPreto = "";
   BRA_PRE_DIR2 = (maximoPreto_sensor_dir2 + minimoBranco_sensor_dir2)/2;
   BRA_PRE_ESQ = (maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
   BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
-}
-*/
 
-Calibracao cali;
-void setup(){
-  Serial.begin(9600);
-	cali.Menu_calibrar();
+  Serial.println("---------------");
   
+  
+}
+
+
+// Calibracao cali;
+
+void setup(){
+  
+  Serial.begin(9600);
+	
+	// cali.Menu_calibrar();
+  Menu_calibrar();
+  Serial.print("BRA_PRE_DIR: ");
+  Serial.println(BRA_PRE_DIR);
+  
+  Serial.print("BRA_PRE_DIR2: ");
+  Serial.println(BRA_PRE_DIR2);
+
+  Serial.print("BRA_PRE_ESQ");
+  Serial.println(BRA_PRE_ESQ);
+  
+  Serial.print("BRA_PRE_ESQ2");
+  Serial.println(BRA_PRE_ESQ2);
 	robo.configurar(false);
 }
 
