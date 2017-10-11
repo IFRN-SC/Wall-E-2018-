@@ -201,6 +201,20 @@ char escolhaBrancoPreto = "";
   BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
 
   Serial.println("---------------");
+  Serial.println("---------------");
+  delay(2000);
+  
+  Serial.print("BRA_PRE_DIR: ");
+  Serial.println(BRA_PRE_DIR);
+  
+  Serial.print("BRA_PRE_DIR2: ");
+  Serial.println(BRA_PRE_DIR2);
+
+  Serial.print("BRA_PRE_ESQ");
+  Serial.println(BRA_PRE_ESQ);
+  
+  Serial.print("BRA_PRE_ESQ2");
+  Serial.println(BRA_PRE_ESQ2);
   
   
 }
@@ -214,17 +228,6 @@ void setup(){
 	
 	// cali.Menu_calibrar();
   Menu_calibrar();
-  Serial.print("BRA_PRE_DIR: ");
-  Serial.println(BRA_PRE_DIR);
-  
-  Serial.print("BRA_PRE_DIR2: ");
-  Serial.println(BRA_PRE_DIR2);
-
-  Serial.print("BRA_PRE_ESQ");
-  Serial.println(BRA_PRE_ESQ);
-  
-  Serial.print("BRA_PRE_ESQ2");
-  Serial.println(BRA_PRE_ESQ2);
 	robo.configurar(false);
 }
 
