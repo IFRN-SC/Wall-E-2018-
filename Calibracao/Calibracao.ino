@@ -4,7 +4,7 @@
 //********PINOS PARA SENSORES REFLETANCIA***********//
 //
 //SENSOR_LINHA_DIREITO2  A0  //Define o pino do sensor de refletancia esquerdo 
-//SENSOR_LINHA_DIREITO  A1  //Define o pino do sensor de refletancia direito
+//SENSOR_LINHA_DIREITO  A1  //Define o pino do sensor de refletancia direito  shasha
 //SENSOR_LINHA_ESQUERDO   A2
 //SENSOR_LINHA_ESQUERDO2  A3
 //
@@ -12,26 +12,26 @@
 
 
 
+/*
+float valor_sensor_dir;
+float valor_sensor_esq;
+float valor_sensor_esq2;
+float valor_sensor_dir2;
 
-float valor_sensor_dir = 0;
-float valor_sensor_esq = 0;
-float valor_sensor_esq2 = 0;
-float valor_sensor_dir2 = 0;
-
-float maximoPreto_sensor_dir = 0;
-float maximoPreto_sensor_esq = 0;
-float maximoPreto_sensor_esq2 = 0;
-float maximoPreto_sensor_dir2 = 0;
+float maximoPreto_sensor_dir;
+float maximoPreto_sensor_esq;
+float maximoPreto_sensor_esq2;
+float maximoPreto_sensor_dir2;
 
 float minimoBranco_sensor_dir = 100;
 float minimoBranco_sensor_esq = 100;
 float minimoBranco_sensor_esq2 = 100;
 float minimoBranco_sensor_dir2 = 100;
 
-float BRA_PRE_DIR = 0;
-float BRA_PRE_DIR2 = 0;
-float BRA_PRE_ESQ = 0;
-float BRA_PRE_ESQ2 = 0;
+float BRA_PRE_DIR;
+float BRA_PRE_DIR2;
+float BRA_PRE_ESQ;
+float BRA_PRE_ESQ2;
 
 
 
@@ -50,10 +50,10 @@ void calibrarBranco(){
 
   char escolhaBranco = "";
   
-  float valorBranco_sensor_dir = 0;
-  float valorBranco_sensor_esq = 0;
-  float valorBranco_sensor_esq2 = 0;
-  float valorBranco_sensor_dir2 = 0;
+  float valorBranco_sensor_dir;
+  float valorBranco_sensor_esq;
+  float valorBranco_sensor_esq2;
+  float valorBranco_sensor_dir2;
 
   while (escolhaBranco != 'S') {
     Serial.println("Coloque todos os sensores no BRANCO");
@@ -107,10 +107,10 @@ void calibrarPreto(){
 
   char escolhaPreto = "";
   
-  float valorPreto_sensor_dir = 0;
-  float valorPreto_sensor_esq = 0;
-  float valorPreto_sensor_esq2 = 0;
-  float valorPreto_sensor_dir2 = 0;
+  float valorPreto_sensor_dir;
+  float valorPreto_sensor_esq;
+  float valorPreto_sensor_esq2;
+  float valorPreto_sensor_dir2;
 
   
   while (escolhaPreto != 'S') {
@@ -165,11 +165,14 @@ char escolhaMenu = "";
 char escolhaBrancoPreto = "";
 
 
-  while (escolhaMenu != 'S') { 
+  while (1) { 
      Serial.println("[C] Começar calibração");
      Serial.println("[S] Sair da calibração");
      esperarParaLer();
      escolhaMenu = Serial.read();
+     if (escolhaMenu=='S'){
+      break;
+      }
      
      if (escolhaMenu == 'C'){
       while (escolhaBrancoPreto != 'S') { 
@@ -195,44 +198,49 @@ char escolhaBrancoPreto = "";
   }
 
 
-  BRA_PRE_DIR = (maximoPreto_sensor_dir + minimoBranco_sensor_dir)/2;
-  BRA_PRE_DIR2 = (maximoPreto_sensor_dir2 + minimoBranco_sensor_dir2)/2;
-  BRA_PRE_ESQ = (maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
-  BRA_PRE_ESQ2 = (maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
+  BRA_PRE_DIR = 1;//(maximoPreto_sensor_dir + minimoBranco_sensor_dir)/2;
+  BRA_PRE_DIR2 = 2;//(maximoPreto_sensor_dir2 + minimoBranco_sensor_dir2)/2;
+  BRA_PRE_ESQ = 3;//(maximoPreto_sensor_esq + minimoBranco_sensor_esq)/2;
+  BRA_PRE_ESQ2 = 4;//(maximoPreto_sensor_esq2 + minimoBranco_sensor_esq2)/2;  
 
-  Serial.println("---------------");
-  Serial.println("---------------");
   delay(2000);
   
-  Serial.print("BRA_PRE_DIR: ");
+  Serial.println("asdasda");
+  
+  Serial.println("2");
+  
+  Serial.println(3);
+  
+  Serial.println(4);
+
   Serial.println(BRA_PRE_DIR);
   
-  Serial.print("BRA_PRE_DIR2: ");
   Serial.println(BRA_PRE_DIR2);
-
-  Serial.print("BRA_PRE_ESQ");
+  
   Serial.println(BRA_PRE_ESQ);
   
-  Serial.print("BRA_PRE_ESQ2");
   Serial.println(BRA_PRE_ESQ2);
   
   
-}
+}*/
 
 
-// Calibracao cali;
+ Calibracao2 cali;
 
 void setup(){
   
   Serial.begin(9600);
-	
-	// cali.Menu_calibrar();
-  Menu_calibrar();
+	cali.Menu_calibrar();
+  // Menu_calibrar();
 	robo.configurar(false);
 }
 
 void loop(){
 
+  Serial.println("CALIBRADO");
+  delay(10000);
+  Serial.println(":D");
+  delay(500);
 
 }
 
