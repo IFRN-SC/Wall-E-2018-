@@ -103,6 +103,26 @@ void Estrategia::alinharEncruzilhada(){
   }
 }
 
+void Estrategia::passeVerde(){
+	if (sensor.corEsq_verde() && (sensor.corDir_branco() || sensor.corDir_preto())){
+			para(700);
+			passeEncruzilhadaDireita();
+		}
+		else if (sensor.corDir_verde() && (sensor.corEsq_branco() || sensor.corEsq_preto())){
+			para(700);
+			passeEncruzilhadaEsquerda();
+		}
+		else if (sensor.corDir_verde() && sensor.corEsq_verde()){
+			while (!sensor.corEsq_preto()){
+				robo.acionarMotores(35, -35);
+			}
+		}
+		else {
+			robo.acionarMotores(-35, -35);
+			delay(400);
+		}
+}
+
 void Estrategia::passeObstaculo(){
 		  robo.acionarMotores(0, 0);
 		  delay(300);
@@ -167,23 +187,7 @@ void Estrategia::sigaLinha(){
 		para(1000);
 		//digitalWrite(LED_BUILTIN, LOW);
 		
-		if (sensor.corEsq_verde() && (sensor.corDir_branco() || sensor.corDir_preto())){
-			para(700);
-			passeEncruzilhadaDireita();
-		}
-		else if (sensor.corDir_verde() && (sensor.corEsq_branco() || sensor.corEsq_preto())){
-			para(700);
-			passeEncruzilhadaEsquerda();
-		}
-		else if (sensor.corDir_verde() && sensor.corEsq_verde()){
-			while (!sensor.corEsq_preto()){
-				robo.acionarMotores(35, -35);
-			}
-		}
-		else {
-			robo.acionarMotores(-35, -35);
-			delay(400);
-		}
+		passeVerde();
 	}
 
 	else if (sensor.branco_preto_branco_branco() ||

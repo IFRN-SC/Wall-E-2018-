@@ -25,7 +25,7 @@ class Estrategia {
 		bool viuObstaculo();
 		
 		void para(int tempo);
-		
+		void passeVerde();
 		void alinharEncruzilhada();
 		void alinharObstaculo();
 		void passeEncruzilhadaDireita();
