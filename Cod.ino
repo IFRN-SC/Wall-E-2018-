@@ -1,7 +1,5 @@
 #include "Estrategia.h"
 
-
-
 Estrategia estrategia;
 
 void setup(){
@@ -9,8 +7,6 @@ void setup(){
   robo.configurar(false);
   estrategia.configurar();
   estrategia.calibrar();
-  
-  
 }
 
 void loop(){

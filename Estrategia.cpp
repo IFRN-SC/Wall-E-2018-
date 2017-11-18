@@ -6,10 +6,10 @@ void Estrategia::configurar(){
 }
 void Estrategia::calibrar(/*bool escolha*/){
 	// realizarCali = escolha;
-	Serial.println("Digite qualquer coisa para calibrar");
+	Serial.println(F("Digite qualquer coisa para calibrar"));
 	for(int i=0; i<10; i++){
 		delay(500);
-		Serial.print("Tentativa ");
+		Serial.print(F("Tentativa "));
 		Serial.println(i);
 		if(Serial.available()){
 			Serial.read();
@@ -35,7 +35,7 @@ void Estrategia::passeEncruzilhadaDireita(){
 	robo.acionarMotores(-35, 35);
 	}*/
 	
-	robo.acionarMotores(-35, 35);
+	robo.acionarMotores(35, -35);
 	delay(1000);
 	/*
 	while (!sensor.Esq_Branco() && !sensor.Dir_Branco()){
@@ -53,7 +53,7 @@ void Estrategia::passeEncruzilhadaEsquerda(){
 	while (!sensor.Dir_Preto()){
 	robo.acionarMotores(35, -35);
 	}*/
-	robo.acionarMotores(35, -35);
+	robo.acionarMotores(-35, 35);
 	delay(1000);
 	/*
 	while (!sensor.Dir_Branco() && !sensor.Esq_Branco()){
@@ -106,11 +106,11 @@ void Estrategia::alinharEncruzilhada(){
 void Estrategia::passeVerde(){
 	if (sensor.corEsq_verde() && (sensor.corDir_branco() || sensor.corDir_preto())){
 			para(700);
-			passeEncruzilhadaDireita();
+			passeEncruzilhadaEsquerda();
 		}
 		else if (sensor.corDir_verde() && (sensor.corEsq_branco() || sensor.corEsq_preto())){
 			para(700);
-			passeEncruzilhadaEsquerda();
+			passeEncruzilhadaDireita();
 		}
 		else if (sensor.corDir_verde() && sensor.corEsq_verde()){
 			while (!sensor.corEsq_preto()){
