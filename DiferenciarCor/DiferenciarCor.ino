@@ -10,7 +10,16 @@ void setup() {
 }
 
 void loop() {
-
+  if(sensor.branco_branco_branco_branco()){
+    Serial.println("TODOS BRANCO");
+    robo.acionarMotores(55, 55);
+  }
+  else{
+    Serial.println("NAO BRANCO");
+    robo.acionarMotores(0, 0);
+  }
+  
+/*
   if (sensor.corEsq_branco()) {
     Serial.print("BRANCO ESQ   ");
   }
@@ -32,8 +41,8 @@ void loop() {
   Serial.print(leituraSensorCor.v);
   
   
-  Serial.println("    |    ");
-/*
+  Serial.print("    |    ");
+
   if (sensor.corDir_branco()) {
     Serial.print("BRANCO DIR  ");
   }
