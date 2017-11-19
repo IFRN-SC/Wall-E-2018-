@@ -169,7 +169,7 @@ void Estrategia::sigaLinha(){
 	sensor.branco_preto_preto_branco()){
 		robo.acionarMotores(50, 50);
 	}
-	
+
 	else if (sensor.preto_preto_preto_branco()){
 		robo.acionarMotores(-50, 50);
 	}
