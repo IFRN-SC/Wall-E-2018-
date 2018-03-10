@@ -1,25 +1,21 @@
+#ifndef CALIBRACAO2_H
+#define CALIBRACAO2_H
+
 #include <robo_hardware.h> 
 #include <Servo.h>
 #include "SensorDeCor.h"
+#include "Refletancia.h"
  
 class Calibracao2 {
 	
-	
-
 private:
 	Matematica calcule;
 	calibracao_dados cali;
+
 	
 	bool realizarCali;
 	
 	const char SAIDA = 'S'; 
-	
-	float mediaEsq;
-	float mediaEsq2;
-	float mediaDir;
-	float mediaDir2;
-	
-	void calculeMedia();
 	
 	void esperarParaLer();
 	void calibrarBranco();
@@ -30,31 +26,6 @@ private:
 	void calibrarCorBranco();
 	void calibrarVerde();
 	void calibrarCinza();
-	
-	float valor_sensor_dir;
-	float valor_sensor_esq;
-	float valor_sensor_esq2;
-	float valor_sensor_dir2;
-
-	float maximoPreto_sensor_dir;
-	float maximoPreto_sensor_esq;
-	float maximoPreto_sensor_esq2;
-	float maximoPreto_sensor_dir2;
-
-	float minimoBranco_sensor_dir;
-	float minimoBranco_sensor_esq;
-	float minimoBranco_sensor_esq2;
-	float minimoBranco_sensor_dir2;
-
-	float valorPreto_sensor_dir;
-	float valorPreto_sensor_esq;
-	float valorPreto_sensor_esq2;
-	float valorPreto_sensor_dir2;
-
-	float valorBranco_sensor_dir;
-	float valorBranco_sensor_esq;
-	float valorBranco_sensor_esq2;
-	float valorBranco_sensor_dir2;
 	
 	char escolhaInicial;
 	char escolhaMenu;
@@ -70,16 +41,13 @@ private:
 public:
  
 	Calibracao2();
-	
-	float getSeparacaoDir();
-	float getSeparacaoDir2();
-	float getSeparacaoEsq();
-	float getSeparacaoEsq2();
 
 	void Menu_calibrar();
 	void lerCalibracao();
 	
 protected: 
+	Refletancia refletancia_dir, refletancia_dir2, refletancia_esq, refletancia_esq2;
 	SensorDeCor corDireito, corEsquerdo;
 };
 
+#endif

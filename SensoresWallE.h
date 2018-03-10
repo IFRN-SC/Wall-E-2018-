@@ -46,7 +46,7 @@ class Sensores: public Calibracao2 {
 	 bool maisDir_Branco(); // Mais direito branco
 	 bool maisDir_Preto(); // Mais direito preto
 	 
-	inline int sonar_frontal(){return robo.lerSensorSonarFrontal();}
+	//inline float sonar_frontal(){return robo.lerSensorSonarFrontal();}
 
 	 
 	 Sensores();

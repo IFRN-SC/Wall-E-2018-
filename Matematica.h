@@ -1,3 +1,6 @@
+#ifndef MATEMATICA_H
+#define MATEMATICA_H
+
 class Matematica {
 	
 	public:
@@ -12,3 +15,5 @@ class Matematica {
 	private:
 	
 };
+
+#endif

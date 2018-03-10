@@ -3,25 +3,29 @@
 
 #include <robo_hardware.h>
 #include "SensoresWallE.h"
+#include "Movimentacao.h"
 
-#define ESQUERDA 1
-#define DIREITA 2
+
 
 class Estrategia {
 	public:
 		
 		void executar();
-		void calibrar(/*bool escolha*/);
+		void calibrar();
 		
 		void configurar();
-		
-		
 	private:
 		// bool realizarCali;
+		#define ESQUERDA 1
+		#define DIREITA 2
+		#define VELPADRAO 40
+
+		int t;
+		Movimentacao mova;
 		Sensores sensor;
 		int contAlternadas = 0;
 		int indicador;
-		bool desalinhado();
+		bool desalinhado(); 
 		bool viuObstaculo();
 		
 		void para(int tempo);
@@ -32,6 +36,10 @@ class Estrategia {
 		void passeEncruzilhadaEsquerda();
 		void passeObstaculo();
 		void sigaLinha();
+    	void passeVerdeOuRedutor();
+    	void vireEsquerda();
+    	void vireDireita();
+    	void piscarLeds();
 };
 
 

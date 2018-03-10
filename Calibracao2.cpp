@@ -1,45 +1,18 @@
 #include "Calibracao2.h"
 
 
-Calibracao2::Calibracao2 (){
+Calibracao2::Calibracao2(){
 	escolhaInicial = ' ';
 	escolhaMenu = ' ';
 	escolhaBranco = ' ';
 	escolhaPreto = ' ';
-	
-	
-	minimoBranco_sensor_dir = 100;
-	minimoBranco_sensor_esq = 100;
-	minimoBranco_sensor_esq2 = 100;
-	minimoBranco_sensor_dir2 = 100;
 }
 
-void Calibracao2::calculeMedia(){
-	mediaDir = calcule.media(maximoPreto_sensor_dir, minimoBranco_sensor_dir, 0.3); 
-	mediaDir2 = calcule.media(maximoPreto_sensor_dir2, minimoBranco_sensor_dir2, 0.3);
-	mediaEsq = calcule.media(maximoPreto_sensor_esq, minimoBranco_sensor_esq, 0.3);
-	mediaEsq2 = calcule.media(maximoPreto_sensor_esq2, minimoBranco_sensor_esq2, 0.3);
-}
 
 void Calibracao2::esperarParaLer (){
   while (!Serial.available()){}
 }
 
-float Calibracao2::getSeparacaoDir (){
-	return mediaDir;
-}
-
-float Calibracao2::getSeparacaoDir2 (){
-	return mediaDir2;
-}
-
-float Calibracao2::getSeparacaoEsq (){
-	return mediaEsq;
-}
-
-float Calibracao2::getSeparacaoEsq2 (){
-	return mediaEsq2;
-}
 
 void Calibracao2::calibrarVerde(){
 	
@@ -166,25 +139,20 @@ void Calibracao2::calibrarBranco(){
     escolhaBranco = Serial.read();
 
     if (escolhaBranco == 'C') {
-      valorBranco_sensor_dir = robo.lerSensorLinhaDir();
-      valorBranco_sensor_dir2 = robo.lerSensorLinhaDir2();
-      valorBranco_sensor_esq = robo.lerSensorLinhaEsq();
-      valorBranco_sensor_esq2 = robo.lerSensorLinhaEsq2();
+	  refletancia_dir.setBrancoMini(robo.lerSensorLinhaDir());
+	  refletancia_dir2.setBrancoMini(robo.lerSensorLinhaDir2());
+	  refletancia_esq.setBrancoMini(robo.lerSensorLinhaEsq());
+	  refletancia_esq2.setBrancoMini(robo.lerSensorLinhaEsq2());
 
-      minimoBranco_sensor_dir = calcule.minimo(valorBranco_sensor_dir, minimoBranco_sensor_dir);
-	  minimoBranco_sensor_dir2 = calcule.minimo(valorBranco_sensor_dir2, minimoBranco_sensor_dir2);
-	  minimoBranco_sensor_esq = calcule.minimo(valorBranco_sensor_esq, minimoBranco_sensor_esq);
-	  minimoBranco_sensor_esq2 = calcule.minimo(valorBranco_sensor_esq2, minimoBranco_sensor_esq2);
-	  
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));
-      Serial.print(minimoBranco_sensor_esq2);
+      Serial.print(refletancia_esq2.getMinimoBranco());
       Serial.print(F(" --- "));
-      Serial.print(minimoBranco_sensor_esq);
+      Serial.print(refletancia_esq.getMinimoBranco());
       Serial.print(F(" --- "));
-      Serial.print(minimoBranco_sensor_dir);
+      Serial.print(refletancia_dir.getMinimoBranco());
       Serial.print(F(" --- "));
-      Serial.println(minimoBranco_sensor_dir2);
+      Serial.println(refletancia_dir2.getMinimoBranco());
       Serial.println(F(" "));
       
           
@@ -205,25 +173,20 @@ void Calibracao2::calibrarPreto(){
 		escolhaPreto = Serial.read();
     
     if (escolhaPreto == 'C') {
-      valorPreto_sensor_dir = robo.lerSensorLinhaDir();
-      valorPreto_sensor_dir2 = robo.lerSensorLinhaDir2();
-      valorPreto_sensor_esq = robo.lerSensorLinhaEsq();
-      valorPreto_sensor_esq2 = robo.lerSensorLinhaEsq2();
-
-      maximoPreto_sensor_dir = calcule.maximo(valorPreto_sensor_dir, maximoPreto_sensor_dir);
-	  maximoPreto_sensor_dir2 = calcule.maximo(valorPreto_sensor_dir2, maximoPreto_sensor_dir2);
-	  maximoPreto_sensor_esq = calcule.maximo(valorPreto_sensor_esq, maximoPreto_sensor_esq);
-	  maximoPreto_sensor_esq2 = calcule.maximo(valorPreto_sensor_esq2, maximoPreto_sensor_esq2);
+	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDir());
+	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaDir2());
+	  refletancia_esq.setPretoMax(robo.lerSensorLinhaEsq());
+	  refletancia_esq2.setPretoMax(robo.lerSensorLinhaEsq2());
 	  
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));
-      Serial.print(maximoPreto_sensor_esq2);
+      Serial.print(refletancia_esq2.getMaximoPreto());
       Serial.print(F(" --- "));
-      Serial.print(maximoPreto_sensor_esq);
+      Serial.print(refletancia_esq.getMaximoPreto());
       Serial.print(F(" --- "));
-      Serial.print(maximoPreto_sensor_dir);
+      Serial.print(refletancia_dir.getMaximoPreto());
       Serial.print(F(" --- "));
-      Serial.println(maximoPreto_sensor_dir2);
+      Serial.println(refletancia_dir2.getMaximoPreto());
       Serial.println(F(" "));
       
           
@@ -268,12 +231,15 @@ void Calibracao2::Menu_calibrar() {
       }
       escolhaMenu = ' ';
 	  
-	  calculeMedia();
+	  refletancia_esq2.calculeMedia();
+	  refletancia_esq.calculeMedia();
+	  refletancia_dir.calculeMedia();
+	  refletancia_dir2.calculeMedia();
 	  
-	  cali.refletancia_dir = getSeparacaoDir();
-	  cali.refletancia_mais_dir = getSeparacaoDir2();
-	  cali.refletancia_esq = getSeparacaoEsq();
-	  cali.refletancia_mais_esq = getSeparacaoEsq2();
+	  cali.refletancia_dir = refletancia_dir.getSeparacao();
+	  cali.refletancia_mais_dir = refletancia_dir2.getSeparacao();
+	  cali.refletancia_esq = refletancia_esq.getSeparacao();
+	  cali.refletancia_mais_esq = refletancia_esq2.getSeparacao();
 	
 	  cali.brancoEsq = corEsquerdo.getBranco();
 	  cali.brancoDir = corDireito.getBranco();
@@ -288,9 +254,7 @@ void Calibracao2::Menu_calibrar() {
 	
 	}
   }
-	  	  
-	  
-	  /*
+	 /*
 	  Serial.println(mediaEsq2);
 	  Serial.println(mediaEsq);
 	  Serial.println(mediaDir);
@@ -301,10 +265,10 @@ void Calibracao2::Menu_calibrar() {
  void Calibracao2::lerCalibracao(){
 	 robo.lerCalibracao(cali);
 	  
-	  mediaDir = cali.refletancia_dir;
-	  mediaDir2 = cali.refletancia_mais_dir;
-	  mediaEsq = cali.refletancia_esq;
-	  mediaEsq2 = cali.refletancia_mais_esq;
+	  refletancia_dir.setMedia(cali.refletancia_dir);
+	  refletancia_dir2.setMedia(cali.refletancia_mais_dir);
+	  refletancia_esq.setMedia(cali.refletancia_esq);
+	  refletancia_esq2.setMedia(cali.refletancia_mais_esq);
 	  
 	  corEsquerdo.setBranco(cali.brancoEsq); 
 	  corDireito.setBranco(cali.brancoDir);

@@ -7,7 +7,7 @@ Sensores::Sensores(){}
 //}
 
 bool Sensores::maisEsq_Branco(){
-	if (robo.lerSensorLinhaEsq2() > getSeparacaoEsq2()){
+	if (robo.lerSensorLinhaEsq2() > refletancia_esq2.getSeparacao()){
 		return true;	
 	}
 	else {
@@ -16,7 +16,7 @@ bool Sensores::maisEsq_Branco(){
 }
 
 bool Sensores::maisEsq_Preto(){
-	if (robo.lerSensorLinhaEsq2() < getSeparacaoEsq2()) {
+	if (robo.lerSensorLinhaEsq2() < refletancia_esq2.getSeparacao()) {
 		return true;
 	}
 	else {
@@ -25,7 +25,7 @@ bool Sensores::maisEsq_Preto(){
 }
 
 bool Sensores::Esq_Branco(){
-	if (robo.lerSensorLinhaEsq() > getSeparacaoEsq()) {
+	if (robo.lerSensorLinhaEsq() > refletancia_esq.getSeparacao()) {
 		return true;	
 	}
 	else {
@@ -34,7 +34,7 @@ bool Sensores::Esq_Branco(){
 }
 
 bool Sensores::Esq_Preto(){
-	if (robo.lerSensorLinhaEsq() < getSeparacaoEsq()) {
+	if (robo.lerSensorLinhaEsq() < refletancia_esq.getSeparacao()) {
 		return true;	
 	}
 	else {
@@ -43,7 +43,7 @@ bool Sensores::Esq_Preto(){
 }
 
 bool Sensores::Dir_Branco(){
-	if(robo.lerSensorLinhaDir() > getSeparacaoDir()){
+	if(robo.lerSensorLinhaDir() > refletancia_dir.getSeparacao()){
 		return true;
 	}
 	else {
@@ -52,7 +52,7 @@ bool Sensores::Dir_Branco(){
 }
 
 bool Sensores::Dir_Preto(){
-	if(robo.lerSensorLinhaDir() < getSeparacaoDir()){
+	if(robo.lerSensorLinhaDir() < refletancia_dir.getSeparacao()){
 		return true;
 	}
 	else {
@@ -61,7 +61,7 @@ bool Sensores::Dir_Preto(){
 }
 
 bool Sensores::maisDir_Branco(){
-	if(robo.lerSensorLinhaDir2() > getSeparacaoDir2()){
+	if(robo.lerSensorLinhaDir2() > refletancia_dir2.getSeparacao()){
 		return true;
 	}
 	else {
@@ -70,7 +70,7 @@ bool Sensores::maisDir_Branco(){
 }   
 
 bool Sensores::maisDir_Preto(){
-	if(robo.lerSensorLinhaDir2() < getSeparacaoDir2()){
+	if(robo.lerSensorLinhaDir2() < refletancia_dir2.getSeparacao()){
 		return true;
 	}
 	else {
