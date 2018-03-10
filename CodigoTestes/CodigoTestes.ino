@@ -1,6 +1,7 @@
-#include "SensoresWallE.h"
+#include "Estrategia.h"
 
 Sensores sensor;
+Estrategia estrategia;
 
 void setup() {
   Serial.begin(9600);
@@ -10,17 +11,20 @@ void setup() {
 }
 
 void loop() {
-  if(sensor.branco_branco_branco_branco()){
+  /*if(sensor.branco_branco_branco_branco()){
     Serial.println("TODOS BRANCO");
     robo.acionarMotores(55, 55);
+  }
+  else if (sensor.preto_preto_preto_preto()){
+    Serial.println("TODOS PRETO MEU DEUS");
   }
   else{
     Serial.println("NAO BRANCO");
     robo.acionarMotores(0, 0);
   }
   
-/*
-  if (sensor.corEsq_branco()) {
+*/
+/*  if (sensor.corEsq_branco()) {
     Serial.print("BRANCO ESQ   ");
   }
   else if (sensor.corEsq_preto()) {
@@ -55,12 +59,12 @@ void loop() {
   else {
     Serial.print("NAOSEI    ");
   }
-
+  */
   HSV leituraSensorCor2 = robo.getHSV_Direito();
   Serial.print(leituraSensorCor2.h);
   Serial.print(", ");
   Serial.print(leituraSensorCor2.s);
   Serial.print(", ");
   Serial.print(leituraSensorCor2.v);
-  Serial.println();*/
+  Serial.println();
 }

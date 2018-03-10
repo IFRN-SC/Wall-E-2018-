@@ -1,0 +1,31 @@
+#include <robo_hardware.h> 
+#include <Servo.h>
+
+//********PINOS PARA SENSORES REFLETANCIA***********//
+//
+//SENSOR_LINHA_ESQUERDO			A0
+//SENSOR_LINHA_DIREITO			A1
+//
+//*********PINOS PARA SENSORES REFLETANCIA*********//
+
+float valor_sensor_dir;
+float valor_sensor_esq;
+
+void setup(){
+	Serial.begin(9600);
+	robo.configurar(false);
+}
+
+void loop(){
+	Serial.println("+direito     direito     esquerdo     +esquerdo ");
+	Serial.print(robo.lerSensorLinhaDir2()); //Imprime o valor do sensor pela porta serial
+  Serial.print("       ");
+  Serial.print(robo.lerSensorLinhaDir());
+  Serial.print("       ");
+  Serial.print(robo.lerSensorLinhaEsq());
+  Serial.print("       ");
+  Serial.println(robo.lerSensorLinhaEsq2());
+	
+	delay(1000);
+
+}

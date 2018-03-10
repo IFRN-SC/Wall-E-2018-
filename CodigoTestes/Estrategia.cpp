@@ -1,0 +1,1 @@
+/home/paulo/Wall-E/Cod/Estrategia.cpp
