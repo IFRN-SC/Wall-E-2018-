@@ -12,12 +12,13 @@ void Estrategia::calibrar(){
 		delay(500);
 		Serial.print(F("Tentativa "));
 		Serial.println(i);
+
 		if(Serial.available()){
-			Serial.read();
-			sensor.Menu_calibrar();
+			Serial.read();	
+			sensor.Menu_calibrar(); // ?? @isaacmarlon > Onde está o objeto?
 		}
 	}
-	sensor.lerCalibracao();
+	sensor.lerCalibracao(); // ?? @isaacmarlon > Onde está o objeto?
 }
 
 void Estrategia::para(int tempo){
