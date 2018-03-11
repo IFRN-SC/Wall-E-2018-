@@ -8,18 +8,22 @@ Calibracao2::Calibracao2(){
 	escolhaPreto = ' ';
 }
 
-
+/*
 void Calibracao2::esperarParaLer (){
   while (!Serial.available()){}
 }
+*/
 
 
 void Calibracao2::calibrarVerde(){
 	
 	Serial.println(F(" COLOQUE O SENSOR DIREITO NO VERDE: "));
 	Serial.println(F("[D] Calibrar VERDE DIREITO"));
-	esperarParaLer();
+	/*
+	esperarParaLer();				>> inout.ler...();
 	controlador = Serial.read();
+	*/
+	inout.lerChar(controlador); // !!
 	
 	if (controlador == 'D') {
 		corDireito.setVerde(robo.getHSV_Direito());
@@ -27,9 +31,13 @@ void Calibracao2::calibrarVerde(){
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO VERDE: "));
 	Serial.println(F("[E] Calibrar VERDE ESQUERDO"));
+	/*
 	esperarParaLer();
 	controlador = Serial.read();
-	
+	*/
+	inout.lerChar(controlador); // !!
+
+
 	if (controlador == 'E'){
 		corEsquerdo.setVerde(robo.getHSV_Esquerdo()); 
 	}
@@ -43,18 +51,24 @@ void Calibracao2::calibrarCorPreto(){
 	
 	Serial.println(F(" COLOQUE O SENSOR DIREITO NO PRETO: "));
 	Serial.println(F("[D] Calibrar PRETO DIREITO"));
+	/*
 	esperarParaLer();
 	controlador = Serial.read();
-	
+	*/
+	inout.lerChar(controlador);
+
 	if (controlador == 'D') {
 		corDireito.setPreto(robo.getHSV_Direito());
 	}
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO PRETO: "));
 	Serial.println(F("[E] Calibrar PRETO ESQUERDO"));
+	/*
 	esperarParaLer();
 	controlador = Serial.read();
-	
+	*/
+	inout.lerChar(controlador);
+
 	if (controlador == 'E'){
 		corEsquerdo.setPreto(robo.getHSV_Esquerdo()); 
 	}
@@ -67,9 +81,12 @@ void Calibracao2::calibrarCorBranco(){
 	
 	Serial.println(F(" COLOQUE OS SENSORES NO BRANCO: "));
 	Serial.println(F("[B] Calibrar COR BRANCO"));
+	/*
 	esperarParaLer();
 	controlador = Serial.read();
-	
+	*/
+	inout.lerChar(controlador);
+
 	if (controlador == 'B') {
 		corDireito.setBranco(robo.getHSV_Direito());
 		corEsquerdo.setBranco(robo.getHSV_Esquerdo());
@@ -82,9 +99,12 @@ void Calibracao2::calibrarCinza(){
 	
 	Serial.println(F(" COLOQUE OS SENSORES NO CINZA: "));
 	Serial.println(F("[C] Calibrar COR CINZA"));
+	/*
 	esperarParaLer();
 	controlador = Serial.read();
-	
+	*/
+	inout.lerChar(controlador);
+
 	if (controlador == 'C') {
 		corDireito.setCinza(robo.getHSV_Direito());
 		corEsquerdo.setCinza(robo.getHSV_Esquerdo());
@@ -102,9 +122,12 @@ void Calibracao2::calibrarCor(){
 		Serial.println(F("[P] Para calibrar o PRETO"));
 		Serial.println(F("[M] MENU INICIAL"));
 		Serial.println(F("[S] SAIR"));
+		/*
 		esperarParaLer();
 		escolhaCor = Serial.read();
-		
+		*/
+		inout.lerChar(escolhaCor);
+
 		switch (escolhaCor) {
 		
 			case 'V':
@@ -135,8 +158,11 @@ void Calibracao2::calibrarBranco(){
     Serial.println(F("Coloque todos os sensores no BRANCO"));
     Serial.println(F("[C] Para CALIBRAR"));
     Serial.println(F("[S] Para SAIR"));
+    /*
     esperarParaLer();
     escolhaBranco = Serial.read();
+	*/
+	inout.lerChar(escolhaBranco);
 
     if (escolhaBranco == 'C') {
 	  refletancia_dir.setBrancoMini(robo.lerSensorLinhaDir());
@@ -170,9 +196,11 @@ void Calibracao2::calibrarPreto(){
 		Serial.println(F("Coloque todos os sensores no PRETO"));
 		Serial.println(F("[C] Para CALIBRAR"));
 		Serial.println(F("[S] Para SAIR"));
+		/*
 		esperarParaLer();
 		escolhaPreto = Serial.read();
-    
+		*/
+		inout.lerChar(escolhaPreto);    
     if (escolhaPreto == 'C') {
 	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDir());
 	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaDir2());
@@ -204,18 +232,24 @@ void Calibracao2::Menu_calibrar() {
   while (escolhaInicial != SAIDA) { 
      Serial.println(F("[C] Começar calibração"));
      Serial.println(F("[S] Sair da calibração"));
+     /*
      esperarParaLer();
      escolhaInicial = Serial.read();
-     
+     */
+     inout.lerChar(escolhaInicial);
+
      if (escolhaInicial == 'C'){
       while (escolhaMenu != SAIDA) { 
         Serial.println(F("[B] Calibrar BRANCO REFLETÂNCIA"));
         Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
 		Serial.println(F("[C] Calibrar COR"));
         Serial.println(F("[S] SAIR"));
+        /*
         esperarParaLer();
         escolhaMenu = Serial.read();
-        
+        */
+        inout.lerChar(escolhaMenu);
+
         if (escolhaMenu == 'B') {
           calibrarBranco();           
         }

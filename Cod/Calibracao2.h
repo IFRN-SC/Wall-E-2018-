@@ -5,6 +5,7 @@
 #include <Servo.h>
 #include "SensorDeCor.h"
 #include "Refletancia.h"
+#include "Inout.h" //	>> Inclusão da nova classe.
  
 class Calibracao2 {
 	
@@ -17,7 +18,7 @@ private:
 	
 	const char SAIDA = 'S'; 
 	
-	void esperarParaLer();
+	//void esperarParaLer();   inout.ler...();
 	void calibrarBranco();
 	void calibrarPreto();
 	
