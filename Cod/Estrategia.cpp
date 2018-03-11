@@ -239,12 +239,16 @@ void Estrategia::sigaLinha(){
 	//**********************************************
 	
 	// bloco para o verde
-	/*else if (sensor.branco_preto_branco_preto() ||
+	else if (sensor.branco_preto_branco_preto() ||
 		sensor.preto_branco_preto_branco()){
 		digitalWrite(10, HIGH);
 		alinharEncruzilhada();
 		passeVerdeOuRedutor();
-	}*/
+	} else if (sensor.preto_preto_preto_preto()){
+		while(1){
+			para(2);
+		}
+	}
 	//**********************************************
 
 }
