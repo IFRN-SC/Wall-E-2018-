@@ -12,6 +12,7 @@ class Calibracao2 {
 private:
 	Matematica calcule;
 	calibracao_dados cali;
+	Inout inout;
 
 	
 	bool realizarCali;
@@ -37,7 +38,7 @@ private:
 	
 	char escolhaCor;
 	char controlador;
-   
+
   
 public:
  

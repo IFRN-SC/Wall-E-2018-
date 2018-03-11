@@ -22,11 +22,12 @@ String Inout::lerString(String stringer){
 	return stringer = Serial.read();
 }
 */
-
+/*
 Byte Inout::lerByte(Byte byter){
 	esperarParaLer();
 	return byter = Serial.read();
 }
+*/
 
 short Inout::lerShort(short shorter){
 	esperarParaLer();
