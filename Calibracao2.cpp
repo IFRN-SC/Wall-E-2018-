@@ -163,6 +163,7 @@ void Calibracao2::calibrarBranco(){
   }
 }
 
+
 void Calibracao2::calibrarPreto(){
 
 	while (escolhaPreto != SAIDA) {

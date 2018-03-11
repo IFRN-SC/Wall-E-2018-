@@ -214,17 +214,13 @@ void Estrategia::sigaLinha(){
 	}
 	
 	// bloco de ações para curva 90º
-	else if(sensor.preto_preto_branco_branco()/* ||
-		sensor.preto_preto_preto_branco()*/) {
-		digitalWrite(11, HIGH);
+	else if(sensor.preto_preto_branco_branco()) {
 		mova.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		vireEsquerda();
 		delay(600);
 	}
-	else if(sensor.branco_branco_preto_preto()/* ||
-		sensor.branco_preto_preto_preto()*/) {
-		digitalWrite(11, HIGH);
+	else if(sensor.branco_branco_preto_preto()) {
 		mova.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		vireDireita();
