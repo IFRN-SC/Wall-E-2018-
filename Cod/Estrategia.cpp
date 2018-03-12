@@ -15,10 +15,10 @@ void Estrategia::calibrar(){
 
 		if(Serial.available()){
 			Serial.read();	
-			sensor.Menu_calibrar(); // ?? @isaacmarlon > Onde está o objeto?
+			sensor.Menu_calibrar(); 
 		}
 	}
-	sensor.lerCalibracao(); // ?? @isaacmarlon > Onde está o objeto?
+	sensor.lerCalibracao();
 }
 
 void Estrategia::para(int tempo){
