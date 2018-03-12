@@ -5,21 +5,18 @@
 #include <Servo.h>
 #include "SensorDeCor.h"
 #include "Refletancia.h"
-#include "Inout.h" //	>> Inclusão da nova classe.
  
 class Calibracao2 {
 	
 private:
 	Matematica calcule;
 	calibracao_dados cali;
-	Inout inout;
 
-	
 	bool realizarCali;
 	
 	const char SAIDA = 'S'; 
 	
-	void esperarParaLer();   inout.ler...();
+	void esperarParaLer();
 	void calibrarBranco();
 	void calibrarPreto();
 	
