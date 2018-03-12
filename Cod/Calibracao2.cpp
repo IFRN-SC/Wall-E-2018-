@@ -8,12 +8,10 @@ Calibracao2::Calibracao2(){
 	escolhaPreto = ' ';
 }
 
-/*
+
 void Calibracao2::esperarParaLer (){
   while (!Serial.available()){}
 }
-*/
-
 
 void Calibracao2::calibrarVerde(){
 	
@@ -196,11 +194,10 @@ void Calibracao2::calibrarPreto(){
 		Serial.println(F("Coloque todos os sensores no PRETO"));
 		Serial.println(F("[C] Para CALIBRAR"));
 		Serial.println(F("[S] Para SAIR"));
-		/*
+		
 		esperarParaLer();
 		escolhaPreto = Serial.read();
-		*/
-		inout.lerChar(escolhaPreto);    
+
     if (escolhaPreto == 'C') {
 	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDir());
 	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaDir2());
@@ -232,11 +229,9 @@ void Calibracao2::Menu_calibrar() {
   while (escolhaInicial != SAIDA) { 
      Serial.println(F("[C] Começar calibração"));
      Serial.println(F("[S] Sair da calibração"));
-     /*
+   
      esperarParaLer();
      escolhaInicial = Serial.read();
-     */
-     inout.lerChar(escolhaInicial);
 
      if (escolhaInicial == 'C'){
       while (escolhaMenu != SAIDA) { 
@@ -244,11 +239,10 @@ void Calibracao2::Menu_calibrar() {
         Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
 		Serial.println(F("[C] Calibrar COR"));
         Serial.println(F("[S] SAIR"));
-        /*
+        
         esperarParaLer();
         escolhaMenu = Serial.read();
-        */
-        inout.lerChar(escolhaMenu);
+       
 
         if (escolhaMenu == 'B') {
           calibrarBranco();           

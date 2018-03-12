@@ -19,7 +19,7 @@ private:
 	
 	const char SAIDA = 'S'; 
 	
-	//void esperarParaLer();   inout.ler...();
+	void esperarParaLer();   inout.ler...();
 	void calibrarBranco();
 	void calibrarPreto();
 	

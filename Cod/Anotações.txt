@@ -1,5 +1,7 @@
 /****
  *	@isaacmarlon {
 	11/03 - 17H - Calor da bexiga.
+
+	// robo_hardware2.cpp - L120 -sensor.lerCalibracao(); >> ?? função para guardar no EEMPROM?
  }
  */
