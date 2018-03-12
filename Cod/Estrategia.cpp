@@ -75,7 +75,7 @@ void Estrategia::alinharObstaculo(){
 }
 
 void Estrategia::alinharEncruzilhada(){
-  while(desalinhado()){
+  while(!sensor.preto_preto_preto_preto()){
   		if (sensor.maisEsq_Preto()){
   			//para(500);
   			robo.acionarMotores(0,35);
@@ -244,7 +244,7 @@ void Estrategia::sigaLinha(){
 		digitalWrite(10, HIGH);
 		alinharEncruzilhada();
 		passeVerdeOuRedutor();
-	} else if (sensor.preto_preto_preto_preto()){
+	}else if (sensor.preto_preto_preto_preto()){
 		while(1){
 			para(2);
 		}
