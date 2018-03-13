@@ -270,13 +270,9 @@ void Calibracao2::Menu_calibrar() {
 	
 	}
   }
-	 /*
-	  Serial.println(mediaEsq2);
-	  Serial.println(mediaEsq);
-	  Serial.println(mediaDir);
-	  Serial.println(mediaDir2);
-	*/
+	 
  }
+ 
  
  void Calibracao2::lerCalibracao(){
 	 robo.lerCalibracao(cali);

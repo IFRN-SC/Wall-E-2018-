@@ -19,6 +19,14 @@ void Estrategia::calibrar(){
 		}
 	}
 	sensor.lerCalibracao();
+
+	/*while(1){
+		Serial.println(sensor.branco_branco_preto_preto());
+	  	Serial.println(sensor.branco_branco_preto_branco());
+	  	//Serial.println(refletancia_dir.getSeparacao());
+	  	//Serial.println(refletancia_dir2.getSeparacao());
+		delay(1000);	
+	}*/
 }
 
 void Estrategia::para(int tempo){
@@ -158,9 +166,10 @@ void Estrategia::piscarLeds(){
 	}
 }
 
+
 void Estrategia::passeObstaculo(){
 
-		  piscarLeds();
+		  //piscarLeds();
 
 		  robo.acionarMotores(0, 0);
 		  delay(300);
@@ -177,24 +186,24 @@ void Estrategia::passeObstaculo(){
 		  para(1000);
 
 		  robo.acionarMotores(40, 40);
-		  delay(1120);
+		  delay(1350);
 
 		  para(1000);
 
 		  robo.acionarMotores(40, -40);
-		  delay(700);
+		  delay(600);
 
 		  para(1000);
 
 		  robo.acionarMotores(40, 40);
-		  delay(1750);
+		  delay(1490);
 
 		  para(1000);
 
 		  robo.acionarMotores(40, -40);
-		  delay(690);
+		  delay(620);
 
-		  while (sensor.branco_branco_branco_branco()){
+		  while (sensor.Dir_Branco() && sensor.Esq_Branco()){
 			robo.acionarMotores(40, 40);
 		  }
 
@@ -215,13 +224,15 @@ void Estrategia::sigaLinha(){
 	}
 	
 	// bloco de ações para curva 90º
-	else if(sensor.preto_preto_branco_branco()) {
+	else if(sensor.preto_preto_branco_branco()/* ||
+		sensor.branco_preto_branco_branco()*/) {
 		mova.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		vireEsquerda();
 		delay(600);
 	}
-	else if(sensor.branco_branco_preto_preto()) {
+	else if(sensor.branco_branco_preto_preto()/* ||
+		sensor.branco_branco_preto_branco()*/) {
 		mova.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		vireDireita();
@@ -231,15 +242,15 @@ void Estrategia::sigaLinha(){
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		vireEsquerda();
+		robo.acionarMotores(-40, 40);
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		vireDireita();
+		robo.acionarMotores(40, -40);
 	}
 	//**********************************************
 	
 	// bloco para o verde
-	else if (sensor.branco_preto_branco_preto() ||
+	/*else if (sensor.branco_preto_branco_preto() ||
 		sensor.preto_branco_preto_branco()){
 		digitalWrite(10, HIGH);
 		alinharEncruzilhada();
@@ -248,7 +259,7 @@ void Estrategia::sigaLinha(){
 		while(1){
 			para(2);
 		}
-	}
+	}*/
 	//**********************************************
 
 }

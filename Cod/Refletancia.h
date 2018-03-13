@@ -18,7 +18,6 @@ class Refletancia {
 		Refletancia();
 		
 	private:
-		float lala;
 		float minimoBranco;
 		float maximoPreto;
 		float media;
