@@ -34,7 +34,7 @@ void Estrategia::para(int tempo){
 	delay(tempo);
 }
 
-void Estrategia::passeEncruzilhadaDireita(){
+void Estrategia::passeEncruzilhada_Direita(){
 	while (!sensor.branco_branco_branco_branco()) {
 		robo.acionarMotores(40, 40);
 	}
@@ -44,7 +44,7 @@ void Estrategia::passeEncruzilhadaDireita(){
 	robo.acionarMotores(40, 40);
 }
 
-void Estrategia::passeEncruzilhadaEsquerda(){
+void Estrategia::passeEncruzilhada_Esquerda(){
 	while (!sensor.branco_branco_branco_branco()) {
 		robo.acionarMotores(40, 40);
 	}
@@ -69,29 +69,26 @@ void Estrategia::alinharObstaculo(){
   
 	if (sensor.branco_branco_branco_preto() ||
 	sensor.branco_branco_preto_preto() ||
-	sensor.branco_preto_preto_preto()) 
-	{
+	sensor.branco_preto_preto_preto()) {
 	  robo.acionarMotores(-40, 0); 
 	}
 	else if (sensor.preto_branco_branco_branco() ||
 	sensor.preto_preto_branco_branco() ||
-	sensor.preto_preto_preto_branco()) 
-	{
+	sensor.preto_preto_preto_branco()) {
 	  robo.acionarMotores(0, -40); 
 	}
   }
 }
 
-void Estrategia::alinharEncruzilhada(){
-  while(!sensor.preto_preto_preto_preto()){
-  		if (sensor.maisEsq_Preto()){
-  			//para(500);
-  			robo.acionarMotores(0,35);
-  		}else if (sensor.maisDir_Preto()){
-  			robo.acionarMotores(35,0);
-  			
-  		}
-	 
+void Estrategia::alinharEncruzilhada(){   // tenta alinhar na encruzilhada T para ler o verde logo após.
+  if(sensor.maisEsq_Preto()){ 
+  	while(!sensor.maisDir_Preto()){robo.acionarMotores(0, 35);}
+  }else if(sensor.maisDir_Preto()){
+  	while(!sensor.maisEsq_Preto()){robo.acionarMotores(35, 0);}
+  }else {
+  	while(sensor.maisEsq_Branco() ^ sensor.maisDir_Branco()){
+  		robo.acionarMotores(-35, -35);
+  	}
   }
 }
 
@@ -99,11 +96,11 @@ void Estrategia::passeVerdeOuRedutor(){
 		digitalWrite(10, HIGH);
 		if (sensor.corEsq_verde() && (sensor.corDir_branco() || sensor.corDir_preto())){
 			para(700);
-			passeEncruzilhadaEsquerda();
+			passeEncruzilhada_Esquerda();
 		}
 		else if (sensor.corDir_verde() && (sensor.corEsq_branco() || sensor.corEsq_preto())){
 			para(700);
-			passeEncruzilhadaDireita();
+			passeEncruzilhada_Direita();
 			
 		}
 		else if (sensor.corDir_verde() && sensor.corEsq_verde()){
@@ -168,7 +165,6 @@ void Estrategia::piscarLeds(){
 
 
 void Estrategia::passeObstaculo(){
-
 		  //piscarLeds();
 
 		  robo.acionarMotores(0, 0);
@@ -177,7 +173,7 @@ void Estrategia::passeObstaculo(){
 		  robo.acionarMotores(-40, -40);
 		  delay(150);
 		  
-		while (!sensor.branco_branco_branco_preto()){
+		while (!sensor.maisDir_Preto()){
 		  robo.acionarMotores(-40, 40);
 		}
 
@@ -248,18 +244,34 @@ void Estrategia::sigaLinha(){
 		robo.acionarMotores(40, -40);
 	}
 	//**********************************************
-	
 	// bloco para o verde
 	/*else if (sensor.branco_preto_branco_preto() ||
 		sensor.preto_branco_preto_branco()){
 		digitalWrite(10, HIGH);
-		alinharEncruzilhada();
-		passeVerdeOuRedutor();
-	}else if (sensor.preto_preto_preto_preto()){
+		while(1){
+			para(4);
+		}
+	}/*else if (sensor.preto_preto_preto_preto()){
 		while(1){
 			para(2);
 		}
-	}*/
+	 }*/
+	else if (sensor.preto_preto_preto_branco() ||
+		sensor.branco_preto_preto_preto()){
+		//digitalWrite(10, HIGH);
+		para(600);
+		alinharEncruzilhada();
+		if (sensor.corEsq_verde()){
+			digitalWrite(10, HIGH);
+			para(500);
+			mova.emFrente(40, 40);
+			delay(240);
+			para(500);;
+			vireEsquerda();
+			delay(600);
+		}
+		//while(1){para(2);} 
+	}
 	//**********************************************
 
 }
@@ -280,7 +292,6 @@ bool Estrategia::viuObstaculo(){
 }
 
 void Estrategia::executar(){
-		//configurar();
 		sigaLinha();
 	
 }

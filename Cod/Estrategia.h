@@ -33,8 +33,8 @@ class Estrategia {
 		void passeVerde();
 		void alinharEncruzilhada();
 		void alinharObstaculo();
-		void passeEncruzilhadaDireita();
-		void passeEncruzilhadaEsquerda();
+		void passeEncruzilhada_Direita();
+		void passeEncruzilhada_Esquerda();
 		void passeObstaculo();
 		void sigaLinha();
     	void passeVerdeOuRedutor();
