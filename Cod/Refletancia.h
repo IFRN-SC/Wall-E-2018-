@@ -9,6 +9,8 @@ class Refletancia {
 		void setPretoMax(float valorPreto);
 		void setMedia(float valorSalvo);
 
+		//void descartarValores();
+
 		float getSeparacao();
 		float getMinimoBranco();
 		float getMaximoPreto();
