@@ -3,7 +3,7 @@
 
 #include <robo_hardware.h>
 #include "SensoresWallE.h"
-#include "Movimentacao.h"
+#include "Motores.h"
 #include "Calibracao2.h"
 
 
@@ -22,14 +22,14 @@ class Estrategia {
 		#define VELPADRAO 40
 
 		int t;
-		Movimentacao mova;
+		Motores motores;
 		Sensores sensor;
 		int contAlternadas = 0;
 		int indicador;
 		bool desalinhado(); 
 		bool viuObstaculo();
 		
-		void para(int tempo);
+		//void para(int tempo); !! 
 		void passeVerde();
 		void alinharEncruzilhada();
 		void alinharObstaculo();
