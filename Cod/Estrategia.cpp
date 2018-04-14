@@ -19,14 +19,6 @@ void Estrategia::calibrar(){
 		}
 	}
 	sensor.lerCalibracao();
-
-	/*while(1){
-		Serial.println(sensor.branco_branco_preto_preto());
-	  	Serial.println(sensor.branco_branco_preto_branco());
-	  	//Serial.println(refletancia_dir.getSeparacao());
-	  	//Serial.println(refletancia_dir2.getSeparacao());
-		delay(1000);	
-	}*/
 }
 
 void Estrategia::passeEncruzilhada_Direita(){
@@ -272,21 +264,10 @@ void Estrategia::sigaLinha(){
 }
 
 bool Estrategia::viuObstaculo(){
-	/*int contPulsos;
-	if (robo.lerSensorSonarFrontal() <=10){
-		contPulsos++;
-	}
-
-	if (contPulsos == 5){
-		return true;
-		contPulsos = 0;
-	}else {
-		return false;
-	}*/
 	return (robo.lerSensorSonarFrontal() <= 10);
 }
 
 void Estrategia::executar(){
-		sigaLinha();
+	sigaLinha();
 	
 }
