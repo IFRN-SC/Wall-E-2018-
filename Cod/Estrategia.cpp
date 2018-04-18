@@ -6,7 +6,7 @@ Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
 void Estrategia::configurar(){
 	//pinMode(10, OUTPUT);
 	//pinMode(11, OUTPUT);
-	fimDeCurso.config();
+	//fimDeCurso.config();
 }
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
@@ -177,17 +177,21 @@ void Estrategia::passeObstaculo(){
 		  motores.parar(1000);
 
 		  robo.acionarMotores(40, -40);
-		  delay(600);
+		  delay(780);
+
+		  while(sensor.Dir_Preto()){
+		  	robo.acionarMotores(-40, 40);
+		  }
 
 		  motores.parar(1000);
 
 		  robo.acionarMotores(40, 40);
-		  delay(1490);
+		  delay(1620);
 
 		  motores.parar(1000);
 
 		  robo.acionarMotores(40, -40);
-		  delay(620);
+		  delay(680);
 
 		  while (sensor.Dir_Branco() && sensor.Esq_Branco()){
 			robo.acionarMotores(40, 40);
@@ -205,28 +209,23 @@ void Estrategia::sigaLinha(){
 	if(viuObstaculo()){
 		 passeObstaculo();
 	}
-	else if(sensor.branco_branco_branco_branco()){
-		if (fimDeCurso.estaPressionado()){
-			motores.paraTras(VELPADRAO, VELPADRAO);
-			delay(300);
-			motores.emFrente(VELPADRAO, VELPADRAO);
-			delay(500);
-		}else{
-			motores.emFrente(VELPADRAO, VELPADRAO);
-		}
+	else if(sensor.branco_branco_branco_branco() /*||
+		sensor.preto_preto_preto_preto()*/){
+		motores.emFrente(VELPADRAO, VELPADRAO);
+		
 	}
 	
 	// bloco de ações para curva 90º
-	else if(sensor.preto_preto_branco_branco()/* ||
-		sensor.branco_preto_branco_branco()*/) {
+	else if(sensor.preto_preto_branco_branco() ||
+		sensor.preto_preto_preto_branco()) {
 		motores.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		while(sensor.Esq_Branco()){	
 			vireEsquerda();
 		}
 	}
-	else if(sensor.branco_branco_preto_preto()/* ||
-		sensor.branco_branco_preto_branco()*/) {
+	else if(sensor.branco_branco_preto_preto()||
+		sensor.branco_preto_preto_preto()) {
 		motores.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
 		while (sensor.Dir_Branco()){
@@ -238,10 +237,12 @@ void Estrategia::sigaLinha(){
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		vireEsquerda();
+		robo.acionarMotores(-50, 40);
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		vireDireita();
+		robo.acionarMotores(40, -50);
+	}else if (sensor.preto_preto_preto_preto()){
+		robo.acionarMotores(60, 60);
 	}
 	//**********************************************
 	// bloco para o verde
@@ -256,10 +257,10 @@ void Estrategia::sigaLinha(){
 			motores.parar(2);
 		}
 	 }*/
-	else if (sensor.preto_preto_preto_branco() ||
-		sensor.branco_preto_preto_preto()){
-		digitalWrite(10, HIGH);
-		motores.parar(600);
+	//else if (sensor.preto_preto_preto_branco() ||
+	//	sensor.branco_preto_preto_preto()){
+		//digitalWrite(10, HIGH);
+		/*motores.parar(600);
 		alinharEncruzilhada();
 		if (sensor.corEsq_verde()){
 			
@@ -269,9 +270,10 @@ void Estrategia::sigaLinha(){
 			motores.parar(500);;
 			vireEsquerda();
 			delay(600);
-		}
-		//while(1){motores.parar(2);} 
-	}
+		}*/
+		//while(1){motores.parar(2);}
+		//motores.emFrente(50, 50); 
+	//	}
 	//**********************************************
 
 }
