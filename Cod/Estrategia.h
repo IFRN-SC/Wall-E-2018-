@@ -5,12 +5,13 @@
 #include "SensoresWallE.h"
 #include "Motores.h"
 #include "Calibracao2.h"
+#include "Botao.h"
 
 
 
 class Estrategia {
 	public:
-		
+		Estrategia();
 		void executar();
 		void calibrar();
 		
@@ -20,8 +21,10 @@ class Estrategia {
 		#define ESQUERDA 1
 		#define DIREITA 2
 		#define VELPADRAO 40
+		#define FIM_DE_CURSO 12
 
 		int t;
+		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
 		int contAlternadas = 0;

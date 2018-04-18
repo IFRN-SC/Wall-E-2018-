@@ -1,6 +1,8 @@
 #include "Estrategia.h"
+//#include "Botao.h"
 
 Estrategia estrategia;
+
 
 void setup(){
   Serial.begin(9600);
@@ -11,7 +13,6 @@ void setup(){
 
 void loop(){
   estrategia.executar();
-  
 }                                
                                                                                                                 
 

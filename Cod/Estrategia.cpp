@@ -1,9 +1,12 @@
 #include "Estrategia.h"
+Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
 
+}
 
 void Estrategia::configurar(){
-	pinMode(10, OUTPUT);
-	pinMode(11, OUTPUT);
+	//pinMode(10, OUTPUT);
+	//pinMode(11, OUTPUT);
+	fimDeCurso.config();
 }
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
@@ -203,7 +206,14 @@ void Estrategia::sigaLinha(){
 		 passeObstaculo();
 	}
 	else if(sensor.branco_branco_branco_branco()){
-		motores.emFrente(VELPADRAO, VELPADRAO);
+		if (fimDeCurso.estaPressionado()){
+			motores.paraTras(VELPADRAO, VELPADRAO);
+			delay(300);
+			motores.emFrente(VELPADRAO, VELPADRAO);
+			delay(500);
+		}else{
+			motores.emFrente(VELPADRAO, VELPADRAO);
+		}
 	}
 	
 	// bloco de ações para curva 90º
@@ -211,24 +221,27 @@ void Estrategia::sigaLinha(){
 		sensor.branco_preto_branco_branco()*/) {
 		motores.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
-		vireEsquerda();
-		delay(600);
+		while(sensor.Esq_Branco()){	
+			vireEsquerda();
+		}
 	}
 	else if(sensor.branco_branco_preto_preto()/* ||
 		sensor.branco_branco_preto_branco()*/) {
 		motores.emFrente(VELPADRAO, VELPADRAO);
 		delay(150);
-		vireDireita();
-		delay(600);
+		while (sensor.Dir_Branco()){
+			vireDireita();
+		}
+		
 	} 
 	// *********************************************
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		robo.acionarMotores(-40, 40);
+		vireEsquerda();
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		robo.acionarMotores(40, -40);
+		vireDireita();
 	}
 	//**********************************************
 	// bloco para o verde
@@ -245,11 +258,11 @@ void Estrategia::sigaLinha(){
 	 }*/
 	else if (sensor.preto_preto_preto_branco() ||
 		sensor.branco_preto_preto_preto()){
-		//digitalWrite(10, HIGH);
+		digitalWrite(10, HIGH);
 		motores.parar(600);
 		alinharEncruzilhada();
 		if (sensor.corEsq_verde()){
-			digitalWrite(10, HIGH);
+			
 			motores.parar(500);
 			motores.emFrente(40, 40);
 			delay(240);
