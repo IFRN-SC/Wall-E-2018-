@@ -14,6 +14,6 @@ void setup(){
 void loop(){
   estrategia.executar();
 }                                
-                                                                                                                
+                                                                                                               
 
 //angelo.reset(obr2020, true);**-123 
