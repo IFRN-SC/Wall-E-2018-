@@ -23,7 +23,7 @@ void Calibracao2::calibrarVerde(){
 
 	
 	if (controlador == 'D') {
-		corDireito.setVerde(robo.getHSV_Direito());
+		corDireito.setVerde(robo.getHsvDireito());
 	}
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO VERDE: "));
@@ -34,7 +34,7 @@ void Calibracao2::calibrarVerde(){
 
 
 	if (controlador == 'E'){
-		corEsquerdo.setVerde(robo.getHSV_Esquerdo()); 
+		corEsquerdo.setVerde(robo.getHsvEsquerdo()); 
 	}
 	
 	controlador = ' ';
@@ -51,7 +51,7 @@ void Calibracao2::calibrarCorPreto(){
 	controlador = Serial.read();
 
 	if (controlador == 'D') {
-		corDireito.setPreto(robo.getHSV_Direito());
+		corDireito.setPreto(robo.getHsvDireito());
 	}
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO PRETO: "));
@@ -62,7 +62,7 @@ void Calibracao2::calibrarCorPreto(){
 	
 
 	if (controlador == 'E'){
-		corEsquerdo.setPreto(robo.getHSV_Esquerdo()); 
+		corEsquerdo.setPreto(robo.getHsvEsquerdo()); 
 	}
 	
 	controlador = ' ';
@@ -79,8 +79,8 @@ void Calibracao2::calibrarCorBranco(){
 	
 
 	if (controlador == 'B') {
-		corDireito.setBranco(robo.getHSV_Direito());
-		corEsquerdo.setBranco(robo.getHSV_Esquerdo());
+		corDireito.setBranco(robo.getHsvDireito());
+		corEsquerdo.setBranco(robo.getHsvEsquerdo());
 	}
 
 	controlador = ' ';
@@ -95,8 +95,8 @@ void Calibracao2::calibrarCinza(){
 	controlador = Serial.read();
 
 	if (controlador == 'C') {
-		corDireito.setCinza(robo.getHSV_Direito());
-		corEsquerdo.setCinza(robo.getHSV_Esquerdo());
+		corDireito.setCinza(robo.getHsvDireito());
+		corEsquerdo.setCinza(robo.getHsvEsquerdo());
 	}
 	
 	controlador = ' ';
@@ -151,9 +151,9 @@ void Calibracao2::calibrarBranco(){
 
     if (escolhaBranco == 'C') {
 	  refletancia_dir.setBrancoMini(robo.lerSensorLinhaDir());
-	  refletancia_dir2.setBrancoMini(robo.lerSensorLinhaDir2());
+	  refletancia_dir2.setBrancoMini(robo.lerSensorLinhaMaisDir());
 	  refletancia_esq.setBrancoMini(robo.lerSensorLinhaEsq());
-	  refletancia_esq2.setBrancoMini(robo.lerSensorLinhaEsq2());
+	  refletancia_esq2.setBrancoMini(robo.lerSensorLinhaMaisEsq());
 
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));
@@ -187,9 +187,9 @@ void Calibracao2::calibrarPreto(){
 
     if (escolhaPreto == 'C') {
 	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDir());
-	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaDir2());
+	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaMaisDir());
 	  refletancia_esq.setPretoMax(robo.lerSensorLinhaEsq());
-	  refletancia_esq2.setPretoMax(robo.lerSensorLinhaEsq2());
+	  refletancia_esq2.setPretoMax(robo.lerSensorLinhaMaisEsq());
 	  
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));

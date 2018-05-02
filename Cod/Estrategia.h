@@ -1,12 +1,11 @@
 #ifndef ESTRATEGIA_H
 #define ESTRATEGIA_H
 
-#include <robo_hardware.h>
+#include <robo_hardware2.h>
 #include "SensoresWallE.h"
 #include "Motores.h"
 #include "Calibracao2.h"
 #include "Botao.h"
-
 
 
 class Estrategia {
@@ -20,7 +19,7 @@ class Estrategia {
 		// bool realizarCali;
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELPADRAO 40
+		#define VELPADRAO 50
 		#define FIM_DE_CURSO 12
 
 		int t;

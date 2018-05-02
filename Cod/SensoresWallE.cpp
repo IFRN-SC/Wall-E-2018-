@@ -7,7 +7,7 @@ Sensores::Sensores(){}
 //}
 
 bool Sensores::maisEsq_Branco(){
-	if (robo.lerSensorLinhaEsq2() > refletancia_esq2.getSeparacao()){
+	if (robo.lerSensorLinhaMaisEsq() > refletancia_esq2.getSeparacao()){
 		return true;	
 	}
 	else {
@@ -16,7 +16,7 @@ bool Sensores::maisEsq_Branco(){
 }
 
 bool Sensores::maisEsq_Preto(){
-	if (robo.lerSensorLinhaEsq2() < refletancia_esq2.getSeparacao()) {
+	if (robo.lerSensorLinhaMaisEsq() < refletancia_esq2.getSeparacao()) {
 		return true;
 	}
 	else {
@@ -61,7 +61,7 @@ bool Sensores::Dir_Preto(){
 }
 
 bool Sensores::maisDir_Branco(){
-	if(robo.lerSensorLinhaDir2() > refletancia_dir2.getSeparacao()){
+	if(robo.lerSensorLinhaMaisDir() > refletancia_dir2.getSeparacao()){
 		return true;
 	}
 	else {
@@ -70,7 +70,7 @@ bool Sensores::maisDir_Branco(){
 }   
 
 bool Sensores::maisDir_Preto(){
-	if(robo.lerSensorLinhaDir2() < refletancia_dir2.getSeparacao()){
+	if(robo.lerSensorLinhaMaisDir() < refletancia_dir2.getSeparacao()){
 		return true;
 	}
 	else {
