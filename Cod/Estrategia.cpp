@@ -205,6 +205,19 @@ void Estrategia::passeObstaculo(){
 		  }
 }
 
+bool Estrategia::estouNaRampa(){
+	return (robo.lerSensorSonarEsq() <= 8 && robo.lerSensorSonarDir() <= 8);
+}
+void Estrategia::miniSeguirLinha(){
+	if(sensor.branco_branco_branco_branco()){
+		motores.emFrente(65, 65);
+	}else if(sensor.branco_preto_branco_branco()){
+		robo.acionarMotores(50, 65);
+	}else if(sensor.branco_branco_preto_branco()){
+		robo.acionarMotores(65, 50);
+	}
+}
+
 void Estrategia::sigaLinha(){
 	if(viuObstaculo()){
 		 passeObstaculo();
@@ -283,6 +296,7 @@ bool Estrategia::viuObstaculo(){
 }
 
 void Estrategia::executar(){
-	sigaLinha();
+	if(estouNaRampa()) miniSeguirLinha();
+	else sigaLinha();
 	
 }

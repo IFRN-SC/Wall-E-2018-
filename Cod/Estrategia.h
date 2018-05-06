@@ -33,17 +33,20 @@ class Estrategia {
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
-		
+
 		// LINHA
 		void sigaLinha();
+
 		void alinharEncruzilhada();
 		void passeEncruzilhada_Direita();
 		void passeEncruzilhada_Esquerda();
-    	void passeVerdeOuRedutor();
-    	
-    	// MOVIMENTAÇÃO
-    	void vireEsquerda();
-    	void vireDireita();
+    
+    // RAMPA
+    void miniSeguirLinha();
+  
+    // MOVIMENTAÇÃO
+    void vireEsquerda();
+    void vireDireita();
 
 		// OBSTÁCULO
 		bool viuObstaculo();
@@ -53,13 +56,14 @@ class Estrategia {
 		
 		// VERDE
 		void passeVerde();
+    void passeVerdeOuRedutor();
 
 
 		// COMUNICAÇÃO
-    	void piscarLeds();
+    void piscarLeds();
 
 		//void para(int tempo); !! 
-};
 
+};
 
 #endif
