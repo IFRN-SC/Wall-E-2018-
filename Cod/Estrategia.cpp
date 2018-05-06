@@ -8,6 +8,7 @@ void Estrategia::configurar(){
 	//pinMode(11, OUTPUT);
 	//fimDeCurso.config();
 }
+
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
@@ -194,6 +195,10 @@ void Estrategia::miniSeguirLinha(){
 		robo.acionarMotores(50, 65);
 	}else if(sensor.branco_branco_preto_branco()){
 		robo.acionarMotores(65, 50);
+	} else { // DETECÇÃO DO CINZA?
+		motores.emFrente(65, 65);
+		delay(300);
+		//sala3.run();
 	}
 }
 
@@ -277,5 +282,4 @@ bool Estrategia::viuObstaculo(){
 void Estrategia::executar(){
 	if(estouNaRampa()) miniSeguirLinha();
 	else sigaLinha();
-	
 }
