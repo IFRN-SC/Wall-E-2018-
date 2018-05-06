@@ -123,33 +123,12 @@ void Estrategia::vireDireita(){
 }
 
 void Estrategia::piscarLeds(){
-	while (1){
-		motores.parar(2000);
-		digitalWrite(10, HIGH);
+	motores.parar(2000);
+	for (int i=1; i<=3; i++) {
+		digitalWrite(10, (!digitalRead(10)));
 		delay(200);
-		digitalWrite(10, LOW);
-		delay(100);
-		digitalWrite(11, HIGH);
+		digitalWrite(11, (!digitalRead(11)));
 		delay(200);
-		digitalWrite(11, LOW);
-		delay(100);
-		digitalWrite(10, HIGH);
-		delay(200);
-		digitalWrite(10, LOW);
-		delay(100);
-		digitalWrite(11, HIGH);
-		delay(200);
-		digitalWrite(11, LOW);
-		delay(100);
-		digitalWrite(10, HIGH);
-		delay(200);
-		digitalWrite(10, LOW);
-		delay(100);
-		digitalWrite(11, HIGH);
-		delay(200);
-		digitalWrite(11, LOW);
-		delay(100);
-		break;
 	}
 }
 
