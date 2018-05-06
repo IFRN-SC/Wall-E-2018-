@@ -17,35 +17,53 @@ class Estrategia {
 		void configurar();
 	private:
 		// bool realizarCali;
+
+		// CONSTANTES
 		#define ESQUERDA 1
 		#define DIREITA 2
 		#define VELPADRAO 50
 		#define FIM_DE_CURSO 12
 
+		// VARIÁVEIS
 		int t;
+		int contAlternadas = 0;
+		int indicador;
+		
+		// OBJETOS 		
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
-		int contAlternadas = 0;
-		int indicador;
-		bool desalinhado(); 
-		bool viuObstaculo();
-		bool estouNaRampa();
-		//void para(int tempo); !! 
-		void passeVerde();
+
+		// LINHA
+		void sigaLinha();
+
 		void alinharEncruzilhada();
-		void alinharObstaculo();
 		void passeEncruzilhada_Direita();
 		void passeEncruzilhada_Esquerda();
+    
+    // RAMPA
+    void miniSeguirLinha();
+  
+    // MOVIMENTAÇÃO
+    void vireEsquerda();
+    void vireDireita();
+
+		// OBSTÁCULO
+		bool viuObstaculo();
 		void passeObstaculo();
-		void sigaLinha();
-    	void miniSeguirLinha();
-    	void passeVerdeOuRedutor();
-    	void vireEsquerda();
-    	void vireDireita();
-    	void piscarLeds();
+		void alinharObstaculo();
+		bool desalinhado(); 
+		
+		// VERDE
+		void passeVerde();
+    void passeVerdeOuRedutor();
+
+
+		// COMUNICAÇÃO
+    void piscarLeds();
+
+		//void para(int tempo); !! 
 
 };
-
 
 #endif
