@@ -30,7 +30,7 @@ class Estrategia {
 		int indicador;
 		bool desalinhado(); 
 		bool viuObstaculo();
-		
+		bool estouNaRampa();
 		//void para(int tempo); !! 
 		void passeVerde();
 		void alinharEncruzilhada();
@@ -39,10 +39,12 @@ class Estrategia {
 		void passeEncruzilhada_Esquerda();
 		void passeObstaculo();
 		void sigaLinha();
+    	void miniSeguirLinha();
     	void passeVerdeOuRedutor();
     	void vireEsquerda();
     	void vireDireita();
     	void piscarLeds();
+
 };
 
 
