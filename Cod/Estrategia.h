@@ -13,7 +13,7 @@ class Estrategia {
 		Estrategia();
 		void executar();
 		void calibrar();
-		
+		void miniSeguirLinha();	
 		void configurar();
 	private:
 		// bool realizarCali;
@@ -42,7 +42,7 @@ class Estrategia {
 		void passeEncruzilhada_Esquerda();
     
     // RAMPA
-    void miniSeguirLinha();
+    //void miniSeguirLinha();
   
     // MOVIMENTAÇÃO
     void vireEsquerda();
@@ -57,7 +57,7 @@ class Estrategia {
 		// VERDE
 		void passeVerde();
     void passeVerdeOuRedutor();
-
+    bool estouNaRampa();
 
 		// COMUNICAÇÃO
     void piscarLeds();
