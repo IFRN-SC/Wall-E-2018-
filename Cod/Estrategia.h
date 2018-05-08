@@ -16,6 +16,7 @@ class Estrategia {
 		void calibrar();
 		
 		void configurar();
+		void miniSeguirLinha();
 	private:
 		// bool realizarCali;
 		#define ESQUERDA 1
@@ -44,6 +45,7 @@ class Estrategia {
     	void vireEsquerda();
     	void vireDireita();
     	void piscarLeds();
+
 };
 
 

@@ -4,15 +4,15 @@ Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
 }
 
 void Estrategia::configurar(){
-	//pinMode(10, OUTPUT);
-	//pinMode(11, OUTPUT);
+	pinMode(10, OUTPUT);
+	pinMode(11, OUTPUT);
 	//fimDeCurso.config();
 }
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
 	for(int i=0; i<10; i++){
-		delay(500);
+		//delay(500);
 		Serial.print(F("Tentativa "));
 		Serial.println(i);
 
@@ -203,6 +203,24 @@ void Estrategia::passeObstaculo(){
 		  while (!(sensor.Dir_Preto())){
 			robo.acionarMotores(-40, 40);
 		  }
+}
+
+void Estrategia::miniSeguirLinha(){
+	if(sensor.branco_branco_branco_branco()){
+		motores.emFrente(80, 80);
+	}else if(sensor.branco_preto_branco_branco()){
+		robo.acionarMotores(70, 80);
+	}else if(sensor.branco_branco_preto_branco()){
+		robo.acionarMotores(80, 70);
+	}else if (sensor.preto_preto_preto_preto()){
+		//digitalWrite(11, HIGH);
+		//digitalWrite(10, HIGH);
+		robo.acionarMotores(80, 80);
+		delay(800);
+		robo.acionarMotores(40, -40);
+		delay(810);
+		while(1){robo.acionarMotores(0, 0);}
+	}
 }
 
 void Estrategia::sigaLinha(){
