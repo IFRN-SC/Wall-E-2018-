@@ -12,7 +12,7 @@ void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
 	for(int i=0; i<10; i++){
-		//delay(500);
+		delay(500);
 		Serial.print(F("Tentativa "));
 		Serial.println(i);
 
@@ -206,12 +206,15 @@ void Estrategia::passeObstaculo(){
 }
 
 void Estrategia::miniSeguirLinha(){
+	digitalWrite(10, HIGH);
 	if(sensor.branco_branco_branco_branco()){
 		motores.emFrente(80, 80);
-	}else if(sensor.branco_preto_branco_branco()){
-		robo.acionarMotores(70, 80);
-	}else if(sensor.branco_branco_preto_branco()){
-		robo.acionarMotores(80, 70);
+	}else if(sensor.branco_preto_branco_branco() ||
+		sensor.preto_branco_branco_branco()){
+		robo.acionarMotores(65, 80);
+	}else if(sensor.branco_branco_preto_branco() ||
+		sensor.branco_branco_branco_preto()){
+		robo.acionarMotores(80, 65);
 	}else if (sensor.preto_preto_preto_preto()){
 		//digitalWrite(11, HIGH);
 		//digitalWrite(10, HIGH);
@@ -240,6 +243,8 @@ void Estrategia::sigaLinha(){
 		delay(150);
 		while(sensor.Esq_Branco()){	
 			vireEsquerda();
+		}while(sensor.Esq_Preto()){
+			vireEsquerda();
 		}
 	}
 	else if(sensor.branco_branco_preto_preto()||
@@ -248,6 +253,8 @@ void Estrategia::sigaLinha(){
 		delay(150);
 		while (sensor.Dir_Branco()){
 			vireDireita();
+		}while (sensor.Dir_Preto()){
+			vireDireita();
 		}
 		
 	} 
@@ -255,10 +262,10 @@ void Estrategia::sigaLinha(){
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		robo.acionarMotores(-50, 40);
+		robo.acionarMotores(-50, 50);
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		robo.acionarMotores(40, -50);
+		robo.acionarMotores(50, -50);
 	}else if (sensor.preto_preto_preto_preto()){
 		robo.acionarMotores(60, 60);
 	}
@@ -300,7 +307,26 @@ bool Estrategia::viuObstaculo(){
 	return (robo.lerSensorSonarFrontal() <= 10);
 }
 
-void Estrategia::executar(){
-	sigaLinha();
-	
+void Estrategia::executar(){ 
+	if (robo.lerSensorSonarLateral() <= 10.0){
+		miniSeguirLinha();
+ 		//robo.acionarMotores(80, 80);
+	}else{
+		sigaLinha();
+		//robo.acionarMotores(40, 40);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

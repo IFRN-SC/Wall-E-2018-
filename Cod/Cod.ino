@@ -12,8 +12,8 @@ void setup(){
 }
 
 void loop(){
-  //estrategia.executar();
-  estrategia.miniSeguirLinha();
+   estrategia.executar();
+  //estrategia.miniSeguirLinha();
 }                                
                                                                                                                
 

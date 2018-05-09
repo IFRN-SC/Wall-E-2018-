@@ -16,12 +16,11 @@ class Estrategia {
 		void calibrar();
 		
 		void configurar();
-		void miniSeguirLinha();
 	private:
 		// bool realizarCali;
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELPADRAO 40
+		#define VELPADRAO 50
 		#define FIM_DE_CURSO 12
 
 		int t;
@@ -40,11 +39,14 @@ class Estrategia {
 		void passeEncruzilhada_Direita();
 		void passeEncruzilhada_Esquerda();
 		void passeObstaculo();
-		void sigaLinha();
     	void passeVerdeOuRedutor();
     	void vireEsquerda();
     	void vireDireita();
     	void piscarLeds();
+    	void decida();
+
+    	void sigaLinha();
+		void miniSeguirLinha();
 
 };
 
