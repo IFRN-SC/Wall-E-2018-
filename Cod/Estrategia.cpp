@@ -186,12 +186,24 @@ void Estrategia::passeObstaculo(){
 	}
 
 	robo.acionarMotores(40, 40);
-	delay(200);
+	delay(340);
 
-	robo.acionarMotores();
+	robo.acionarMotores(-40, 40);
+	delay(540);
+
+	while (robo.lerSensorSonarLateral() > 10){
+		//digitalWrite(10, HIGH);
+		robo.acionarMotores(40, 40);
+	}
+
+	motores.parar(500);
+
+	while(robo.lerSensorSonarLateral() < 20){
+		robo.acionarMotores(17, 47);
+	    //delay(700);	
+	}
+
 	
-
-
 
 	while(1){motores.parar(10);}
 }
