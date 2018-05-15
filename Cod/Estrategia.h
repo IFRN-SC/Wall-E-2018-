@@ -20,7 +20,7 @@ class Estrategia {
 		// bool realizarCali;
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELPADRAO 50
+		#define VELPADRAO 45
 		#define FIM_DE_CURSO 12
 
 		int t;

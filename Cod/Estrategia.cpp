@@ -156,65 +156,56 @@ void Estrategia::piscarLeds(){
 
 void Estrategia::passeObstaculo(){
 		  //piscarLeds();
+	motores.parar(1000);
 
-		  robo.acionarMotores(0, 0);
-		  delay(300);
-		  
-		  robo.acionarMotores(-40, -40);
-		  delay(150);
-		  
-		while (!sensor.maisDir_Preto()){
-		  robo.acionarMotores(-40, 40);
-		}
+	robo.acionarMotores(-40, -40);
+	delay(200);
 
-		  alinharObstaculo();
+	while(sensor.maisEsq_Branco()){
+		robo.acionarMotores(40, -40);
+	}
 
-		  motores.parar(1000);
+	motores.parar(1000);
 
-		  robo.acionarMotores(40, 40);
-		  delay(1350);
+	alinharObstaculo();
 
-		  motores.parar(1000);
+	robo.acionarMotores(40, -40);
+	delay(130);
+	
+	motores.parar(1000);
 
-		  robo.acionarMotores(40, -40);
-		  delay(780);
+	while (robo.lerSensorSonarLateral() > 10){
+		//digitalWrite(10, HIGH);
+		robo.acionarMotores(40, 40);
+	}
 
-		  while(sensor.Dir_Preto()){
-		  	robo.acionarMotores(-40, 40);
-		  }
+	motores.parar(1000);
 
-		  motores.parar(1000);
+	while(robo.lerSensorSonarLateral() < 15){
+		robo.acionarMotores(40, 40);
+	}
 
-		  robo.acionarMotores(40, 40);
-		  delay(1620);
+	robo.acionarMotores(40, 40);
+	delay(200);
 
-		  motores.parar(1000);
+	robo.acionarMotores();
+	
 
-		  robo.acionarMotores(40, -40);
-		  delay(680);
 
-		  while (sensor.Dir_Branco() && sensor.Esq_Branco()){
-			robo.acionarMotores(40, 40);
-		  }
 
-		  robo.acionarMotores(35, 35);
-		  delay(250);
-
-		  while (!(sensor.Dir_Preto())){
-			robo.acionarMotores(-40, 40);
-		  }
+	while(1){motores.parar(10);}
 }
 
 void Estrategia::miniSeguirLinha(){
 	digitalWrite(10, HIGH);
 	if(sensor.branco_branco_branco_branco()){
-		motores.emFrente(80, 80);
+		motores.emFrente(75, 75);
 	}else if(sensor.branco_preto_branco_branco() ||
 		sensor.preto_branco_branco_branco()){
-		robo.acionarMotores(65, 80);
+		robo.acionarMotores(65, 75);
 	}else if(sensor.branco_branco_preto_branco() ||
 		sensor.branco_branco_branco_preto()){
-		robo.acionarMotores(80, 65);
+		robo.acionarMotores(75, 65);
 	}else if (sensor.preto_preto_preto_preto()){
 		//digitalWrite(11, HIGH);
 		//digitalWrite(10, HIGH);
@@ -262,12 +253,12 @@ void Estrategia::sigaLinha(){
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		robo.acionarMotores(-50, 50);
+		robo.acionarMotores(-45, 45);
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		robo.acionarMotores(50, -50);
+		robo.acionarMotores(45, -45);
 	}else if (sensor.preto_preto_preto_preto()){
-		robo.acionarMotores(60, 60);
+		robo.acionarMotores(50, 50);
 	}
 	//**********************************************
 	// bloco para o verde
@@ -300,7 +291,7 @@ void Estrategia::sigaLinha(){
 		//motores.emFrente(50, 50); 
 	//	}
 	//**********************************************
-
+	//delay(75);
 }
 
 bool Estrategia::viuObstaculo(){
