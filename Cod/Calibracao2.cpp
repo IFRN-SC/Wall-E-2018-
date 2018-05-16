@@ -142,7 +142,10 @@ void Calibracao2::calibrarCor(){
 void Calibracao2::calibrarBranco(){
 
   while (escolhaBranco != SAIDA) {
-    Serial.println(F("Coloque todos os sensores no BRANCO"));
+    Serial.println(F("\nColoque todos os sensores no BRANCO"));
+    
+    esperar_Posicionamento();
+
     Serial.println(F("[C] Para CALIBRAR"));
     Serial.println(F("[S] Para SAIR"));
     
@@ -178,7 +181,10 @@ void Calibracao2::calibrarBranco(){
 void Calibracao2::calibrarPreto(){
 
 	while (escolhaPreto != SAIDA) {
-		Serial.println(F("Coloque todos os sensores no PRETO"));
+		Serial.println(F("\nColoque todos os sensores no PRETO"));
+
+		esperar_Posicionamento();
+
 		Serial.println(F("[C] Para CALIBRAR"));
 		Serial.println(F("[S] Para SAIR"));
 		
@@ -209,6 +215,28 @@ void Calibracao2::calibrarPreto(){
     }
   }
   
+}
+
+void Calibracao2::esperar_Posicionamento() {
+	Serial.println();
+	Serial.println(F("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.\n"));
+	Serial.println(F("(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
+	while(1) {
+		Serial.print(robo.lerSensorLinhaEsq2());
+		Serial.print(F("		---		"));
+		Serial.print(robo.lerSensorLinhaEsq());
+		Serial.print(F("		---		"));
+		Serial.print(robo.lerSensorLinhaDir());
+		Serial.print(F("		---		"));
+		Serial.print(robo.lerSensorLinhaDir2());
+		Serial.println();
+		delay(1000);
+
+		if(Serial.available()) {
+			Serial.read();
+			break;
+		}
+	}
 }
 
 void Calibracao2::Menu_calibrar() {
