@@ -45,6 +45,9 @@ class Estrategia {
     	void piscarLeds();
     	void decida();
 
+
+    	void boySala3();
+
     	void sigaLinha();
 		void miniSeguirLinha();
 
