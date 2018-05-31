@@ -34,6 +34,7 @@ class SensorDeCor {
 		bool ehBranco(HSV hsvAt);
 		bool ehVerde(HSV hsvAt);
 		bool ehPreto(HSV hsvAt);
+		bool ehQualquerCoisa(HSV hsvAt);
 		
 	private:
 	

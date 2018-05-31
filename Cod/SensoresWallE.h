@@ -16,6 +16,10 @@ class Sensores: public Calibracao2 {
 	 
 	 inline bool corEsq_preto(){return corEsquerdo.ehPreto(robo.getHSV_Esquerdo());}
 	 inline bool corDir_preto(){return corDireito.ehPreto(robo.getHSV_Direito());}
+
+	 inline bool corEsq_naoVerde(){return corEsquerdo.ehQualquerCoisa(robo.getHSV_Esquerdo());}
+	 inline bool corDir_naoVerde(){return corDireito.ehQualquerCoisa(robo.getHSV_Direito());}
+	 
 	 
 	 bool branco_branco_branco_branco();
 	 bool preto_preto_preto_preto();

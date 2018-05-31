@@ -32,12 +32,17 @@ bool SensorDeCor::ehBranco(HSV hsvAt){
 
 bool SensorDeCor::ehVerde(HSV hsvAt){
 	 leituraHSV = hsvAt;
-	 return (/*(leituraHSV.h < preto.h + 3 && */leituraHSV.v > SeparacaoBrancoVerdeV() || leituraHSV.v < SeparacaoVerdePretoV());
+	return (leituraHSV.v < verde.v*1.2);;
 }
 
 bool SensorDeCor::ehPreto(HSV hsvAt){
 	 leituraHSV = hsvAt;
 	 return (leituraHSV.v > SeparacaoVerdePretoV() && leituraHSV.v < SeparacaoBrancoVerdeV()) ;
+}
+
+bool SensorDeCor::ehQualquerCoisa(HSV hsvAt){
+	leituraHSV = hsvAt;
+	return (leituraHSV.v > verde.v*1.2);
 }
 
 

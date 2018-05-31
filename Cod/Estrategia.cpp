@@ -12,14 +12,18 @@ void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
 	for(int i=0; i<10; i++){
-		delay(500);
+		digitalWrite(10, HIGH);
+		delay(250);
 		Serial.print(F("Tentativa "));
 		Serial.println(i);
 
 		if(Serial.available()){
+			digitalWrite(10, LOW);
 			Serial.read();	
 			sensor.Menu_calibrar(); 
 		}
+		digitalWrite(10, LOW);
+		delay(250);
 	}
 	sensor.lerCalibracao();
 }
@@ -306,24 +310,22 @@ void Estrategia::sigaLinha(){
 	// bloco de ações para curva 90º
 	else if(sensor.preto_preto_branco_branco() ||
 		sensor.preto_preto_preto_branco()) {
-		motores.emFrente(VELPADRAO, VELPADRAO);
-		delay(150);
-		while(sensor.Esq_Branco()){	
-			vireEsquerda();
-		}while(sensor.Esq_Preto()){
-			vireEsquerda();
+		motores.parar(500);
+
+		if(sensor.corEsq_verde()){
+			digitalWrite(10, HIGH);
+		}
+		if(sensor.corDir_verde()){
+			robo.acionarMotores(45, -45);
+			delay(500);
+			while(1){motores.parar(100);}
 		}
 	}
+	
 	else if(sensor.branco_branco_preto_preto()||
 		sensor.branco_preto_preto_preto()) {
-		motores.emFrente(VELPADRAO, VELPADRAO);
-		delay(150);
-		while (sensor.Dir_Branco()){
-			vireDireita();
-		}while (sensor.Dir_Preto()){
-			vireDireita();
-		}
-		
+		digitalWrite(11, HIGH);
+		while(1){motores.parar(100);}	
 	} 
 	// *********************************************
 
@@ -334,7 +336,7 @@ void Estrategia::sigaLinha(){
 	else if (sensor.branco_branco_preto_branco()){
 		robo.acionarMotores(45, -45);
 	}else if (sensor.preto_preto_preto_preto()){
-		robo.acionarMotores(50, 50);
+		while(1){motores.parar(100);}
 	}
 	//**********************************************
 	// bloco para o verde
@@ -375,14 +377,34 @@ bool Estrategia::viuObstaculo(){
 }
 
 void Estrategia::executar(){ 
-	if (robo.lerSensorSonarLateral() <= 10.0){
+/*	if (robo.lerSensorSonarLateral() <= 10.0){
 		miniSeguirLinha();
  		//robo.acionarMotores(80, 80);
 	}else{
 		sigaLinha();
 		//robo.acionarMotores(40, 40);
+	}*/
+	char esq = ' ';
+	char dir = ' ';
+	
+	if(sensor.corDir_verde()){
+		dir = 'V';
+	}else{
+		dir = 'N';
 	}
+
+  	if(sensor.corEsq_verde()){
+		esq = 'V';
+	}else{
+		esq = 'N';
+	}
+
+  	Serial.println("esq    dir ");
+  	Serial.print(esq);
+  	Serial.print("       ");
+  	Serial.println(dir);
 }
+
 
 
 
