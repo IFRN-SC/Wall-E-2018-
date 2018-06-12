@@ -319,6 +319,8 @@ void Calibracao2::Menu_calibrar() {
 	  corEsquerdo.setVerde(cali.verdeEsq);
 	  corDireito.setVerde(cali.verdeDir);
 	   Serial.print("Branco ESQ: ");
+   
+
     Serial.println(cali.brancoEsq.v);
     Serial.print("Branco DIR: ");
     Serial.println(cali.brancoDir.v);

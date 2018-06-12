@@ -1,4 +1,4 @@
-#include <robo_hardware.h> 
+#include <robo_hardware2.h> 
 #include <Servo.h>
 
 //********PINOS PARA SENSORES REFLETANCIA***********//
@@ -18,13 +18,13 @@ void setup(){
 
 void loop(){
 	Serial.println("+direito     direito     esquerdo     +esquerdo ");
-	Serial.print(robo.lerSensorLinhaDir2()); //Imprime o valor do sensor pela porta serial
+	Serial.print(robo.lerSensorLinhaMaisDir()); //Imprime o valor do sensor pela porta serial
   Serial.print("       ");
   Serial.print(robo.lerSensorLinhaDir());
   Serial.print("       ");
   Serial.print(robo.lerSensorLinhaEsq());
   Serial.print("       ");
-  Serial.println(robo.lerSensorLinhaEsq2());
+  Serial.println(robo.lerSensorLinhaMaisEsq());
 	
 	delay(1000);
 
