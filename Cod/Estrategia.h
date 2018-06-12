@@ -8,62 +8,50 @@
 #include "Botao.h"
 
 
+
 class Estrategia {
 	public:
 		Estrategia();
 		void executar();
 		void calibrar();
-		void miniSeguirLinha();	
+		
 		void configurar();
 	private:
 		// bool realizarCali;
-
-		// CONSTANTES
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELPADRAO 50
+		#define VELPADRAO 45
 		#define FIM_DE_CURSO 12
 
-		// VARIÁVEIS
 		int t;
-		int contAlternadas = 0;
-		int indicador;
-		
-		// OBJETOS 		
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
-
-		// LINHA
-		void sigaLinha();
-
+		int contAlternadas = 0;
+		int indicador;
+		bool desalinhado(); 
+		bool viuObstaculo();
+		
+		//void para(int tempo); !! 
+		void passeVerde();
 		void alinharEncruzilhada();
+		void alinharObstaculo();
 		void passeEncruzilhada_Direita();
 		void passeEncruzilhada_Esquerda();
-    
-    // RAMPA
-    //void miniSeguirLinha();
-  
-    // MOVIMENTAÇÃO
-    void vireEsquerda();
-    void vireDireita();
-
-		// OBSTÁCULO
-		bool viuObstaculo();
 		void passeObstaculo();
-		void alinharObstaculo();
-		bool desalinhado(); 
-		
-		// VERDE
-		void passeVerde();
-    void passeVerdeOuRedutor();
-    bool estouNaRampa();
+    	void passeVerdeOuRedutor();
+    	void vireEsquerda();
+    	void vireDireita();
+    	void piscarLeds();
+    	void decida();
 
-		// COMUNICAÇÃO
-    void piscarLeds();
 
-		//void para(int tempo); !! 
+    	void boySala3();	
+
+    	void sigaLinha();
+		void miniSeguirLinha();
 
 };
+
 
 #endif
