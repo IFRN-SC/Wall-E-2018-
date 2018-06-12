@@ -16,6 +16,9 @@ private:
 	
 	const char SAIDA = 'S'; 
 	
+
+	void esperar_Posicionamento();
+
 	void esperarParaLer();
 	void calibrarBranco();
 	void calibrarPreto();
