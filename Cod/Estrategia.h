@@ -20,7 +20,8 @@ class Estrategia {
 		// bool realizarCali;
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELPADRAO 45
+		#define VELESQ 40
+		#define VELDIR 43
 		#define FIM_DE_CURSO 12
 
 		int t;
@@ -42,7 +43,7 @@ class Estrategia {
     	void passeVerdeOuRedutor();
     	void vireEsquerda();
     	void vireDireita();
-    	void piscarLeds();
+    	void piscarLeds(int vezes);
     	void decida();
 
 

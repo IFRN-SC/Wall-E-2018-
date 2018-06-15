@@ -7,7 +7,7 @@ Estrategia estrategia;
 void setup(){
   Serial.begin(9600);
   robo.configurar(false);
-  estrategia.configurar();
+  //estrategia.configurar();
   estrategia.calibrar();
 }
 
