@@ -20,11 +20,12 @@ class Estrategia {
 		// bool realizarCali;
 		#define ESQUERDA 1
 		#define DIREITA 2
-		#define VELESQ 40
-		#define VELDIR 43
+		#define VELESQ 45
+		#define VELDIR 45
 		#define FIM_DE_CURSO 12
 
-		int t;
+		long tAntes = 0;
+		bool jaVi = false;
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
