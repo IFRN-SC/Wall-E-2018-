@@ -3,11 +3,6 @@ Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
 
 }
 
-void Estrategia::configurar(){
-	//pinMode(10, OUTPUT);
-	//pinMode(11, OUTPUT);
-	//fimDeCurso.config();
-}
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
@@ -239,44 +234,17 @@ void Estrategia::miniSeguirLinha(){
 }
 
 void Estrategia::resgate(){
-  for(int i = 90; i >=10; i--){
-    robo.acionarServoGarra1(i);
-    delay(20);
-  }
 
-  for(int i = 90; i >=0; i--){
-    robo.acionarServoGarra2(i);
-    delay(20);
-  }
+	//garra.iniciar();
 
+	garra.abrir(90,0,20);
 
-  for(int i = 10; i <=90; i++){
-    robo.acionarServoGarra1(i);
-    delay(20);
-  }
-  for(int i = 0; i <=90; i++){
-    robo.acionarServoGarra2(i);
-    delay(20);
-  }
-  robo.acionarMotores(30, 30);
-  delay(800);
-  robo.acionarMotores(0,0);
- 
-  for(int i = 90; i >=40; i--){
-    robo.acionarServoGarra2(i);
-    delay(20);
-  }
-  for(int i = 90; i >=10; i--){
-    robo.acionarServoGarra1(i);
-    delay(20);
-  }
-  for(int i = 41; i <=85; i++){
-    robo.acionarServoGarra2(i);
-    delay(20);
-  }
-  robo.acionarMotores(-30, -30);
-  delay(300);
-  robo.acionarMotores(0,0); 
+  	garra.baixar(90,0,20);
+
+  	garra.fechar(0,90,20);
+
+  	garra.subir(0,90, 20);
+
 }
 
 void Estrategia::boySala3() {

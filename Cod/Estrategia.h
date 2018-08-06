@@ -5,9 +5,7 @@
 #include "SensoresWallE.h"
 #include "Motores.h"
 #include "Calibracao2.h"
-#include "Botao.h"
-
-
+#include "Garra.h"
 
 class Estrategia {
 	public:
@@ -29,6 +27,14 @@ class Estrategia {
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
+
+		/****/
+
+		Garra garra;
+
+		/****/
+
+
 		int contAlternadas = 0;
 		int indicador;
 		bool desalinhado(); 
