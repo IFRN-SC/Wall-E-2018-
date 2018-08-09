@@ -119,7 +119,6 @@ void Estrategia::piscarLeds(int vezes){
 	}
 }
 
-
 void Estrategia::passeObstaculo(){
 		  
 	motores.parar(1000);
@@ -237,13 +236,11 @@ void Estrategia::resgate(){
 
 	//garra.iniciar();
 
-	garra.abrir(90,0,20);
-
-  	garra.baixar(90,0,20);
-
-  	garra.fechar(0,90,20);
-
-  	garra.subir(0,90, 20);
+	garra.subir();
+	garra.abrir();
+  	garra.baixar();
+  	garra.fechar();
+  	garra.subir();
 
 }
 
@@ -395,7 +392,9 @@ void Estrategia::executar(){
 		sigaLinha();
 		//robo.acionarMotores(40, 40);
 	}*/
-	boySala3();
+	//boySala3();
+	resgate();	
+	while(1){}
 }
 
 

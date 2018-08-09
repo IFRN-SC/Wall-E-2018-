@@ -1,45 +1,33 @@
 #include "Garra.h"
 
-void Garra::subir() {
-
-	for(int i = ANG_INIT; i >= 0; i++){
-
-		robo.acionarServoGarra1(i);
-		delay(TEMPO);
-
+void Garra::setBraco(int angInicial, int angFinal, int tempo){
+	if(angFinal > angInicial){
+		for(int i = angInicial; i < angFinal; i++){
+			robo.acionarServoGarra2(i);
+			delay(tempo);
+		}
+	}else{
+		for(int i = angInicial; i > angFinal; i--){
+			robo.acionarServoGarra2(i);
+			delay(tempo);
+		}
 	}
-
 }
 
-void Garra::baixar() {
-
-	for(int i = ANG_INIT; i >= 0; i--){
-
-		robo.acionarServoGarra1(i);
-		delay(TEMPO);
-
+void Garra::setMao(int angInicial, int angFinal, int tempo){
+	if(angFinal > angInicial){
+		for(int i = angInicial; i < angFinal; i++){
+			robo.acionarServoGarra1(i);
+			delay(tempo);
+		}
+	}else{
+		for(int i = angInicial; i > angFinal; i--){
+			robo.acionarServoGarra1(i);
+			delay(tempo);
+		}
 	}
-
 }
-
-void Garra::abrir() {
-
-	for(int i = ANG_INIT; i >= 0; i--){
-
-		robo.acionarServoGarra2(i);
-		delay(TEMPO);
-
-	}
-
-}
-
-void Garra::fechar() {
-
-	for(int i = 0; i >= ANG_INIT; i++){
-
-		robo.acionarServoGarra2(i);
-		delay(TEMPO);
-
-	}
-
-}
+void Garra::subir() {setBraco(10, 90, 20);}
+void Garra::baixar() {setBraco(90, 10, 20);}
+void Garra::abrir() {setMao(90, 0, 20);}
+void Garra::fechar() {setMao(0, 90, 20);}
