@@ -8,14 +8,14 @@ class Sensores: public Calibracao2 {
 		
 	public:
 		
-	 inline bool corEsq_verde(){return corEsquerdo.ehVerde(robo.getHsvEsquerdo());}
-	 inline bool corDir_verde(){return corDireito.ehVerde(robo.getHsvDireito());}
+	 inline bool corEsq_verde(){return corEsquerdo.ehVerde(robo.getHSVEsquerdo());}
+	 inline bool corDir_verde(){return corDireito.ehVerde(robo.getHSVDireito());}
 	 
-	 inline bool corEsq_branco(){return corEsquerdo.ehBranco(robo.getHsvEsquerdo());}
-	 inline bool corDir_branco(){return corDireito.ehBranco(robo.getHsvDireito());}
+	 inline bool corEsq_branco(){return corEsquerdo.ehBranco(robo.getHSVEsquerdo());}
+	 inline bool corDir_branco(){return corDireito.ehBranco(robo.getHSVDireito());}
 	 
-	 inline bool corEsq_preto(){return corEsquerdo.ehPreto(robo.getHsvEsquerdo());}
-	 inline bool corDir_preto(){return corDireito.ehPreto(robo.getHsvDireito());}
+	 inline bool corEsq_preto(){return corEsquerdo.ehPreto(robo.getHSVEsquerdo());}
+	 inline bool corDir_preto(){return corDireito.ehPreto(robo.getHSVDireito());}
 	 
 	 bool branco_branco_branco_branco();
 	 bool preto_preto_preto_preto();

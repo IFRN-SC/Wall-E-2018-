@@ -23,7 +23,7 @@ void Calibracao2::calibrarVerde(){
 
 	
 	if (controlador == 'D') {
-		corDireito.setVerde(robo.getHsvDireito());
+		corDireito.setVerde(robo.getHSVDireito());
 	}
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO VERDE: "));
@@ -34,7 +34,7 @@ void Calibracao2::calibrarVerde(){
 
 
 	if (controlador == 'E'){
-		corEsquerdo.setVerde(robo.getHsvEsquerdo()); 
+		corEsquerdo.setVerde(robo.getHSVEsquerdo()); 
 	}
 	
 	controlador = ' ';
@@ -51,7 +51,7 @@ void Calibracao2::calibrarCorPreto(){
 	controlador = Serial.read();
 
 	if (controlador == 'D') {
-		corDireito.setPreto(robo.getHsvDireito());
+		corDireito.setPreto(robo.getHSVDireito());
 	}
 	
 	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO PRETO: "));
@@ -62,7 +62,7 @@ void Calibracao2::calibrarCorPreto(){
 	
 
 	if (controlador == 'E'){
-		corEsquerdo.setPreto(robo.getHsvEsquerdo()); 
+		corEsquerdo.setPreto(robo.getHSVEsquerdo()); 
 	}
 	
 	controlador = ' ';
@@ -79,8 +79,8 @@ void Calibracao2::calibrarCorBranco(){
 	
 
 	if (controlador == 'B') {
-		corDireito.setBranco(robo.getHsvDireito());
-		corEsquerdo.setBranco(robo.getHsvEsquerdo());
+		corDireito.setBranco(robo.getHSVDireito());
+		corEsquerdo.setBranco(robo.getHSVEsquerdo());
 	}
 
 	controlador = ' ';
@@ -95,8 +95,8 @@ void Calibracao2::calibrarCinza(){
 	controlador = Serial.read();
 
 	if (controlador == 'C') {
-		corDireito.setCinza(robo.getHsvDireito());
-		corEsquerdo.setCinza(robo.getHsvEsquerdo());
+		corDireito.setCinza(robo.getHSVDireito());
+		corEsquerdo.setCinza(robo.getHSVEsquerdo());
 	}
 	
 	controlador = ' ';
@@ -280,10 +280,10 @@ void Calibracao2::Menu_calibrar() {
 	  refletancia_dir.calculeMedia();
 	  refletancia_dir2.calculeMedia();
 	  
-	  cali.refletancia_dir = refletancia_dir.getSeparacao();
-	  cali.refletancia_mais_dir = refletancia_dir2.getSeparacao();
-	  cali.refletancia_esq = refletancia_esq.getSeparacao();
-	  cali.refletancia_mais_esq = refletancia_esq2.getSeparacao();
+	  cali.refletanciaDir = refletancia_dir.getSeparacao();
+	  cali.refletanciaMaisDir = refletancia_dir2.getSeparacao();
+	  cali.refletanciaEsq = refletancia_esq.getSeparacao();
+	  cali.refletanciaMaisEsq = refletancia_esq2.getSeparacao();
 	
 	  cali.brancoEsq = corEsquerdo.getBranco();
 	  cali.brancoDir = corDireito.getBranco();
@@ -305,10 +305,10 @@ void Calibracao2::Menu_calibrar() {
  void Calibracao2::lerCalibracao(){
 	 robo.lerCalibracao(cali);
 	  
-	  refletancia_dir.setMedia(cali.refletancia_dir);
-	  refletancia_dir2.setMedia(cali.refletancia_mais_dir);
-	  refletancia_esq.setMedia(cali.refletancia_esq);
-	  refletancia_esq2.setMedia(cali.refletancia_mais_esq);
+	  refletancia_dir.setMedia(cali.refletanciaDir);
+	  refletancia_dir2.setMedia(cali.refletanciaMaisDir);
+	  refletancia_esq.setMedia(cali.refletanciaEsq);
+	  refletancia_esq2.setMedia(cali.refletanciaMaisEsq);
 	  
 	  corEsquerdo.setBranco(cali.brancoEsq); 
 	  corDireito.setBranco(cali.brancoDir);
