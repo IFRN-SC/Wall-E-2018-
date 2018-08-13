@@ -6,8 +6,19 @@
 class Garra {
 
 	private:
-		#define TEMP 20
+		#define DELAY 20
+		
+		#define ANG_INICIAL_SUBIR_BRACO 10
+		#define ANG_FINAL_SUBIR_BRACO 80
 
+		#define ANG_INICIAL_BAIXAR_BRACO 80
+		#define ANG_FINAL_BAIXAR_BRACO 10
+
+		#define ANG_INICIAL_ABRIR_MAO 90
+		#define ANG_FINAL_ABRIR_MAO 0
+
+		#define ANG_INICIAL_FECHAR_MAO 0
+		#define ANG_FINAL_FECHAR_MAO 90
 	public:
 		void iniciar() { 
 
