@@ -236,7 +236,7 @@ void Estrategia::resgate(){
 
 	//garra.iniciar();
 
-	garra.subir();
+	//garra.subir();
 	garra.abrir();
   	garra.baixar();
   	garra.fechar();

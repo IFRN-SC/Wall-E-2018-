@@ -27,7 +27,7 @@ void Garra::setMao(int angInicial, int angFinal, int tempo){
 		}
 	}
 }
-void Garra::subir() {setBraco(10, 90, 20);}
-void Garra::baixar() {setBraco(90, 10, 20);}
-void Garra::abrir() {setMao(90, 0, 20);}
-void Garra::fechar() {setMao(0, 90, 20);}
+void Garra::subir() {setBraco(10, 80, TEMP);}
+void Garra::baixar() {setBraco(90, 10, TEMP);}
+void Garra::abrir() {setMao(90, 0, TEMP);}
+void Garra::fechar() {setMao(0, 120, TEMP);}

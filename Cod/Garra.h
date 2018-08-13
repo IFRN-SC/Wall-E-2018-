@@ -5,6 +5,9 @@
 
 class Garra {
 
+	private:
+		#define TEMP 20
+
 	public:
 		void iniciar() { 
 
