@@ -7,11 +7,12 @@ float valorSensorEsq;
 void setup(){
   Serial.begin(9600);
   robo.configurar(false);
+  robo.habilitaTCS34();
 }
 
 void loop(){
     Serial.println("\n\n*Escolha o teste a ser feito: ");
-    Serial.print(" [M] Motores \n [R] Refletância \n [S] Sonares \n");
+    Serial.print(" [M] Motores \n [R] Refletância \n [S] Sonares \n [C] COR \n");
   
   
   esperaLeitura();
@@ -24,6 +25,9 @@ void loop(){
       break;
     case 'S':
       testeSonar();
+      break;
+    case 'C':
+      testeCor();
       break;
   }
 
@@ -94,6 +98,34 @@ void testeSonar(){
     Serial.println(robo.lerSensorSonarDir());
     Serial.println();
       
+    delay(500);
+  }
+}
+
+void testeCor(){
+  while(Serial.read() != 'X'){
+    HSV leituraSensorCor;
+    HSV leituraSensorCor2;
+    
+    Serial.print("Esquerdo:               ");
+    Serial.println("Direito:      ");
+    leituraSensorCor = robo.getHSVEsquerdo();
+    Serial.print(leituraSensorCor.h);
+    Serial.print(", ");
+    Serial.print(leituraSensorCor.s);
+    Serial.print(", ");
+    Serial.print(leituraSensorCor.v);
+
+    Serial.print("      ");
+    leituraSensorCor2 = robo.getHSVDireito();
+    Serial.print(leituraSensorCor2.h);
+    Serial.print(", ");
+    Serial.print(leituraSensorCor2.s);
+    Serial.print(", ");
+    Serial.println(leituraSensorCor2.v);
+  
+    Serial.println();
+    
     delay(500);
   }
 }
