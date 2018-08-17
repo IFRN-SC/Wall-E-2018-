@@ -1,4 +1,7 @@
-#include "robo_hardware2.h"
+#ifndef SENSORDECOR_H
+#define SENSORDECOR_H
+
+#include <robo_hardware2.h>
 #include "Matematica.h"
 
 class SensorDeCor {
@@ -38,3 +41,5 @@ class SensorDeCor {
 	private:
 	
 };
+
+#endif
