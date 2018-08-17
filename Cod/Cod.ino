@@ -6,8 +6,8 @@ Estrategia estrategia;
 
 void setup(){
   Serial.begin(9600);
-  robo.configurar(true);
-  //estrategia.configurar();
+  robo.configurar(false);
+  robo.habilitaTCS34();
   estrategia.calibrar();
 }
 

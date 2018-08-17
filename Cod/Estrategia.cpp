@@ -319,10 +319,7 @@ void Estrategia::sigaLinha(){
 		}
 
 		while(sensor.Esq_Branco()){vireEsquerda();}
-		// while(sensor.Dir_Preto())
 		while(sensor.Esq_Preto()){vireEsquerda();}
-
-
 	}
 	else if(sensor.branco_branco_preto_preto()||
 		sensor.branco_preto_preto_preto()) {
@@ -342,8 +339,18 @@ void Estrategia::sigaLinha(){
 	}
 	else if (sensor.branco_branco_preto_branco()){
 		robo.acionarMotores(40, -40);
-	}else if (sensor.preto_preto_preto_preto()){
-		robo.acionarMotores(50, 50);
+	}
+
+
+	else if (sensor.preto_preto_preto_preto()){
+		while(!sensor.branco_branco_branco_branco()){
+			robo.acionarMotores(30, 33);
+		}
+		while(!(sensor.Esq_Preto() && sensor.Dir_Preto())){
+			robo.acionarMotores(-30, -30);
+		}
+		motores.parar(500);
+		while(1){piscarLeds(3);}
 	}
 	//**********************************************
 	// bloco para o verde
@@ -384,17 +391,15 @@ bool Estrategia::viuObstaculo(){
 }
 
 void Estrategia::executar(){ 
-	/*if(robo.lerSensorSonarEsq() <= 14.0 && robo.lerSensorSonarDir() <= 14.0){
+	if(robo.lerSensorSonarEsq() <= 14.0 && robo.lerSensorSonarDir() <= 14.0){
 		robo.ligarLed(2);
 		miniSeguirLinha();
 	}else{
 		robo.desligarLed(2);
 		sigaLinha();
 		//robo.acionarMotores(40, 40);
-	}*/
+	}
 	//boySala3();
-	resgate();	
-	while(1){}
 }
 
 

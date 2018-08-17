@@ -104,6 +104,9 @@ void Calibracao2::calibrarCinza(){
 
 
 void Calibracao2::calibrarCor(){
+
+//  	robo.habilitaTCS34();
+	Serial.println(robo.getSensor() == TCS34 ? "tcs34":"tsc23");
 	while (escolhaCor != SAIDA){
 		Serial.println(F("[V] Para calibrar o VERDE"));
 		Serial.println(F("[C] Para calibrar o CINZA"));

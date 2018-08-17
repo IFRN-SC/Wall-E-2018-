@@ -2,7 +2,6 @@
 #define CALIBRACAO2_H
 
 #include <robo_hardware2.h> 
-#include <Servo.h>
 #include "SensorDeCor.h"
 #include "Refletancia.h"
  
