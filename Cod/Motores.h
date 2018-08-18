@@ -5,11 +5,7 @@
 
 class Motores {
 	public:
-		int velDir;
-		void emFrente(int velEsq, int velDir){
-			robo.acionarMotores(velEsq, velDir);
-			this -> velDir = velDir;
-		}
+		void emFrente(int velEsq, int velDir){robo.acionarMotores(velEsq, velDir);}
 		void direita(int velEsq, int velDir){robo.acionarMotores(velEsq, velDir*(-1));}   // Delirante
 		void esquerda(int velEsq, int velDir){robo.acionarMotores(velEsq*(-1), velDir);}  // Com fome
 		void paraTras(int velEsq, int velDir){robo.acionarMotores(velEsq*(-1), velDir*(-1));}
