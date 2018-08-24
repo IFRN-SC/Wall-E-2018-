@@ -4,18 +4,19 @@
 #include <Arduino.h>
 #include <Stepper.h>
 
-class MotorPasso{
+class MotorPasso {
 	public:
 		MotorPasso(const int passosPorRotacaoEsq,
 				   const int passosPorRotacaoDir);
 		MotorPasso();
 
 		void acionarMotorPasso(int velEsq, int velDir);
-		void acionarAngEsq(float ang, int vel);
-		void acionarAngDir(float ang, int vel);
+		void acionarMotoresEmGraus(int vel, double grau);
+		void acionarAngEsq(int ang, int vel);
+		void acionarAngDir(int ang, int vel);
 
 	private: 
-		#define VELMAX 800
+		#define VELMAX 620
 
 		#define N_PASSOS_DIR 1;
 		#define N_PASSOS_ESQ 1;
