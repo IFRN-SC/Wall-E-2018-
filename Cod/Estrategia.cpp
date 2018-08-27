@@ -300,10 +300,7 @@ void Estrategia::boySala3() {
 
 
 void Estrategia::sigaLinha(){
-	if(viuObstaculo()){
-		 passeObstaculo();
-	}
-	else if(sensor.branco_branco_branco_branco() /*||
+	if(sensor.branco_branco_branco_branco() /*||
 		sensor.preto_preto_preto_preto()*/){
 		motores.emFrente(VELESQ, VELDIR);
 		
@@ -343,14 +340,7 @@ void Estrategia::sigaLinha(){
 
 
 	else if (sensor.preto_preto_preto_preto()){
-		while(!sensor.branco_branco_branco_branco()){
-			robo.acionarMotores(30, 33);
-		}
-		while(!(sensor.Esq_Preto() && sensor.Dir_Preto())){
-			robo.acionarMotores(-30, -30);
-		}
-		motores.parar(500);
-		while(1){piscarLeds(3);}
+		robo.acionarMotores(50,50);
 	}
 	//**********************************************
 	// bloco para o verde
@@ -386,18 +376,15 @@ void Estrategia::sigaLinha(){
 	//delay(75);
 }
 
-bool Estrategia::viuObstaculo(){
-	return (robo.lerSensorSonarFrontal() <= 6);
-}
-
 void Estrategia::executar(){ 
-	if(robo.lerSensorSonarEsq() <= 14.0 && robo.lerSensorSonarDir() <= 14.0){
+	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
+	}else if(sensor.viuObstaculo()){
+		passeObstaculo();
 	}else{
 		robo.desligarLed(2);
 		sigaLinha();
-		//robo.acionarMotores(40, 40);
 	}
 	//boySala3();
 }

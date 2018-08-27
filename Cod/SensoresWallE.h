@@ -5,8 +5,13 @@
 #include "Calibracao2.h"
 
 class Sensores: public Calibracao2 {
-		
+	private:
+		#define DIST_RAMPA 14
+		#define DIST_OBSTACULO 6
+
 	public:
+	 inline bool viuRampa(){return robo.lerSensorSonarEsq() <= DIST_RAMPA && robo.lerSensorSonarDir() <= DIST_RAMPA;}
+	 inline bool viuObstaculo(){return robo.lerSensorSonarFrontal() <= DIST_OBSTACULO;}
 		
 	 inline bool corEsq_verde(){return corEsquerdo.ehVerde(robo.getHSVEsquerdo());}
 	 inline bool corDir_verde(){return corDireito.ehVerde(robo.getHSVDireito());}
@@ -45,13 +50,8 @@ class Sensores: public Calibracao2 {
 	 bool Dir_Preto();      // Direito preto
 	 bool maisDir_Branco(); // Mais direito branco
 	 bool maisDir_Preto(); // Mais direito preto
-	 
-	//inline float sonar_frontal(){return robo.lerSensorSonarFrontal();}
-
-	 
-	 Sensores();
 	
-	private:
+	 Sensores();
 	
 };
 
