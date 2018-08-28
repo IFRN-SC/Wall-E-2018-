@@ -21,7 +21,7 @@ void loop(){
       testeMotores();
       break;
     case 'R':
-      testeRefletancia();
+        testeRefletancia();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
       break;
     case 'S':
       testeSonar();

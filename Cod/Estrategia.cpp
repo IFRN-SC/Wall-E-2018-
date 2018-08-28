@@ -339,9 +339,9 @@ void Estrategia::sigaLinha(){
 	}
 
 
-	else if (sensor.preto_preto_preto_preto()){
+	/*else if (sensor.preto_preto_preto_preto()){
 		robo.acionarMotores(50,50);
-	}
+	}*/
 	//**********************************************
 	// bloco para o verde
 	/*else if (sensor.branco_preto_branco_preto() ||

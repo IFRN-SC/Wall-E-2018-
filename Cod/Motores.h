@@ -4,6 +4,9 @@
 #include <robo_hardware2.h>
 
 class Motores {
+	private:
+		#define VEL_FRENTE 40
+		#define VEL_TRAS 40
 	public:
 		void emFrente(int velEsq, int velDir){robo.acionarMotores(velEsq, velDir);}
 		void direita(int velEsq, int velDir){robo.acionarMotores(velEsq, velDir*(-1));}   // Delirante
