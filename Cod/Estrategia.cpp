@@ -206,7 +206,7 @@ void Estrategia::passeObstaculo(){
 
 void Estrategia::miniSeguirLinha(){
 	if(sensor.branco_branco_branco_branco()){
-		motores.emFrente(85, 85);
+		motores.emFrente(85, 88);
 	}else if(sensor.branco_preto_branco_branco() ||
 		sensor.preto_branco_branco_branco() ||
 		sensor.preto_preto_branco_branco()){
@@ -223,7 +223,7 @@ void Estrategia::miniSeguirLinha(){
 		robo.acionarMotores(40, -40);
 		delay(810);
 		while(1){robo.acionarMotores(0, 0);}*/
-		motores.emFrente(85, 85);
+		motores.emFrente(85, 88);
 		//delay(40);
 
 //		boySala3();

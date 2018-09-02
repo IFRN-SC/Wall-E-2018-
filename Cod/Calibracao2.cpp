@@ -322,6 +322,13 @@ void Calibracao2::Menu_calibrar() {
 	  corEsquerdo.setVerde(cali.verdeEsq);
 	  corDireito.setVerde(cali.verdeDir);
 
+	  Serial.println("mais esq, esq, dir, mais dir");
+	  Serial.println(refletancia_esq2.getSeparacao());
+	  Serial.println(refletancia_esq.getSeparacao());
+	  Serial.println(refletancia_dir.getSeparacao());
+	  Serial.println(refletancia_dir2.getSeparacao());
+	  
+
  }
  
 
