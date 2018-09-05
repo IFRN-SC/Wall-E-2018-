@@ -204,31 +204,24 @@ void Estrategia::passeObstaculo(){
 }
 
 void Estrategia::miniSeguirLinha(){
-	if(sensor.branco_branco_branco_branco()){
-		motores.emFrente(85, 88);
-	}else if(sensor.branco_preto_branco_branco() ||
-		sensor.preto_branco_branco_branco() ||
-		sensor.preto_preto_branco_branco()){
-		robo.acionarMotores(70, 85);
-	}else if(sensor.branco_branco_preto_branco() ||
-		sensor.branco_branco_branco_preto()||
-		sensor.branco_branco_preto_preto()){
-		robo.acionarMotores(85, 70);
-	}else if (sensor.preto_preto_preto_preto()){
-		//digitalWrite(11, HIGH);
-		//digitalWrite(10, HIGH);
-		/*robo.acionarMotores(80, 80);
-		delay(800);
-		robo.acionarMotores(40, -40);
-		delay(810);
-		while(1){robo.acionarMotores(0, 0);}*/
-		motores.emFrente(85, 88);
-		//delay(40);
 
-//		boySala3();
-	}else{
-		motores.emFrente(85, 85);
+	if (sensor.branco_branco_branco_branco())		motores.emFrente(85, 88);
+	else if(
+			sensor.branco_preto_branco_branco() ||
+			sensor.preto_branco_branco_branco() ||
+			sensor.preto_preto_branco_branco()
+		   ){
+		robo.acionarMotores(70, 85);
 	}
+	else if(
+			sensor.branco_branco_preto_branco() ||
+			sensor.branco_branco_branco_preto()||
+			sensor.branco_branco_preto_preto()
+		   ){
+		robo.acionarMotores(85, 70);
+	}
+	else if (sensor.preto_preto_preto_preto())		sala3.executar();
+	else 											motores.emFrente(85, 85);
 }
 
 void Estrategia::resgate(){
@@ -243,17 +236,8 @@ void Estrategia::resgate(){
 
 }
 
+/*
 void Estrategia::boySala3() {
-	motores.parar(500);
-	robo.acionarMotores(40, -40);
-	delay(500);
-
-	motores.parar(500);
-
-	robo.acionarMotores(-30, -30);
-	delay(180);
-
-	motores.parar(500);
 
 	double atual = 100;
 	double anterior = 0;
@@ -295,7 +279,7 @@ void Estrategia::boySala3() {
 	}
 
 	
-}
+}*/
 
 
 void Estrategia::sigaLinha(){
