@@ -1,10 +1,18 @@
 #ifndef SALA3_H
 #define SALA3_H
 
+#include <robo_hardware2.h>
+#include "Motores.h"
+#include "SensoresWallE.h"
+
 class Sala3 {
 	private:
 		float limite_lateral;
 		float limite_frontal;
+
+		Motores motores;
+
+		Sensores sensor;
 
 	public:
 
