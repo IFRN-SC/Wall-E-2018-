@@ -1,11 +1,5 @@
 #include "Estrategia.h"
-Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
-
-}
-
-void Estrategia::esperarParaLer (){
-  while (!Serial.available()){}
-}
+Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){}
 
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
