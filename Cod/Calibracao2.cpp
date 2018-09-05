@@ -367,6 +367,11 @@ void Calibracao2::Menu_calibrar() {
 			cali.verdeEsq = corEsquerdo.getVerde();
 			cali.verdeDir = corDireito.getVerde();
 
+			// SALA 3
+
+			cali.sala3_limiteLateral = sala3.getLimiteLateral();
+			cali.sala3_limiteFrontal = sala3.getLimiteFrontal();
+
 			robo.salvarCalibracao(cali);
 
 		}
@@ -397,7 +402,9 @@ void Calibracao2::Menu_calibrar() {
 	  Serial.println(refletancia_esq.getSeparacao());
 	  Serial.println(refletancia_dir.getSeparacao());
 	  Serial.println(refletancia_dir2.getSeparacao());
-	  
+
+	  sala3.setLimiteLateral(cali.sala3_limiteLateral);
+	  sala3.setLimiteFrontal(cali.sala3_limiteFrontal);
 
  }
  
