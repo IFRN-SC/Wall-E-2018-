@@ -7,6 +7,8 @@
 #include "Calibracao2.h"
 #include "Garra.h"
 
+#include "Sala3.h"
+
 class Estrategia {
 	public:
 		Estrategia();
@@ -31,6 +33,8 @@ class Estrategia {
 		/****/
 
 		Garra garra;
+
+		Sala3 sala3;
 
 		/****/
 

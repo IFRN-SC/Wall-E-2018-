@@ -3,6 +3,10 @@ Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
 
 }
 
+void Estrategia::esperarParaLer (){
+  while (!Serial.available()){}
+}
+
 void Estrategia::calibrar(){
 	Serial.println(F("Digite qualquer coisa para calibrar")); 	
 	
@@ -16,6 +20,7 @@ void Estrategia::calibrar(){
 			Serial.read();	
 			sensor.Menu_calibrar(); 
 		}
+
 		robo.desligarTodosLeds();
 		delay(250);
 	}
