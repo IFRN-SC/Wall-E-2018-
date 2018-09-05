@@ -4,6 +4,8 @@
 #include <robo_hardware2.h> 
 #include "SensorDeCor.h"
 #include "Refletancia.h"
+
+#include "Sala3.h"
  
 class Calibracao2 {
 	
@@ -16,7 +18,10 @@ private:
 	const char SAIDA = 'S'; 
 	
 
-	void esperar_Posicionamento();
+	void posicionar_sensores();
+	void posicionar_sala3();
+	
+	
 
 	void esperarParaLer();
 	void calibrarBranco();
@@ -27,7 +32,11 @@ private:
 	void calibrarCorBranco();
 	void calibrarVerde();
 	void calibrarCinza();
-	
+
+	void calibrarSala3();
+
+	char escolhaSala3;
+
 	char escolhaInicial;
 	char escolhaMenu;
 	char escolhaBrancoPreto;
@@ -49,6 +58,8 @@ public:
 protected: 
 	Refletancia refletancia_dir, refletancia_dir2, refletancia_esq, refletancia_esq2;
 	SensorDeCor corDireito, corEsquerdo;
+
+	Sala3 sala3;
 };
 
 #endif

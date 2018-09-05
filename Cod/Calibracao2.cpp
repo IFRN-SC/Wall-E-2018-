@@ -6,6 +6,7 @@ Calibracao2::Calibracao2(){
 	escolhaMenu = ' ';
 	escolhaBranco = ' ';
 	escolhaPreto = ' ';
+	escolhaSala3 = ' ';
 }
 
 
@@ -147,7 +148,7 @@ void Calibracao2::calibrarBranco(){
   while (escolhaBranco != SAIDA) {
     Serial.println(F("\nColoque todos os sensores no BRANCO"));
     
-    esperar_Posicionamento();
+    posicionar_sensores();
 
     Serial.println(F("[C] Para CALIBRAR"));
     Serial.println(F("[S] Para SAIR"));
@@ -186,7 +187,7 @@ void Calibracao2::calibrarPreto(){
 	while (escolhaPreto != SAIDA) {
 		Serial.println(F("\nColoque todos os sensores no PRETO"));
 
-		esperar_Posicionamento();
+		posicionar_sensores();
 
 		Serial.println(F("[C] Para CALIBRAR"));
 		Serial.println(F("[S] Para SAIR"));
@@ -220,11 +221,13 @@ void Calibracao2::calibrarPreto(){
   
 }
 
-void Calibracao2::esperar_Posicionamento() {
-	Serial.println();
-	Serial.println(F("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.\n"));
+void Calibracao2::posicionar_sensores() {
+
+	Serial.println(F("\nINSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.\n"));
 	Serial.println(F("(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
+	
 	while(1) {
+		
 		Serial.print(robo.lerSensorLinhaMaisEsq());
 		Serial.print(F("		---		"));
 		Serial.print(robo.lerSensorLinhaEsq());
@@ -236,73 +239,140 @@ void Calibracao2::esperar_Posicionamento() {
 		delay(1000);
 
 		if(Serial.available()) {
+		
 			Serial.read();
 			break;
+		
 		}
 	}
 }
 
+void Calibracao2::posicionar_sala3() {
+
+	Serial.println(F("\nINSIRA ALGO NO SERIAL QUANDO O ROBÔ ESTIVER POSICIONADO CORRETAMENTE.\n"));
+	Serial.println(F("(esquerda)	---		(frente)		---		(direita)\n"));
+
+	while(1) {
+
+		Serial.print(robo.lerSensorSonarEsq());
+		Serial.print(F("		---		"));
+		Serial.print(robo.lerSensorSonarFrontal());
+		Serial.print(F("		---		"));
+		Serial.print(robo.lerSensorSonarDir());
+		Serial.println();
+		delay(1000);
+
+		if(Serial.available()) {
+
+			Serial.read();
+			break;
+
+		}
+
+	}
+
+}
+
+void Calibracao2::calibrarSala3() {
+
+	while (escolhaSala3 != SAIDA) {
+
+		Serial.println(F("\nColoque o robô na Sala 3."));
+
+		posicionar_sala3();
+
+		Serial.println(F("[C] Para CALIBRAR"));
+		Serial.println(F("[S] Para SAIR"));
+
+		esperarParaLer();
+		escolhaSala3 = Serial.read();
+
+	    if (escolhaSala3 == 'C') {
+
+	    	sala3.setLimiteLateral(robo.lerSensorSonarEsq());
+	    	sala3.setLimiteFrontal(robo.lerSensorSonarFrontal());
+
+			Serial.println("  ");
+			Serial.println(F("Valores lidos: "));
+			Serial.print(sala3.getLimiteLateral());
+			Serial.print(F(" --- "));
+			Serial.print(sala3.getLimiteFrontal());
+	      
+	    }
+	    else {
+	      escolhaSala3 = SAIDA;
+	    }
+
+	}
+
+}
+
 void Calibracao2::Menu_calibrar() {
 	
-  while (escolhaInicial != SAIDA) { 
-     Serial.println(F("[C] Começar calibração"));
-     Serial.println(F("[S] Sair da calibração"));
-   
-     esperarParaLer();
-     escolhaInicial = Serial.read();
+	while (escolhaInicial != SAIDA) { 
 
-     if (escolhaInicial == 'C'){
-      while (escolhaMenu != SAIDA) { 
-        Serial.println(F("[B] Calibrar BRANCO REFLETÂNCIA"));
-        Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
-		Serial.println(F("[C] Calibrar COR"));
-        Serial.println(F("[S] SAIR"));
-        
-        esperarParaLer();
-        escolhaMenu = Serial.read();
-       
+		Serial.println(F("[C] Começar calibração"));
+		Serial.println(F("[S] Sair da calibração"));
 
-        if (escolhaMenu == 'B') {
-          calibrarBranco();           
-        }
-        else if (escolhaMenu == 'P') {
-          calibrarPreto();
-        }
-		else if (escolhaMenu == 'C'){
-			calibrarCor();
+		esperarParaLer();
+		escolhaInicial = Serial.read();
+
+		if (escolhaInicial == 'C') {
+
+			while (escolhaMenu != SAIDA) { 
+
+				Serial.println(F("[B] Calibrar BRANCO REFLETÂNCIA"));
+				Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
+				Serial.println(F("[C] Calibrar COR"));
+				Serial.println(F("[T] Sala 3"));
+				Serial.println(F("[S] SAIR"));
+
+				esperarParaLer();
+				escolhaMenu = Serial.read();
+
+				switch(escolhaMenu) {
+					case 'B':
+						calibrarBranco();  
+						break;
+					case 'P':
+						calibrarPreto();
+						break;
+					case 'C':
+						calibrarCor();
+						break;
+					case 'T':
+						calibrarSala3();
+				}
+
+			}
+
+			escolhaMenu = ' ';
+
+			refletancia_esq2.calculeMedia();
+			refletancia_esq.calculeMedia();
+			refletancia_dir.calculeMedia();
+			refletancia_dir2.calculeMedia();
+
+			cali.refletanciaDir = refletancia_dir.getSeparacao();
+			cali.refletanciaMaisDir = refletancia_dir2.getSeparacao();
+			cali.refletanciaEsq = refletancia_esq.getSeparacao();
+			cali.refletanciaMaisEsq = refletancia_esq2.getSeparacao();
+
+			cali.brancoEsq = corEsquerdo.getBranco();
+			cali.brancoDir = corDireito.getBranco();
+
+			cali.pretoEsq = corEsquerdo.getPreto();
+			cali.pretoDir = corDireito.getPreto();
+
+			cali.verdeEsq = corEsquerdo.getVerde();
+			cali.verdeDir = corDireito.getVerde();
+
+			robo.salvarCalibracao(cali);
+
 		}
-        else {
-          escolhaMenu = SAIDA;
-        }
-        
-      }
-      escolhaMenu = ' ';
-	  
-	  refletancia_esq2.calculeMedia();
-	  refletancia_esq.calculeMedia();
-	  refletancia_dir.calculeMedia();
-	  refletancia_dir2.calculeMedia();
-	  
-	  cali.refletanciaDir = refletancia_dir.getSeparacao();
-	  cali.refletanciaMaisDir = refletancia_dir2.getSeparacao();
-	  cali.refletanciaEsq = refletancia_esq.getSeparacao();
-	  cali.refletanciaMaisEsq = refletancia_esq2.getSeparacao();
-	
-	  cali.brancoEsq = corEsquerdo.getBranco();
-	  cali.brancoDir = corDireito.getBranco();
-	
-	  cali.pretoEsq = corEsquerdo.getPreto();
-	  cali.pretoDir = corDireito.getPreto();
-	
-	  cali.verdeEsq = corEsquerdo.getVerde();
-	  cali.verdeDir = corDireito.getVerde();
-	
-	  robo.salvarCalibracao(cali);
-	
 	}
-  }
-	 
- }
+		 
+}
  
  
  void Calibracao2::lerCalibracao(){
