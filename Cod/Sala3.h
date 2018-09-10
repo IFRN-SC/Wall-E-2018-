@@ -3,7 +3,6 @@
 
 #include <robo_hardware2.h>
 #include "Motores.h"
-#include "SensoresWallE.h"
 
 class Sala3 {
 	private:
@@ -12,7 +11,7 @@ class Sala3 {
 
 		Motores motores;
 
-		Sensores sensor;
+		void alinharParede();
 
 	public:
 
