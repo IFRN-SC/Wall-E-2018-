@@ -215,12 +215,17 @@ void Estrategia::miniSeguirLinha(){
 	}
 	else if(
 			sensor.branco_branco_preto_branco() ||
-			sensor.branco_branco_branco_preto()||
+			sensor.branco_branco_branco_preto() ||
 			sensor.branco_branco_preto_preto()
 		   ){
 		robo.acionarMotores(85, 70);
 	}
-	else if (sensor.preto_preto_preto_preto())		sala3.executar();
+	else if (
+			(sensor.preto_preto_preto_preto()) || 
+			(!sensor.viuRampa())
+			){
+			sala3.executar();
+	}
 	else 											motores.emFrente(85, 85);
 }
 
