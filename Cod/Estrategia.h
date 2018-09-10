@@ -16,14 +16,9 @@ class Estrategia {
 		void configurar();
 	private:
 		// bool realizarCali;
-		#define ESQUERDA 1
-		#define DIREITA 2
-		#define VELESQ 45
-		#define VELDIR 45
+		
 		#define FIM_DE_CURSO 12
 
-		long tAntes = 0;
-		bool jaVi = false;
 		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
@@ -48,8 +43,6 @@ class Estrategia {
 		void passeEncruzilhada_Esquerda();
 		void passeObstaculo();
     	void passeVerdeOuRedutor();
-    	void vireEsquerda();
-    	void vireDireita();
     	void piscarLeds(int vezes);
     	void decida();
 

@@ -103,13 +103,6 @@ void Estrategia::passeVerdeOuRedutor(){
 		}
 }
 
-void Estrategia::vireEsquerda(){
-	motores.esquerda(VELESQ, VELDIR);
-}
-void Estrategia::vireDireita(){
-	motores.direita(VELESQ, VELDIR);
-}
-
 void Estrategia::piscarLeds(int vezes){
 	for(int i = 0; i <= vezes; i++){
 		robo.ligarTodosLeds();
@@ -206,15 +199,17 @@ void Estrategia::passeObstaculo(){
 
 void Estrategia::miniSeguirLinha(){
 	if(sensor.branco_branco_branco_branco()){
-		motores.emFrente(85, 88);
+		motores.emFrenteRampa();
 	}else if(sensor.branco_preto_branco_branco() ||
 		sensor.preto_branco_branco_branco() ||
 		sensor.preto_preto_branco_branco()){
-		robo.acionarMotores(70, 85);
+		
+		motores.esquerdaRampa();
 	}else if(sensor.branco_branco_preto_branco() ||
 		sensor.branco_branco_branco_preto()||
 		sensor.branco_branco_preto_preto()){
-		robo.acionarMotores(85, 70);
+		
+		motores.direitaRampa();
 	}else if (sensor.preto_preto_preto_preto()){
 		//digitalWrite(11, HIGH);
 		//digitalWrite(10, HIGH);
@@ -223,12 +218,12 @@ void Estrategia::miniSeguirLinha(){
 		robo.acionarMotores(40, -40);
 		delay(810);
 		while(1){robo.acionarMotores(0, 0);}*/
-		motores.emFrente(85, 88);
+		motores.emFrenteRampa();
 		//delay(40);
 
 //		boySala3();
 	}else{
-		motores.emFrente(85, 85);
+		motores.emFrenteRampa();
 	}
 }
 
@@ -302,7 +297,7 @@ void Estrategia::boySala3() {
 void Estrategia::sigaLinha(){
 	if(sensor.branco_branco_branco_branco() /*||
 		sensor.preto_preto_preto_preto()*/){
-		motores.emFrente(VELESQ, VELDIR);
+		motores.emFrente();
 		
 	}
 	
@@ -311,31 +306,31 @@ void Estrategia::sigaLinha(){
 		sensor.preto_preto_preto_branco()) {
 		
 		while(sensor.maisEsq_Preto()){
-			motores.emFrente(VELESQ, VELDIR);
+			motores.emFrente();
 			delay(90);
 		}
 
-		while(sensor.Esq_Branco()){vireEsquerda();}
-		while(sensor.Esq_Preto()){vireEsquerda();}
+		while(sensor.Esq_Branco()){motores.esquerda();}
+		while(sensor.Esq_Preto()){motores.esquerda();}
 	}
 	else if(sensor.branco_branco_preto_preto()||
 		sensor.branco_preto_preto_preto()) {
 		while(sensor.maisDir_Preto()){
-			motores.emFrente(VELESQ, VELDIR);
+			motores.emFrente();
 			delay(90);
 		}
-		while (sensor.Dir_Branco()){vireDireita();}
-		while (sensor.Dir_Preto()){vireDireita();}
+		while (sensor.Dir_Branco()){motores.direita();}
+		while (sensor.Dir_Preto()){motores.direita();}
 		
 	} 
 	// *********************************************
 
 	// bloco de ações para correções
 	else if (sensor.branco_preto_branco_branco()){
-		robo.acionarMotores(-40, 40);
+		motores.esquerda();
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		robo.acionarMotores(40, -40);
+		motores.direita();
 	}
 
 
