@@ -15,6 +15,17 @@ void Sala3::executar(){
 
 	alinharParede();
 
+	alinharParede2();
+
+	/*for (int i = 0; i < 3; i++) {
+
+		motores.emFrente(30, 30);
+		delay(1000);
+	
+	}*/
+
+	while(1) { robo.acionarMotores(0, 0); }
+
 	while(1) {
 		
 		robo.acionarMotores(30, 30);
@@ -63,10 +74,12 @@ void Sala3::alinharParede(){
 	// CONTANDO "DOIS PASSOS"
 
 	for (int i = 0; i < 2; i++) {
+
 		robo.ligarLed(3);
 		robo.acionarMotores(40, 40);
-		delay(100);
+		delay(120);
 		robo.desligarLed(3);
+
 	}
 
 	motores.parar(500);
@@ -77,8 +90,30 @@ void Sala3::alinharParede(){
 
 	motores.parar(500);
 
+	encostarRobo();
+
+}
+
+void Sala3::alinharParede2() {
+
+	while(robo.lerSensorSonarDir() > 10)  { motores.emFrente(30, 30); }
+
+	motores.emFrente(30, 34);
+	delay(350);
+
+	while(robo.lerSensorSonarDir() < 20) { robo.acionarMotores(-40, 40); }
+
+	robo.acionarMotores(-40, 40);
+	delay(200);
+
+	encostarRobo();
+
+}
+
+void Sala3::encostarRobo() {
+	
 	robo.acionarMotores(-35, -35);
-	delay(250);
+	delay(1000);
 
 	robo.acionarMotores(30, 30);
 	delay(250);
@@ -87,5 +122,5 @@ void Sala3::alinharParede(){
 	delay(1000);	
 
 	motores.parar(500);
-	
+
 }

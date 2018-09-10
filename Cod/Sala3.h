@@ -12,6 +12,9 @@ class Sala3 {
 		Motores motores;
 
 		void alinharParede();
+		void alinharParede2();
+
+		void encostarRobo();
 
 	public:
 
