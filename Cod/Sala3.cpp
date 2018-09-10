@@ -15,12 +15,48 @@ void Sala3::executar(){
 
 	alinharParede();
 
+	while(1) {
+		
+		robo.acionarMotores(30, 30);
+		
+		if (robo.lerSensorSonarEsq() < limite_lateral) {
+			motores.parar(500);
+
+			robo.acionarMotores(-40, 40);
+			delay(500);
+
+			while(robo.lerSensorSonarFrontal() > 5) {
+				robo.acionarMotores(30, 30);	
+			}
+
+			motores.parar(500);
+
+			while(1){}
+
+		}
+		if (robo.lerSensorSonarFrontal() < limite_frontal) {
+			motores.parar(500);
+
+			while(robo.lerSensorSonarFrontal() > 5) {
+				robo.acionarMotores(30, 30);	
+			}
+
+			motores.parar(500);
+
+			while(1){}
+
+		}
+	}
+
 }
 
 void Sala3::alinharParede(){
 
 	// Passando do portal
-	while(sensor.viuRampa()) { robo.acionarMotores(80, 80); }
+	robo.acionarMotores(70, 70);
+	delay(300);
+	robo.acionarMotores(30, 30);
+	delay(100);
 	
 	motores.parar(300);
 
@@ -29,7 +65,7 @@ void Sala3::alinharParede(){
 	for (int i = 0; i < 2; i++) {
 		robo.ligarLed(3);
 		robo.acionarMotores(40, 40);
-		delay(200);
+		delay(100);
 		robo.desligarLed(3);
 	}
 
@@ -41,8 +77,15 @@ void Sala3::alinharParede(){
 
 	motores.parar(500);
 
+	robo.acionarMotores(-35, -35);
+	delay(250);
+
+	robo.acionarMotores(30, 30);
+	delay(250);
+
 	robo.acionarMotores(-30, -30);
-	delay(180);
+	delay(1000);	
 
 	motores.parar(500);
+	
 }
