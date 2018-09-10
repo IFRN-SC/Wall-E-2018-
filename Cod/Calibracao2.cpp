@@ -250,7 +250,7 @@ void Calibracao2::posicionar_sensores() {
 void Calibracao2::posicionar_sala3() {
 
 	Serial.println(F("\nINSIRA ALGO NO SERIAL QUANDO O ROBÔ ESTIVER POSICIONADO CORRETAMENTE.\n"));
-	Serial.println(F("(esquerda)	---		(frente)		---		(direita)\n"));
+	Serial.println(F("(esquerda)	---		(frente)	---		(direita)\n"));
 
 	while(1) {
 
@@ -400,22 +400,22 @@ void Calibracao2::Menu_calibrar() {
 
 	  Serial.println(F("\nSENSORES:\n"));
 	  Serial.println(F("(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
-	  Serial.println(refletancia_esq2.getSeparacao());
+	  Serial.print(refletancia_esq2.getSeparacao());
 	  Serial.print(F("		---		"));
-	  Serial.println(refletancia_esq.getSeparacao());
+	  Serial.print(refletancia_esq.getSeparacao());
 	  Serial.print(F("		---		"));
-	  Serial.println(refletancia_dir.getSeparacao());
+	  Serial.print(refletancia_dir.getSeparacao());
 	  Serial.print(F("		---		"));
-	  Serial.println(refletancia_dir2.getSeparacao());
+	  Serial.print(refletancia_dir2.getSeparacao());
 
 	  sala3.setLimiteLateral(cali.sala3_limiteLateral);
 	  sala3.setLimiteFrontal(cali.sala3_limiteFrontal);
 
-	  Serial.println(F("\nSALA3:\n"));
+	  Serial.println(F("\n\nSALA3:\n"));
 	  Serial.println(F("(limiteLateral)	---		(limiteFrontal)\n"));
-	  Serial.println(sala3.getLimiteLateral());
+	  Serial.print(sala3.getLimiteLateral());
 	  Serial.print(F("		---		"));
-	  Serial.println(sala3.getLimiteFrontal());
+	  Serial.print(sala3.getLimiteFrontal());
 
 
  }
