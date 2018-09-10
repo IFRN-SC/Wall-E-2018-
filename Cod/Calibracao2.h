@@ -47,7 +47,6 @@ private:
 	char escolhaCor;
 	char controlador;
 
-  
 public:
  
 	Calibracao2();

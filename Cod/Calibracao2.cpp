@@ -1,12 +1,14 @@
 #include "Calibracao2.h"
 
 
-Calibracao2::Calibracao2(){
+Calibracao2::Calibracao2() {
+
 	escolhaInicial = ' ';
 	escolhaMenu = ' ';
 	escolhaBranco = ' ';
 	escolhaPreto = ' ';
 	escolhaSala3 = ' ';
+
 }
 
 
@@ -109,7 +111,7 @@ void Calibracao2::calibrarCor(){
 //  	robo.habilitaTCS34();
 //	Serial.println(robo.getSensor() == TCS34 ? "tcs34":"tsc23");
 	while (escolhaCor != SAIDA){
-		Serial.println(F("[V] Para calibrar o VERDE"));
+		Serial.println(F("\n[V] Para calibrar o VERDE"));
 		Serial.println(F("[C] Para calibrar o CINZA"));
 		Serial.println(F("[B] Para calibrar o BRANCO"));
 		Serial.println(F("[P] Para calibrar o PRETO"));
@@ -189,7 +191,7 @@ void Calibracao2::calibrarPreto(){
 
 		posicionar_sensores();
 
-		Serial.println(F("[C] Para CALIBRAR"));
+		Serial.println(F("\n[C] Para CALIBRAR"));
 		Serial.println(F("[S] Para SAIR"));
 		
 		esperarParaLer();
@@ -308,10 +310,14 @@ void Calibracao2::calibrarSala3() {
 }
 
 void Calibracao2::Menu_calibrar() {
+
+	bool calibrouBranco = false;
+	bool calibrouPreto = false;
 	
 	while (escolhaInicial != SAIDA) { 
 
-		Serial.println(F("[C] Começar calibração"));
+		Serial.println(F("\nMENU CALIBRAÇÃO"));
+		Serial.println(F("\n[C] Começar calibração"));
 		Serial.println(F("[S] Sair da calibração"));
 
 		esperarParaLer();
@@ -321,7 +327,8 @@ void Calibracao2::Menu_calibrar() {
 
 			while (escolhaMenu != SAIDA) { 
 
-				Serial.println(F("[B] Calibrar BRANCO REFLETÂNCIA"));
+				Serial.println(F("-	-	-	-	-	-	-	-	-	-	-	- -"));
+				Serial.println(F("\n[B] Calibrar BRANCO REFLETÂNCIA"));
 				Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
 				Serial.println(F("[C] Calibrar COR"));
 				Serial.println(F("[T] Sala 3"));
@@ -332,9 +339,11 @@ void Calibracao2::Menu_calibrar() {
 
 				switch(escolhaMenu) {
 					case 'B':
+						calibrouBranco = true;
 						calibrarBranco();  
 						break;
 					case 'P':
+						calibrouPreto = true;
 						calibrarPreto();
 						break;
 					case 'C':
@@ -348,10 +357,14 @@ void Calibracao2::Menu_calibrar() {
 
 			escolhaMenu = ' ';
 
-			refletancia_esq2.calculeMedia();
-			refletancia_esq.calculeMedia();
-			refletancia_dir.calculeMedia();
-			refletancia_dir2.calculeMedia();
+			if (calibrouBranco && calibrouPreto) {
+
+				refletancia_esq2.calculeMedia();
+				refletancia_esq.calculeMedia();
+				refletancia_dir.calculeMedia();
+				refletancia_dir2.calculeMedia();
+
+			}
 
 			cali.refletanciaDir = refletancia_dir.getSeparacao();
 			cali.refletanciaMaisDir = refletancia_dir2.getSeparacao();
