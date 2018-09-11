@@ -1,4 +1,4 @@
-#ifndef SALA3_H
+#ifndef SALA3_H	
 #define SALA3_H
 
 #include <robo_hardware2.h>
@@ -12,7 +12,6 @@ class Sala3 {
 		Motores motores;
 
 		void alinharParede();
-		void alinharParede2();
 
 		void encostarRobo();
 
