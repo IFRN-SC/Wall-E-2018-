@@ -211,17 +211,7 @@ void Estrategia::miniSeguirLinha(){
 		
 		motores.direitaRampa();
 	}else if (sensor.preto_preto_preto_preto()){
-		//digitalWrite(11, HIGH);
-		//digitalWrite(10, HIGH);
-		/*robo.acionarMotores(80, 80);
-		delay(800);
-		robo.acionarMotores(40, -40);
-		delay(810);
-		while(1){robo.acionarMotores(0, 0);}*/
 		motores.emFrenteRampa();
-		//delay(40);
-
-//		boySala3();
 	}else{
 		motores.emFrenteRampa();
 	}
@@ -332,43 +322,6 @@ void Estrategia::sigaLinha(){
 	else if (sensor.branco_branco_preto_branco()){
 		motores.direita();
 	}
-
-
-	/*else if (sensor.preto_preto_preto_preto()){
-		robo.acionarMotores(50,50);
-	}*/
-	//**********************************************
-	// bloco para o verde
-	/*else if (sensor.branco_preto_branco_preto() ||
-		sensor.preto_branco_preto_branco()){
-		digitalWrite(10, HIGH);
-		while(1){
-			motores.parar(4);
-		}
-	}/*else if (sensor.preto_preto_preto_preto()){
-		while(1){
-			motores.parar(2);
-		}
-	 }*/
-	//else if (sensor.preto_preto_preto_branco() ||
-	//	sensor.branco_preto_preto_preto()){
-		//digitalWrite(10, HIGH);
-		/*motores.parar(600);
-		alinharEncruzilhada();
-		if (sensor.corEsq_verde()){
-			
-			motores.parar(500);
-			motores.emFrente(40, 40);
-			delay(240);
-			motores.parar(500);;
-			vireEsquerda();
-			delay(600);
-		}*/
-		//while(1){motores.parar(2);}
-		//motores.emFrente(50, 50); 
-	//	}
-	//**********************************************
-	//delay(75);
 }
 
 void Estrategia::executar(){ 
