@@ -6,10 +6,10 @@
 class Motores {
 	private:
 		#define VEL_DIR_FRENTE_RAMPA 88
-		#define VEL_DIR_TRAS_RAMPA 58
+		#define VEL_DIR_TRAS_RAMPA 68
 
 		#define VEL_ESQ_FRENTE_RAMPA 85
-		#define VEL_ESQ_TRAS_RAMPA 55
+		#define VEL_ESQ_TRAS_RAMPA 65
 
 		#define VEL_DIR_FRENTE 48
 		#define VEL_DIR_TRAS -48
