@@ -8,7 +8,7 @@ float SensorDeCor::SeparacaoBrancoPretoV(){
 }
 
 float SensorDeCor::SeparacaoVerdePretoV(){
-	return calcule.media(verde.v, preto.v);
+	return calcule.media(verde.v, preto.v)*0.85;
 }
 
 float SensorDeCor::SeparacaoVerdePretoH(){
@@ -32,7 +32,8 @@ bool SensorDeCor::ehBranco(HSV hsvAt){
 
 bool SensorDeCor::ehVerde(HSV hsvAt){
 	 leituraHSV = hsvAt;
-	 return (/*(leituraHSV.h < preto.h + 3 && */leituraHSV.v > SeparacaoBrancoVerdeV() || leituraHSV.v < SeparacaoVerdePretoV());
+	 Serial.println(SeparacaoVerdePretoV());
+	 return (leituraHSV.v < SeparacaoVerdePretoV());
 }
 
 bool SensorDeCor::ehPreto(HSV hsvAt){

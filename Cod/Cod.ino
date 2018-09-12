@@ -3,7 +3,6 @@
 
 Estrategia estrategia;
 
-
 void setup(){
   Serial.begin(9600);
   robo.configurar(false);
@@ -13,6 +12,7 @@ void setup(){
 
 void loop(){
   estrategia.executar();
+
 }                                
                                                                                                                
 

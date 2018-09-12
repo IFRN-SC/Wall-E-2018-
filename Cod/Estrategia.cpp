@@ -321,7 +321,18 @@ void Estrategia::sigaLinha(){
 	}
 	else if (sensor.branco_branco_preto_branco()){
 		motores.direita();
+	}else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
+		verificaBecoSemSaida();
 	}
+}
+
+void Estrategia::verificaBecoSemSaida(){
+	motores.parar(1000);
+	piscarLeds(3);
+	while(!sensor.maisDir_Branco() && !sensor.maisDir_Branco()){robo.acionarMotores(25, 28);}
+	while(sensor.maisDir_Branco()){robo.acionarMotores(0, -25);}
+	while(sensor.maisEsq_Branco()){robo.acionarMotores(-25, 0);}
+	while(1){robo.acionarMotores(0,0);}
 }
 
 void Estrategia::executar(){ 
