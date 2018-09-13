@@ -236,8 +236,10 @@ void Estrategia::boySala3() {
 
 	motores.parar(500);
 
-	robo.acionarMotores(-30, -30);
-	delay(180);
+	for(int i = 0; i < 2; i++){	
+		robo.acionarMotores(-30, -30);
+		delay(250);
+	}
 
 	motores.parar(500);
 
@@ -272,7 +274,7 @@ void Estrategia::boySala3() {
 	}
 	
 	motores.parar(700);
-	resgate();
+	//resgate();
 
 
 	while(1){
@@ -285,13 +287,12 @@ void Estrategia::boySala3() {
 
 
 void Estrategia::sigaLinha(){
-	if(sensor.branco_branco_branco_branco() /*||
-		sensor.preto_preto_preto_preto()*/){
+	if(sensor.branco_branco_branco_branco()){
 		motores.emFrente();
 		
 	}
 	
-	// bloco de ações para curva 90º
+	// curva 90º
 	else if(sensor.preto_preto_branco_branco() ||
 		sensor.preto_preto_preto_branco()) {
 		
@@ -315,28 +316,45 @@ void Estrategia::sigaLinha(){
 	} 
 	// *********************************************
 
-	// bloco de ações para correções
+	// correções
 	else if (sensor.branco_preto_branco_branco()){
 		motores.esquerda();
 	}
 	else if (sensor.branco_branco_preto_branco()){
 		motores.direita();
-	}else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
-		verificaBecoSemSaida();
 	}
-}
+	// **********************************************
 
-void Estrategia::verificaBecoSemSaida(){
+	// beco sem saída
+	else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
+		alinhaBecoSemSaida();
+	}
+}                                                                                                     
+void Estrategia::alinhaBecoSemSaida(){
 	motores.parar(1000);
 	piscarLeds(3);
 	while(!sensor.maisDir_Branco() && !sensor.maisDir_Branco()){robo.acionarMotores(25, 28);}
 	while(sensor.maisDir_Branco()){robo.acionarMotores(0, -25);}
 	while(sensor.maisEsq_Branco()){robo.acionarMotores(-25, 0);}
+	
 	while(1){robo.acionarMotores(0,0);}
 }
 
+
+void Estrategia::procuraBola(){
+	while(robo.lerSensorSonarFrontal() > 9){
+		robo.acionarMotores(25, -29);
+		delay(100);
+		robo.acionarMotores(0,0);
+		delay(300);
+	}
+	while(1){
+		robo.acionarMotores(0,0);
+		piscarLeds(2);
+	}
+}
 void Estrategia::executar(){ 
-	if(sensor.viuRampa()){
+	/*if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
 	}else if(sensor.viuObstaculo()){
@@ -344,8 +362,9 @@ void Estrategia::executar(){
 	}else{
 		robo.desligarLed(2);
 		sigaLinha();
-	}
-	//boySala3();
+	}*/
+	boySala3();
+	//procuraBola();
 }
 
 

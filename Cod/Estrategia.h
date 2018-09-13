@@ -46,7 +46,8 @@ class Estrategia {
     	void piscarLeds(int vezes);
     	void decida();
 
-    	void verificaBecoSemSaida();
+    	void alinhaBecoSemSaida();
+    	void procuraBola();
 
     	void boySala3();
     	void resgate();	
