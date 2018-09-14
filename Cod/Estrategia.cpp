@@ -360,7 +360,7 @@ void Estrategia::procuraBola(){
 	}
 }
 void Estrategia::executar(){ 
-	/*if(sensor.viuRampa()){
+	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
 	}else if(sensor.viuObstaculo()){
@@ -368,9 +368,10 @@ void Estrategia::executar(){
 	}else{
 		robo.desligarLed(2);
 		sigaLinha();
-	}*/
-	boySala3();
+	}
+	//boySala3();
 	//procuraBola();
+	//resgate();
 }
 
 
