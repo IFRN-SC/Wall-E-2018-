@@ -119,9 +119,9 @@ void Sala3::alinharParede(){
 
 void Sala3::alinharParede2() {
 
-	while(robo.lerSensorSonarDir() > 10)  { motores.emFrente(30, 30); }
+	while(robo.lerSensorSonarDir() > 10)  { robo.acionarMotores(30, 30); }
 
-	motores.emFrente(30, 34);
+	robo.acionarMotores(30, 34);
 	delay(350);
 
 	while(robo.lerSensorSonarDir() < 20) { robo.acionarMotores(-40, 40); }

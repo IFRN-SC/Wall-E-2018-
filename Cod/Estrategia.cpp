@@ -222,6 +222,7 @@ void Estrategia::resgate(){
 	//garra.iniciar();
 
 	//garra.subir();
+	
 	garra.abrir();
   	garra.baixar();
   	garra.fechar();
@@ -236,12 +237,17 @@ void Estrategia::boySala3() {
 
 	motores.parar(500);
 
-	for(int i = 0; i < 2; i++){	
-		robo.acionarMotores(-30, -30);
-		delay(250);
-	}
+	robo.acionarMotores(-35, -35);
+	delay(1000);
+
+	robo.acionarMotores(30, 30);
+	delay(250);
+
+	robo.acionarMotores(-30, -30);
+	delay(1000);	
 
 	motores.parar(500);
+
 
 	double atual = 100;
 	double anterior = 0;
