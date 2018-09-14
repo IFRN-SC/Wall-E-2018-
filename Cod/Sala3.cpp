@@ -33,12 +33,11 @@ void Sala3::executar(){
 	}
 
 	alinharParede();
-	
-	robo.acionarMotores(30, 30);
-		
-	while(1) {
+
+	for (int i = 0; i < 5; i++) {
+		robo.ligarLed(2);
 		// achou vitima esquerda
-		if (robo.lerSensorSonarEsq() < 20) {
+		if (robo.lerSensorSonarEsq() < 10) {
 
 			motores.parar(500);
 
@@ -59,13 +58,13 @@ void Sala3::executar(){
 			robo.desligarTodosLeds();
 
 			while(robo.lerSensorSonarFrontal() > 5) {
-				robo.acionarMotores(30, 30);	
+				robo.acionarMotores(30, 33);	
 			}
 
 			while(1){ motores.parar(500); }
 		} 
 		// achou vitima direita
-		else if (robo.lerSensorSonarDir() < 20) {
+		else if (robo.lerSensorSonarDir() < 10) {
 
 			motores.parar(500);
 
@@ -86,22 +85,28 @@ void Sala3::executar(){
 			robo.desligarTodosLeds();
 
 			while(robo.lerSensorSonarFrontal() > 5) {
-				robo.acionarMotores(30, 30);	
+				robo.acionarMotores(30, 33);	
 			}
 
 			while(1){ motores.parar(0); }
 
 		}
-		else if (robo.lerSensorSonarFrontal() < 2) {
+		else if (robo.lerSensorSonarFrontal() < 4) {
 			
 			while(1){ motores.parar(0); }
 
 		} 
 		else {
-			motores.emFrente(30, 30);
+			motores.emFrente(30, 33);
 		}
-
+		robo.ligarLed(1);
 	}
+
+	robo.desligarLed(1);
+	robo.desligarLed(2);
+
+	motores.parar(0);
+	while(1) {}
 
 }
 
@@ -110,13 +115,12 @@ void Sala3::alinharParede(){
 	motores.parar(500);
 	
 	robo.acionarMotores(40, -40);
-	delay(500);
+	delay(450);
 
 	motores.parar(500);
 
 	motores.emFrente(30, 33);
-	delay(1300);
-
+	delay(800);
 
 	robo.ligarTodosLeds();
 	delay(100);
