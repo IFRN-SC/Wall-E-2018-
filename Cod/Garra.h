@@ -30,10 +30,10 @@ class Garra {
 		void setMao(int angInicial, int angFinal, int tempo);
 		void setBraco(int angInicial, int angFinal, int tempo);
 		
-		void subir();
-		void baixar();
-		void abrir();
-		void fechar();
+		inline void subir()  { robo.acionarServoGarra2(ANG_FINAL_SUBIR_BRACO, DELAY); }
+		inline void baixar() { robo.acionarServoGarra2(ANG_FINAL_BAIXAR_BRACO, DELAY); }
+		inline void abrir()  { robo.acionarServoGarra1(ANG_FINAL_ABRIR_MAO, DELAY); }
+		inline void fechar() { robo.acionarServoGarra1(ANG_FINAL_FECHAR_MAO, DELAY); }
 	
 };
 
