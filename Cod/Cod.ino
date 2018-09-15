@@ -5,14 +5,13 @@ Estrategia estrategia;
 
 void setup(){
   Serial.begin(9600);
-  robo.configurar(true);
+  robo.configurar(false);
   robo.habilitaTCS34();
   estrategia.calibrar();
 }
 
 void loop(){
   estrategia.executar();
-  //robo.acionarServoGarra2(180);
 }                                
                                                                                                                
 

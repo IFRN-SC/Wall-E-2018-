@@ -53,9 +53,14 @@ bool Estrategia::desalinhado(){
 	sensor.branco_preto_branco_preto());
 }
 void Estrategia::alinharObstaculo(){
-  while(sensor.maisDir_Branco()){
+  while(sensor.Esq_Branco()){
   	robo.acionarMotores(0, -40);
   }
+  robo.acionarMotores(0, -40);
+  delay(180);
+  /*while(sensor.maisDir_Branco()){
+  	robo.acionarMotores(0, -40);
+  }*/
 }
 
 void Estrategia::alinharEncruzilhada(){   // tenta alinhar na encruzilhada T para ler o verde logo após.
@@ -212,6 +217,8 @@ void Estrategia::miniSeguirLinha(){
 		motores.direitaRampa();
 	}else if (sensor.preto_preto_preto_preto()){
 		motores.emFrenteRampa();
+		delay(200);
+		while(1){motores.parar(100);}
 	}else{
 		motores.emFrenteRampa();
 	}
@@ -360,13 +367,14 @@ void Estrategia::procuraBola(){
 	}
 }
 void Estrategia::executar(){ 
+	robo.acionarServoGarra2(190);
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
 	}else if(sensor.viuObstaculo()){
 		passeObstaculo();
 	}else{
-		robo.desligarLed(2);
+		robo.desligarLed(2);		
 		sigaLinha();
 	}
 	//boySala3();

@@ -6,16 +6,16 @@
 class Motores {
 	private:
 		#define VEL_DIR_FRENTE_RAMPA 88
-		#define VEL_DIR_TRAS_RAMPA 68
+		#define VEL_DIR_TRAS_RAMPA 72
 
 		#define VEL_ESQ_FRENTE_RAMPA 85
-		#define VEL_ESQ_TRAS_RAMPA 65
+		#define VEL_ESQ_TRAS_RAMPA 70
 
-		#define VEL_DIR_FRENTE 48
-		#define VEL_DIR_TRAS -48
+		#define VEL_DIR_FRENTE 52
+		#define VEL_DIR_TRAS -52
 
-		#define VEL_ESQ_FRENTE 45
-		#define VEL_ESQ_TRAS -45
+		#define VEL_ESQ_FRENTE 50
+		#define VEL_ESQ_TRAS -50
 	public:
 		inline void emFrente(){robo.acionarMotores(VEL_ESQ_FRENTE, VEL_DIR_FRENTE);}
 		inline void direita(){robo.acionarMotores(VEL_ESQ_FRENTE, VEL_DIR_TRAS);} 
