@@ -8,6 +8,10 @@ void setup(){
   Serial.begin(9600);
   robo.configurar(false);
   robo.habilitaTCS34();
+  while(sensor.maisEsq_Branco()){
+    robo.acionarMotores(-40, 40);
+  }
+ 
 }
 
 void loop(){

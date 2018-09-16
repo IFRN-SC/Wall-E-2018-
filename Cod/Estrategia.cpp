@@ -20,6 +20,21 @@ void Estrategia::calibrar(){
 		delay(250);
 	}
 	sensor.lerCalibracao();
+	while(sensor.maisEsq_Branco()){
+   	 robo.acionarMotores(-40, 40);
+  	}
+  	while(sensor.Esq_Branco()){
+   	 robo.acionarMotores(-40, 40);
+  	}
+  	while(sensor.Esq_Preto()){
+  		robo.acionarMotores(-40, 40);	
+  	}
+  	while(sensor.Esq_Branco()){
+  		robo.acionarMotores(-40, 40);
+  	}
+  	while(sensor.Esq_Preto()){
+  		robo.acionarMotores(-40, 40);
+  	}
 }
 
 void Estrategia::passeEncruzilhada_Direita(){
@@ -53,14 +68,14 @@ bool Estrategia::desalinhado(){
 	sensor.branco_preto_branco_preto());
 }
 void Estrategia::alinharObstaculo(){
-  while(sensor.Esq_Branco()){
+  /*while(sensor.Esq_Branco()){
   	robo.acionarMotores(0, -40);
   }
   robo.acionarMotores(0, -40);
-  delay(180);
-  /*while(sensor.maisDir_Branco()){
-  	robo.acionarMotores(0, -40);
-  }*/
+  delay(180);*/
+  while(sensor.maisEsq_Branco()){
+  	robo.acionarMotores(-40, 0);
+  }
 }
 
 void Estrategia::alinharEncruzilhada(){   // tenta alinhar na encruzilhada T para ler o verde logo após.
@@ -126,8 +141,8 @@ void Estrategia::passeObstaculo(){
 	robo.acionarMotores(-40, -40);
 	delay(60);
 
-	while(sensor.maisEsq_Branco()){
-		robo.acionarMotores(40, -40);
+	while(sensor.maisDir_Branco()){
+		robo.acionarMotores(-40, 40);
 	}
 
 	motores.parar(1000);
@@ -139,14 +154,14 @@ void Estrategia::passeObstaculo(){
 	
 	motores.parar(1000);
 
-	while (robo.lerSensorSonarEsq() > 15){
+	while (robo.lerSensorSonarDir() > 15){
 		//digitalWrite(10, HIGH);
 		robo.acionarMotores(40, 43);
 	}
 
 	motores.parar(1000);
 
-	while(robo.lerSensorSonarEsq() < 15){
+	while(robo.lerSensorSonarDir() < 15){
 		robo.ligarLed(3);
 		robo.acionarMotores(40, 43);
 		delay(200);
@@ -158,20 +173,20 @@ void Estrategia::passeObstaculo(){
 
 	motores.parar(500);
 
-	robo.acionarMotores(-40, 40);
+	robo.acionarMotores(40, -40);
 	delay(396);
 
 	motores.parar(300);
 
-	while (robo.lerSensorSonarEsq() > 15){
+	while (robo.lerSensorSonarDir() > 15){
 		//digitalWrite(10, HIGH);
 		robo.acionarMotores(40, 43);
-		delay(100);
+		delay(70);
 	}
 
 	motores.parar(500);
 
-	while(robo.lerSensorSonarEsq() < 15){
+	while(robo.lerSensorSonarDir() < 15){
 		robo.acionarMotores(40, 43);
 		delay(150);
 	}
@@ -179,7 +194,7 @@ void Estrategia::passeObstaculo(){
 //	robo.acionarMotores(40, 43);
 //	delay(95);
 
-	robo.acionarMotores(-40, 40);
+	robo.acionarMotores(40, -40);
 	delay(396);
 
 	robo.acionarMotores(40, 40);
@@ -195,8 +210,8 @@ void Estrategia::passeObstaculo(){
 		robo.acionarMotores(40, 40);
 	}
 
-	while(sensor.Dir_Branco()){robo.acionarMotores(40, -40);}
-	while(sensor.Dir_Preto()){robo.acionarMotores(40, -40);}
+	while(sensor.Esq_Branco()){robo.acionarMotores(-40, 40);}
+	while(sensor.Esq_Preto()){robo.acionarMotores(-40, 40);}
 
 //	while(1){motores.parar(400);}
 
@@ -217,10 +232,17 @@ void Estrategia::miniSeguirLinha(){
 		motores.direitaRampa();
 	}else if (sensor.preto_preto_preto_preto()){
 		motores.emFrenteRampa();
-		delay(200);
-		while(1){motores.parar(100);}
+		delay(1000);
+		while(1){
+			piscarLeds(3);
+			motores.parar(100);
+		}
 	}else{
 		motores.emFrenteRampa();
+		while(1){
+			piscarLeds(3);
+			motores.parar(100);
+		}
 	}
 }
 
@@ -314,8 +336,8 @@ void Estrategia::sigaLinha(){
 			delay(90);
 		}
 
-		while(sensor.Esq_Branco()){motores.esquerda();}
-		while(sensor.Esq_Preto()){motores.esquerda();}
+		while(sensor.Dir_Branco()){motores.esquerda();}
+		//while(sensor.Esq_Preto()){motores.esquerda();}
 	}
 	else if(sensor.branco_branco_preto_preto()||
 		sensor.branco_preto_preto_preto()) {
@@ -323,8 +345,8 @@ void Estrategia::sigaLinha(){
 			motores.emFrente();
 			delay(90);
 		}
-		while (sensor.Dir_Branco()){motores.direita();}
-		while (sensor.Dir_Preto()){motores.direita();}
+		while (sensor.Esq_Branco()){motores.direita();}
+		//while (sensor.Dir_Preto()){motores.direita();}
 		
 	} 
 	// *********************************************
@@ -339,9 +361,9 @@ void Estrategia::sigaLinha(){
 	// **********************************************
 
 	// beco sem saída
-	else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
+	/*else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
 		alinhaBecoSemSaida();
-	}
+	}*/
 }                                                                                                     
 void Estrategia::alinhaBecoSemSaida(){
 	motores.parar(1000);
@@ -367,7 +389,7 @@ void Estrategia::procuraBola(){
 	}
 }
 void Estrategia::executar(){ 
-	robo.acionarServoGarra2(190);
+	//robo.acionarServoGarra2(190);
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();

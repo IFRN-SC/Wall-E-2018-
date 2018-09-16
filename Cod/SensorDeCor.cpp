@@ -32,7 +32,7 @@ bool SensorDeCor::ehBranco(HSV hsvAt){
 
 bool SensorDeCor::ehVerde(HSV hsvAt){
 	 leituraHSV = hsvAt;
-	 Serial.println(SeparacaoVerdePretoV());
+	 //Serial.println(SeparacaoVerdePretoV());
 	 return (leituraHSV.v < SeparacaoVerdePretoV());
 }
 
