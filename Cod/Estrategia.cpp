@@ -233,10 +233,7 @@ void Estrategia::miniSeguirLinha(){
 	}else if (sensor.preto_preto_preto_preto()){
 		motores.emFrenteRampa();
 		delay(1000);
-		while(1){
-			piscarLeds(3);
-			motores.parar(100);
-		}
+		boySala3();
 	}else{
 		motores.emFrenteRampa();
 		while(1){
@@ -282,7 +279,7 @@ void Estrategia::boySala3() {
 	double anterior = 0;
 	robo.acionarMotores(30, 33);
 
-	while(1){
+	while(robo.lerSensorSonarFrontal() > 3.3){
 		anterior = atual;
 		for(int i = 0; i < 10; i++){
 			atual = robo.lerSensorSonarEsq();
