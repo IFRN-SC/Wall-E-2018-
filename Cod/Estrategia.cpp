@@ -321,6 +321,7 @@ void Estrategia::vireEsquerda(bool temVerde=true){
 		//pareInfinito(1);
 	}else{
 		while(sensor.Dir_Branco()){motores.esquerda();}
+		while(sensor.Dir_Preto()){motores.direita();}
 		//pareInfinito(2);
 	}
 }
@@ -330,9 +331,10 @@ void Estrategia::vireDireita(bool temVerde=true){
 	delay(90);
 	if(temVerde){
 		while(sensor.Dir_Branco()){motores.direita();}
-		while(sensor.Dir_Preto()){motores.direita();}
+		while(sensor.Dir_Preto()) {motores.direita();}
 	}else{
 		while(sensor.Esq_Branco()){motores.direita();}
+		while(sensor.Esq_Preto()) {motores.esquerda();}
 
 	}
 }
