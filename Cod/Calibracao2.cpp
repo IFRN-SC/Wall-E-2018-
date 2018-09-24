@@ -15,7 +15,7 @@ void Calibracao2::esperarParaLer (){
 
 void Calibracao2::calibrarVerde(){
 	
-	Serial.println(F(" COLOQUE O SENSOR DIREITO NO VERDE: "));
+	Serial.println(F("\n\nCOLOQUE O SENSOR DIREITO NO VERDE: "));
 	Serial.println(F("[D] Calibrar VERDE DIREITO"));
 	
 	esperarParaLer();
@@ -25,10 +25,13 @@ void Calibracao2::calibrarVerde(){
 	if (controlador == 'D') {
 		corDireito.setVerde(robo.getHSVDireito());
 	}
-	
-	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO VERDE: "));
-	Serial.println(F("[E] Calibrar VERDE ESQUERDO"));
 
+	Serial.print(F("Verde direito: "));
+	Serial.println(corDireito.getVerde().v);
+	
+	Serial.println(F("\n\nCOLOQUE O SENSOR ESQUERDO NO VERDE: "));
+	Serial.println(F("[E] Calibrar VERDE ESQUERDO"));
+	
 	esperarParaLer();
 	controlador = Serial.read();
 
@@ -36,6 +39,9 @@ void Calibracao2::calibrarVerde(){
 	if (controlador == 'E'){
 		corEsquerdo.setVerde(robo.getHSVEsquerdo()); 
 	}
+
+	Serial.print(F("Verde esquerdo: "));
+	Serial.println(corEsquerdo.getVerde().v);
 	
 	controlador = ' ';
 	
@@ -44,7 +50,7 @@ void Calibracao2::calibrarVerde(){
 
 void Calibracao2::calibrarCorPreto(){
 	
-	Serial.println(F(" COLOQUE O SENSOR DIREITO NO PRETO: "));
+	Serial.println(F("\n\nCOLOQUE O SENSOR DIREITO NO PRETO: "));
 	Serial.println(F("[D] Calibrar PRETO DIREITO"));
 	
 	esperarParaLer();
@@ -53,9 +59,12 @@ void Calibracao2::calibrarCorPreto(){
 	if (controlador == 'D') {
 		corDireito.setPreto(robo.getHSVDireito());
 	}
+
+	Serial.print(F("Preto direito: "));
+	Serial.println(corDireito.getPreto().v);
 	
-	Serial.println(F( "COLOQUE O SENSOR ESQUERDO NO PRETO: "));
-	Serial.println(F("[E] Calibrar PRETO ESQUERDO"));
+	Serial.println(F("\n\nCOLOQUE O SENSOR ESQUERDO NO PRETO: "));
+	Serial.println(F("[E] Calibrar PRETO ESQUERDO"));	
 	
 	esperarParaLer();
 	controlador = Serial.read();
@@ -64,6 +73,8 @@ void Calibracao2::calibrarCorPreto(){
 	if (controlador == 'E'){
 		corEsquerdo.setPreto(robo.getHSVEsquerdo()); 
 	}
+	Serial.print(F("Preto esquerdo: "));
+	Serial.println(corEsquerdo.getPreto().v);
 	
 	controlador = ' ';
 	
@@ -71,7 +82,7 @@ void Calibracao2::calibrarCorPreto(){
 
 void Calibracao2::calibrarCorBranco(){
 	
-	Serial.println(F(" COLOQUE OS SENSORES NO BRANCO: "));
+	Serial.println(F("\n\nCOLOQUE OS SENSORES NO BRANCO: "));
 	Serial.println(F("[B] Calibrar COR BRANCO"));
 	
 	esperarParaLer();
@@ -82,6 +93,11 @@ void Calibracao2::calibrarCorBranco(){
 		corDireito.setBranco(robo.getHSVDireito());
 		corEsquerdo.setBranco(robo.getHSVEsquerdo());
 	}
+
+	Serial.print(F("Branco esquerdo: "));
+	Serial.print(corEsquerdo.getBranco().v);
+	Serial.print(F("\tBranco direito: "));
+	Serial.print(corDireito.getBranco().v);
 
 	controlador = ' ';
 }

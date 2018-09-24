@@ -46,7 +46,11 @@ class Estrategia {
 		void passeObstaculo();
     	void passeVerdeOuRedutor();
     	void piscarLeds(int vezes);
-    	void decida();
+    	
+    	void alinhaEsquerda();
+    	void alinhaDireita();
+    	void vireDireita(bool temVerde);
+    	void vireEsquerda(bool temVerde);
 
     	void alinhaBecoSemSaida();
     	void procuraBola();
@@ -56,6 +60,8 @@ class Estrategia {
 
     	void sigaLinha();
 		void miniSeguirLinha();
+
+		void pareInfinito(int led);
 
 };
 
