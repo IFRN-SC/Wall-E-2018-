@@ -16,6 +16,8 @@ class Refletancia {
 		float getMaximoPreto();
 
 		void calculeMedia();
+		inline void resetPreto(){maximoPreto = 0;};
+		inline void resetBranco(){minimoBranco = 101;};
 
 		Refletancia();
 		

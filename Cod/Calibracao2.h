@@ -18,11 +18,11 @@ private:
 
 	void esperarPosicionamento();
 	void esperarPosicionamentoCor();
-	
+
 	void esperarParaLer();
 	void calibrarBranco();
 	void calibrarPreto();
-	
+
 	void calibrarCor();
 	void calibrarCorPreto();
 	void calibrarCorBranco();

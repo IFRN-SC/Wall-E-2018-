@@ -109,6 +109,8 @@ void Calibracao2::calibrarCorBranco(){
 	Serial.print(F("\tBranco direito: \n\n"));
 	Serial.print(corDireito.getBranco().v);
 
+
+
 	controlador = ' ';
 }
 
@@ -196,7 +198,18 @@ void Calibracao2::calibrarBranco(){
       Serial.print(F(" --- "));
       Serial.println(refletancia_dir2.getMinimoBranco());
       Serial.println(F(" "));
+
+      Serial.println(F("[D] Para DESCARTAR"));
+      Serial.println(F("[N] Para NÃO DESCARTAR"));
+      esperarParaLer();
       
+      if(Serial.read() == 'D'){
+		refletancia_dir.resetBranco();
+	  	refletancia_dir2.resetBranco();
+	  	refletancia_esq.resetBranco();
+	  	refletancia_esq2.resetBranco();      	
+      	calibrarBranco();
+      }
           
     }
     else {
@@ -235,6 +248,18 @@ void Calibracao2::calibrarPreto(){
       Serial.print(F(" --- "));
       Serial.println(refletancia_dir2.getMaximoPreto());
       Serial.println(F(" "));
+
+      Serial.println(F("[D] Para DESCARTAR"));
+      Serial.println(F("[N] Para NÃO DESCARTAR"));
+      esperarParaLer();
+      
+      if(Serial.read() == 'D'){
+		refletancia_dir.resetPreto();
+	  	refletancia_dir2.resetPreto();
+	  	refletancia_esq.resetPreto();
+	  	refletancia_esq2.resetPreto();      	
+      	calibrarPreto();
+      }
       
           
     }
@@ -273,7 +298,7 @@ void Calibracao2::esperarPosicionamentoCor() {
 	Serial.println(F("(Esq [V])		---		(Dir [V])\n"));
 	while(1) {
 		Serial.print(robo.getHSVEsquerdo().v);
-		Serial.print(F("		---		"));
+		Serial.print(F("		        ---		"));
 		Serial.print(robo.getHSVDireito().v);
 		Serial.println();
 		delay(1000);
