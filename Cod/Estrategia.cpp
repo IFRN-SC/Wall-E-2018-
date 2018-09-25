@@ -312,29 +312,31 @@ void Estrategia::alinhaDireita(){
 	while(sensor.Dir_Branco() && sensor.maisDir_Branco()){robo.acionarMotores(-28, -28);}
 }
 
-void Estrategia::vireEsquerda(bool temVerde=true){
+void Estrategia::vireEsquerda(bool temVerde=false){
 	while(sensor.maisEsq_Preto()){motores.emFrente();}
 	delay(90);
 	if(temVerde){
+		robo.ligarLed(1);
 		while(sensor.Esq_Branco()){motores.esquerda();}
 		while(sensor.Esq_Preto()){motores.esquerda();}
-		//pareInfinito(1);
 	}else{
+		robo.desligarLed(1);
 		while(sensor.Dir_Branco()){motores.esquerda();}
-		while(sensor.Dir_Preto()){motores.direita();}
-		//pareInfinito(2);
+		while(!(sensor.Dir_Branco() && sensor.maisDir_Branco())){motores.direita();}
 	}
 }
 
-void Estrategia::vireDireita(bool temVerde=true){
+void Estrategia::vireDireita(bool temVerde=false){
 	while(sensor.maisDir_Preto()){motores.emFrente();}
 	delay(90);
 	if(temVerde){
+		robo.ligarLed(2);
 		while(sensor.Dir_Branco()){motores.direita();}
 		while(sensor.Dir_Preto()) {motores.direita();}
 	}else{
+		robo.desligarLed(2);
 		while(sensor.Esq_Branco()){motores.direita();}
-		while(sensor.Esq_Preto()) {motores.esquerda();}
+		while(!(sensor.Esq_Branco() && sensor.maisEsq_Branco())) {motores.esquerda();}
 
 	}
 }
@@ -352,18 +354,13 @@ void Estrategia::sigaLinha(){
 		alinhaEsquerda();
 		motores.parar(200);
 		vireEsquerda(sensor.corEsq_verde());
-
-		//pareInfinito(1);
 	}
-	else if(sensor.branco_branco_preto_preto()||
+	else if(sensor.branco_branco_preto_preto() ||
 		sensor.branco_preto_preto_preto()) {
 		
 		alinhaDireita();
 		motores.parar(200);
 		vireDireita(sensor.corDir_verde());
-		
-
-		//pareInfinito(2);
 	} 
 	// *********************************************
 
@@ -404,14 +401,14 @@ void Estrategia::procuraBola(){
 		piscarLeds(2);
 	}
 }
-void Estrategia::pareInfinito(int led){
+void Estrategia::pareInfinito(int led=3){
 	while(1){
-			motores.parar(10);
-			robo.ligarLed(led);
-			delay(300);
-			robo.desligarLed(led);
-			delay(300);
-		}
+		motores.parar(10);
+		robo.ligarLed(led);
+		delay(300);
+		robo.desligarLed(led);
+		delay(300);
+	}
 }
 void Estrategia::executar(){ 
 	//robo.acionarServoGarra2(190);
