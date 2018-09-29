@@ -365,7 +365,7 @@ void Estrategia::sigaLinha(){
 }
 
 void Estrategia::executar(){ 
-	if(sensor.viuRampa()){
+	/*if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
 	}else if(sensor.viuObstaculo()){
@@ -373,7 +373,9 @@ void Estrategia::executar(){
 	}else{
 		robo.desligarLed(2);
 		sigaLinha();
-	}
+	}*/
+	resgate();
+	//robo.acionarServoGarra1(90);
 	//boySala3();
 }
 
