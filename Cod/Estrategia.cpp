@@ -234,11 +234,13 @@ void Estrategia::resgate(){
 	//garra.iniciar();
 
 	//garra.subir();
-	garra.abrir();
+	//garra.abrir();
   	garra.baixar();
-  	garra.fechar();
+  	//garra.fechar();
+  	//garra.subir();
+  	garra.abrir();
   	garra.subir();
-
+  	garra.fechar();
 }
 
 /*
@@ -375,7 +377,7 @@ void Estrategia::executar(){
 		sigaLinha();
 	}*/
 	resgate();
-	//robo.acionarServoGarra1(90);
+	//robo.acionarServoGarra1(180);
 	//boySala3();
 }
 
