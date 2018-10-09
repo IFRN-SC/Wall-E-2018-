@@ -80,6 +80,20 @@ bool Sensores::maisDir_Preto(){
 
 //*****//
 
+bool Sensores::super_branco() {
+  bool maisEsq_super = robo.lerSensorLinhaMaisEsq() > (refletancia_esq2.getSeparacao() + 20);
+  bool esq_super = robo.lerSensorLinhaEsq() > (refletancia_esq2.getSeparacao() + 20);
+  bool dir_super = robo.lerSensorLinhaDir() > (refletancia_esq2.getSeparacao() + 20);
+  bool maisDir_super = robo.lerSensorLinhaMaisDir() > (refletancia_esq2.getSeparacao() + 20);
+
+  return (
+    maisEsq_super &&
+    esq_super &&
+    dir_super &&
+    maisDir_super
+    );
+}
+
 bool Sensores::branco_branco_branco_branco(){
   return(
     maisEsq_Branco() &&
