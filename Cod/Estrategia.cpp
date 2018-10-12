@@ -227,6 +227,8 @@ void Estrategia::miniSeguirLinha(){
 		delay(100);
 	}
 	robo.desligarLed(1);*/
+}
+void Estrategia::miniSeguirLinha(int n){
 
 	float sonarEsq = robo.lerSensorSonarEsq();
 	float sonarDir = robo.lerSensorSonarDir();
@@ -274,6 +276,7 @@ void Estrategia::miniSeguirLinha(){
 	else {
 		//motores.emFrente(85, 85);
 	}
+
 }
 
 void Estrategia::resgate(){
@@ -416,23 +419,24 @@ void Estrategia::sigaLinha(){
 void Estrategia::executar(){ 
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
+		//miniSeguirLinha(COM_GANHO);
 		miniSeguirLinha();
-	}/*else if(sensor.viuObstaculo()){
+	}else if(sensor.viuObstaculo()){
 		passeObstaculo();
-	}*/
+	}
 	else if (sensor.super_branco()) {
 		robo.ligarTodosLeds();
 		while(sensor.super_branco()) {
 			robo.acionarMotores(80,80);
 		}
 		robo.desligarTodosLeds();
+		motores.parar(10);
+		while(1);
 	} else{
 		robo.desligarLed(2);
 		sigaLinha();
 	}
-	//resgate();
-	//robo.acionarServoGarra1(180);
-	//boySala3();
+
 }
 
 

@@ -23,6 +23,7 @@ class Estrategia {
 		#define VELESQ 45
 		#define VELDIR 45
 		#define FIM_DE_CURSO 12
+		#define COM_GANHO 0
 
 		long tAntes = 0;
 		bool jaVi = false;
@@ -63,6 +64,7 @@ class Estrategia {
 
     	void sigaLinha();
 		void miniSeguirLinha();
+		void miniSeguirLinha(int n);
 
 };
 
