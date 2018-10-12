@@ -9,6 +9,7 @@ void setup(){
   robo.configurar(true);
   robo.habilitaTCS34();
   estrategia.calibrar();
+  estrategia.verificar();
 }
 
 void loop(){
