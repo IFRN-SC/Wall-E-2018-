@@ -14,6 +14,7 @@ class Estrategia {
 		Estrategia();
 		void executar();
 		void calibrar();
+		void verificar();
 		
 		void configurar();
 	private:
@@ -53,8 +54,6 @@ class Estrategia {
 		void passeEncruzilhada_Esquerda();
 		void passeObstaculo();
     	void passeVerdeOuRedutor();
-    	void vireEsquerda();
-    	void vireDireita();
     	void piscarLeds(int vezes);
     	void decida();
 

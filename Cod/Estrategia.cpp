@@ -21,6 +21,17 @@ void Estrategia::calibrar(){
 	sensor.lerCalibracao();
 }
 
+void Estrategia::verificar(){
+	if(sensor.viuRampa()){
+		robo.ligarLed(1);
+	    while(!sensor.preto_preto_preto_preto()){
+		    robo.acionarMotores(50, 57);
+		    delay(1000);
+		}
+		robo.desligarLed(1);
+		sala3.executar();
+  	}	
+}
 void Estrategia::passeEncruzilhada_Direita(){
 	while (!sensor.branco_branco_branco_branco()) {
 		robo.acionarMotores(40, 40);
@@ -100,13 +111,6 @@ void Estrategia::passeVerdeOuRedutor(){
 			robo.acionarMotores(-35, -35);
 			delay(400);
 		}
-}
-
-void Estrategia::vireEsquerda(){
-	motores.esquerda(VELESQ, VELDIR);
-}
-void Estrategia::vireDireita(){
-	motores.direita(VELESQ, VELDIR);
 }
 
 void Estrategia::piscarLeds(int vezes){
@@ -204,29 +208,35 @@ void Estrategia::passeObstaculo(){
 }
 
 void Estrategia::miniSeguirLinha(){
-	robo.desligarLed(2);
-	/*
-	robo.ligarLed(1);
+	robo.acionarMotores(50, 57);
+	delay(1000);
 
-	for (int i = 0; i < 5; i++) {
+	while(!sensor.preto_preto_preto_preto()){
 		if (sensor.branco_branco_branco_branco()) {
-			motores.emFrente(40, 40);
+			motores.emFrenteRampa();
 		}
 		else if(sensor.branco_preto_branco_branco() ||
-				sensor.preto_branco_branco_branco() ||
 				sensor.preto_preto_branco_branco())
 		{
-			robo.acionarMotores(35, 40);
+			motores.esquerdaRampa();
+		}else if(sensor.preto_branco_branco_branco()){
+			motores.esquerdaRampa(15);
 		}
 		else if(sensor.branco_branco_preto_branco() ||
-				sensor.branco_branco_branco_preto() ||
 				sensor.branco_branco_preto_preto())
 		{
-			robo.acionarMotores(40, 35);
+			motores.direitaRampa();
+		}else if(sensor.branco_branco_branco_preto()){
+			motores.direitaRampa(10);
 		}
-		delay(100);
+		else{
+			motores.emFrenteRampa();
+		}
 	}
-	robo.desligarLed(1);*/
+	robo.desligarLed(2);
+	motores.emFrenteRampa();
+	delay(100);
+	sala3.executar();
 }
 void Estrategia::miniSeguirLinha(int n){
 
@@ -254,7 +264,7 @@ void Estrategia::miniSeguirLinha(int n){
 	} 
 
 	if (sensor.branco_branco_branco_branco()) {
-		motores.emFrente(50 + ganhoEsq, 50 + ganhoDir);
+		robo.acionarMotores(50 + ganhoEsq, 50 + ganhoDir);
 	}
 	else if(sensor.branco_preto_branco_branco() ||
 			sensor.preto_branco_branco_branco() ||
@@ -274,7 +284,7 @@ void Estrategia::miniSeguirLinha(int n){
 			sala3.executar();
 	}
 	else {
-		//motores.emFrente(85, 85);
+		//robo.acionarMotores(85, 85);
 	}
 
 }
@@ -342,7 +352,7 @@ void Estrategia::boySala3() {
 void Estrategia::sigaLinha(){
 	if(sensor.branco_branco_branco_branco() /*||
 		sensor.preto_preto_preto_preto()*/){
-		motores.emFrente(VELESQ, VELDIR);
+		motores.emFrente();
 		
 	}
 	
@@ -351,21 +361,21 @@ void Estrategia::sigaLinha(){
 		sensor.preto_preto_preto_branco()) {
 		
 		while(sensor.maisEsq_Preto()){
-			motores.emFrente(VELESQ, VELDIR);
+			motores.emFrente();
 			delay(90);
 		}
 
-		while(sensor.Esq_Branco()){vireEsquerda();}
-		while(sensor.Esq_Preto()){vireEsquerda();}
+		while(sensor.Esq_Branco()){motores.esquerda();}
+		while(sensor.Esq_Preto()){motores.esquerda();}
 	}
 	else if(sensor.branco_branco_preto_preto()||
 		sensor.branco_preto_preto_preto()) {
 		while(sensor.maisDir_Preto()){
-			motores.emFrente(VELESQ, VELDIR);
+			motores.emFrente();
 			delay(90);
 		}
-		while (sensor.Dir_Branco()){vireDireita();}
-		while (sensor.Dir_Preto()){vireDireita();}
+		while (sensor.Dir_Branco()){motores.direita();}
+		while (sensor.Dir_Preto()){motores.direita();}
 		
 	} 
 	// *********************************************
@@ -403,14 +413,14 @@ void Estrategia::sigaLinha(){
 		if (sensor.corEsq_verde()){
 			
 			motores.parar(500);
-			motores.emFrente(40, 40);
+			motores.emFrente();
 			delay(240);
 			motores.parar(500);;
-			vireEsquerda();
+			motores.esquerda();
 			delay(600);
 		}*/
 		//while(1){motores.parar(2);}
-		//motores.emFrente(50, 50); 
+		//motores.emFrente(); 
 	//	}
 	//**********************************************
 	//delay(75);
@@ -426,12 +436,11 @@ void Estrategia::executar(){
 	}
 	else if (sensor.super_branco()) {
 		robo.ligarTodosLeds();
-		while(sensor.super_branco()) {
-			robo.acionarMotores(80,80);
-		}
+		
+		robo.acionarMotores(80, 87);
+		delay(300);
+		
 		robo.desligarTodosLeds();
-		motores.parar(10);
-		while(1);
 	} else{
 		robo.desligarLed(2);
 		sigaLinha();
