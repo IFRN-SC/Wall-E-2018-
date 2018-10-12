@@ -88,7 +88,7 @@ void Sala3::executar(){
 				robo.acionarMotores(30, 33);	
 			}
 
-			while(1){ motores.parar(0); }
+			while(1){ motores.parar(1); }
 
 		}
 		else if (robo.lerSensorSonarFrontal() < 4) {
@@ -97,7 +97,7 @@ void Sala3::executar(){
 
 		} 
 		else {
-			motores.emFrente(30, 33);
+			robo.acionarMotores(30, 33);
 		}
 		robo.ligarLed(1);
 	}
@@ -119,14 +119,14 @@ void Sala3::alinharParede(){
 
 	motores.parar(500);
 
-	motores.emFrente(30, 33);
+	robo.acionarMotores(30, 33);
 	delay(800);
 
 	robo.ligarTodosLeds();
 	delay(100);
 	robo.desligarTodosLeds();
 
-	motores.emFrente(30, 33);
+	robo.acionarMotores(30, 33);
 	delay(350);
 
 	robo.ligarTodosLeds();
