@@ -76,21 +76,29 @@ bool Sensores::maisDir_Preto(){
 	else {
 		return false;
 	}
+}
+
+bool Sensores::maisEsq_super(){
+  return robo.lerSensorLinhaMaisEsq() > (refletancia_esq2.getSeparacao() + 20); 
+} 
+bool Sensores::esq_super(){
+  return robo.lerSensorLinhaEsq() > (refletancia_esq.getSeparacao() + 20); 
+} 
+bool Sensores::dir_super(){
+  return robo.lerSensorLinhaDir() > (refletancia_dir.getSeparacao() + 20); 
+} 
+bool Sensores::maisDir_super(){
+  return robo.lerSensorLinhaMaisDir() > (refletancia_dir2.getSeparacao() + 20); 
 } 
 
 //*****//
 
 bool Sensores::super_branco() {
-  bool maisEsq_super = robo.lerSensorLinhaMaisEsq() > (refletancia_esq2.getSeparacao() + 20);
-  bool esq_super = robo.lerSensorLinhaEsq() > (refletancia_esq2.getSeparacao() + 20);
-  bool dir_super = robo.lerSensorLinhaDir() > (refletancia_esq2.getSeparacao() + 20);
-  bool maisDir_super = robo.lerSensorLinhaMaisDir() > (refletancia_esq2.getSeparacao() + 20);
-
   return (
-    maisEsq_super &&
-    esq_super &&
-    dir_super &&
-    maisDir_super
+    maisEsq_super() &&
+    esq_super() &&
+    dir_super() &&
+    maisDir_super()
     );
 }
 

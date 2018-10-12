@@ -51,6 +51,11 @@ class Sensores: public Calibracao2 {
 	 bool Dir_Preto();      // Direito preto
 	 bool maisDir_Branco(); // Mais direito branco
 	 bool maisDir_Preto(); // Mais direito preto
+
+	 bool maisEsq_super();
+	 bool esq_super();
+	 bool dir_super();
+	 bool maisDir_super();
 	
 	 Sensores();
 	
