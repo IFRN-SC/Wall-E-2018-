@@ -374,9 +374,9 @@ void Estrategia::sigaLinha(){
 	// **********************************************
 
 	// beco sem saída
-	//else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
-	//	alinhaBecoSemSaida();
-	//}
+	else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
+		alinhaBecoSemSaida();
+	}
 }                                                                                                     
 void Estrategia::alinhaBecoSemSaida(){
 	motores.parar(1000);
@@ -384,8 +384,16 @@ void Estrategia::alinhaBecoSemSaida(){
 	while(!sensor.maisDir_Branco() && !sensor.maisDir_Branco()){robo.acionarMotores(25, 28);}
 	while(sensor.maisDir_Branco()){robo.acionarMotores(0, -25);}
 	while(sensor.maisEsq_Branco()){robo.acionarMotores(-25, 0);}
+	motores.parar(400);
+
+	if(sensor.corDir_verde() && sensor.corEsq_verde()){
+		robo.acionarMotores(30, 30);
+		delay(200);
+		robo.acionarMotores(40, -40);
+		delay(840);
+	}
 	
-	while(1){robo.acionarMotores(0,0);}
+	//while(1){robo.acionarMotores(0,0);}
 }
 
 
