@@ -425,6 +425,20 @@ void Estrategia::executar(){
 		miniSeguirLinha();
 	}else if(sensor.viuObstaculo()){
 		passeObstaculo();
+	}else if(sensor.super_branco()){
+		robo.ligarTodosLeds();
+
+		motores.paraTras();
+		delay(200);
+
+		motores.parar(400);
+
+		motores.emFrenteRampa();
+		delay(150);
+
+		motores.parar(300);
+
+		robo.desligarTodosLeds();
 	}else{
 		robo.desligarLed(2);		
 		sigaLinha();
