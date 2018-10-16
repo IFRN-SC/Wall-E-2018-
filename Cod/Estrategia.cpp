@@ -203,29 +203,32 @@ void Estrategia::passeObstaculo(){
 }
 
 void Estrategia::miniSeguirLinha(){
-	if(sensor.branco_branco_branco_branco()){
-		motores.emFrenteRampa();
-	}else if(sensor.branco_preto_branco_branco() ||
-		sensor.preto_branco_branco_branco() ||
-		sensor.preto_preto_branco_branco()){
-		
-		motores.esquerdaRampa();
-	}else if(sensor.branco_branco_preto_branco() ||
-		sensor.branco_branco_branco_preto()||
-		sensor.branco_branco_preto_preto()){
-		
-		motores.direitaRampa();
-	}else if (sensor.preto_preto_preto_preto()){
-		motores.emFrenteRampa();
-		delay(1000);
-		boySala3();
-	}else{
-		motores.emFrenteRampa();
-		while(1){
-			piscarLeds(3);
-			motores.parar(100);
+	while(!sensor.preto_preto_preto_preto()){
+		if (sensor.branco_branco_branco_branco()) {
+			motores.emFrenteRampa();
+		}
+		else if(sensor.branco_preto_branco_branco() ||
+				sensor.preto_preto_branco_branco())
+		{
+			motores.esquerdaRampa();
+		}else if(sensor.preto_branco_branco_branco()){
+			motores.esquerdaRampa(15);
+		}
+		else if(sensor.branco_branco_preto_branco() ||
+				sensor.branco_branco_preto_preto())
+		{
+			motores.direitaRampa();
+		}else if(sensor.branco_branco_branco_preto()){
+			motores.direitaRampa(10);
+		}
+		else{
+			motores.emFrenteRampa();
 		}
 	}
+	robo.desligarLed(2);
+	motores.emFrenteRampa();
+	delay(100);
+	sala3.executar();
 }
 
 void Estrategia::resgate(){
