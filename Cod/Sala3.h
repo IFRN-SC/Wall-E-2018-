@@ -9,6 +9,8 @@ class Sala3 {
 		float limite_lateral;
 		float limite_frontal;
 
+		char ladoRampa;
+
 		Motores motores;
 
 		void alinharParede();

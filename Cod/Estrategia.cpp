@@ -180,7 +180,7 @@ void Estrategia::passeObstaculo(){
 //	delay(95);
 
 	robo.acionarMotores(40, -40);
-	delay(396);
+	delay(430);
 
 	robo.acionarMotores(40, 40);
 	delay(200);
@@ -228,7 +228,6 @@ void Estrategia::miniSeguirLinha(){
 	robo.desligarLed(2);
 	motores.emFrenteRampa();
 	delay(100);
-	sala3.executar();
 }
 
 void Estrategia::resgate(){
@@ -315,7 +314,7 @@ void Estrategia::alinhaDireita(){
 	while(sensor.Dir_Branco() && sensor.maisDir_Branco()){robo.acionarMotores(-28, -28);}
 }
 
-void Estrategia::vireEsquerda(bool temVerde=false){
+void Estrategia::vireEsquerda(bool temVerde=true){
 	while(sensor.maisEsq_Preto()){motores.emFrente();}
 	delay(90);
 	if(temVerde){
@@ -329,7 +328,7 @@ void Estrategia::vireEsquerda(bool temVerde=false){
 	}
 }
 
-void Estrategia::vireDireita(bool temVerde=false){
+void Estrategia::vireDireita(bool temVerde=true){
 	while(sensor.maisDir_Preto()){motores.emFrente();}
 	delay(90);
 	if(temVerde){
@@ -356,7 +355,7 @@ void Estrategia::sigaLinha(){
 		
 		alinhaEsquerda();
 		motores.parar(200);
-		vireEsquerda(sensor.corEsq_verde());
+		vireEsquerda(sensor.corEsq_verde()); 
 	}
 	else if(sensor.branco_branco_preto_preto() ||
 		sensor.branco_preto_preto_preto()) {
@@ -377,9 +376,9 @@ void Estrategia::sigaLinha(){
 	// **********************************************
 
 	// beco sem saída
-	else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
+	/*else if(sensor.Esq_Preto() && sensor.Dir_Preto()){
 		alinhaBecoSemSaida();
-	}
+	}*/
 }                                                                                                     
 void Estrategia::alinhaBecoSemSaida(){
 	motores.parar(1000);
@@ -426,6 +425,7 @@ void Estrategia::executar(){
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
+		sala3.executar();
 	}else if(sensor.viuObstaculo()){
 		passeObstaculo();
 	}else if(sensor.super_branco()){
@@ -434,12 +434,10 @@ void Estrategia::executar(){
 		motores.paraTras();
 		delay(200);
 
-		motores.parar(400);
+		motores.parar(200);
 
 		motores.emFrenteRampa();
-		delay(150);
-
-		motores.parar(300);
+		delay(250);
 
 		robo.desligarTodosLeds();
 	}else{

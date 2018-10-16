@@ -3,6 +3,7 @@
 Sala3::Sala3() {
 	limite_lateral = 0;
 	limite_frontal = 0;
+	ladoRampa = ' ';
 }
 
 void Sala3::setLimiteLateral(float valorLido) { limite_lateral = valorLido; }
@@ -13,9 +14,26 @@ float Sala3::getLimiteFrontal() { return limite_frontal; }
 
 void Sala3::executar(){
 
+	robo.acionarMotores(0, 0);
+
+	// DEFININDO LADO DA RAMPA
+	if (robo.lerSensorSonarEsq() > robo.lerSensorSonarDir()) {
+		ladoRampa = 'D';
+		robo.ligarLed(1);
+		delay(150);
+		robo.desligarLed(1);
+	} else {
+		ladoRampa = 'E';
+		robo.ligarLed(3);
+		delay(150);
+		robo.desligarLed(3);
+	}
+
+	while(1){}
+
 	alinharParede();
 
-	alinharParede2();
+	/*alinharParede2();
 
 	//while(1) { robo.acionarMotores(0, 0); }
 
@@ -51,7 +69,7 @@ void Sala3::executar(){
 			while(1){}
 
 		}
-	}
+	}*/
 		
 	/*if (robo.lerSensorSonarEsq() < limite_lateral) {
 			motores.parar(500);
@@ -87,6 +105,7 @@ void Sala3::executar(){
 void Sala3::alinharParede(){
 
 	// Passando do portal
+
 	robo.acionarMotores(70, 70);
 	delay(300);
 	robo.acionarMotores(30, 30);
@@ -94,7 +113,7 @@ void Sala3::alinharParede(){
 	
 	motores.parar(300);
 
-	// CONTANDO "DOIS PASSOS"
+	/*// CONTANDO "DOIS PASSOS"
 
 	for (int i = 0; i < 2; i++) {
 
@@ -103,13 +122,18 @@ void Sala3::alinharParede(){
 		delay(120);
 		robo.desligarLed(3);
 
-	}
+	}*/
 
 	motores.parar(500);
 	
 	// SE ALINHANDO NA PAREDE
-	robo.acionarMotores(40, -40);
-	delay(500);
+	if (ladoRampa == 'E') {
+		robo.acionarMotores(40, -40);
+		delay(500);
+	} else {
+		robo.acionarMotores(-40, 40);
+		delay(500);
+	}
 
 	motores.parar(500);
 
