@@ -2,10 +2,6 @@
 
 
 Calibracao2::Calibracao2(){
-	escolhaInicial = ' ';
-	escolhaMenu = ' ';
-	escolhaBranco = ' ';
-	escolhaPreto = ' ';
 }
 
 
@@ -170,7 +166,7 @@ void Calibracao2::calibrarCor(){
 }
 
 void Calibracao2::calibrarBranco(){
-
+  char escolhaBranco = ' ';
   while (escolhaBranco != SAIDA) {
     Serial.println(F("\nColoque todos os sensores no BRANCO"));
     
@@ -220,7 +216,7 @@ void Calibracao2::calibrarBranco(){
 
 
 void Calibracao2::calibrarPreto(){
-
+	char escolhaPreto = ' ';
 	while (escolhaPreto != SAIDA) {
 		Serial.println(F("\nColoque todos os sensores no PRETO"));
 
@@ -311,7 +307,8 @@ void Calibracao2::esperarPosicionamentoCor() {
 }
 
 void Calibracao2::Menu_calibrar() {
-	
+  char escolhaInicial = ' ';
+  char escolhaMenu = ' ';
   while (escolhaInicial != SAIDA) { 
      Serial.println(F("[C] Começar calibração"));
      Serial.println(F("[S] Sair da calibração"));

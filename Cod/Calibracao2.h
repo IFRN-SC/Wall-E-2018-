@@ -33,8 +33,7 @@ private:
 	char escolhaMenu;
 	char escolhaBrancoPreto;
 
-	char escolhaPreto;
-	char escolhaBranco;
+	
 	
 	char escolhaCor;
 	char controlador;
