@@ -436,9 +436,14 @@ void Estrategia::executar(){
 	}
 	else if (sensor.super_branco()) {
 		robo.ligarTodosLeds();
+
+		robo.acionarMotores(-40, -40);
+		delay(150);
+
+		motores.parar(500);
 		
-		robo.acionarMotores(80, 87);
-		delay(300);
+		robo.acionarMotores(60, 67);
+		delay(200);
 		
 		robo.desligarTodosLeds();
 	} else{
