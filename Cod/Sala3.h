@@ -4,6 +4,7 @@
 #include <robo_hardware2.h>
 #include "Motores.h"
 
+
 class Sala3 {
 	private:
 		float limite_lateral;

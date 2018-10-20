@@ -7,7 +7,7 @@
 class Sensores: public Calibracao2 {
 	private:
 		#define DIST_RAMPA 14
-		#define DIST_OBSTACULO 6
+		#define DIST_OBSTACULO 4
 
 	public:
 	 inline bool viuRampa(){return robo.lerSensorSonarEsq() <= DIST_RAMPA && robo.lerSensorSonarDir() <= DIST_RAMPA;}

@@ -11,11 +11,11 @@ class Motores {
 		#define VEL_ESQ_FRENTE_RAMPA 85
 		#define VEL_ESQ_TRAS_RAMPA 70
 
-		#define VEL_DIR_FRENTE 57
+		#define VEL_DIR_FRENTE 52
 		#define VEL_DIR_TRAS -52
 
-		#define VEL_ESQ_FRENTE 50
-		#define VEL_ESQ_TRAS -50
+		#define VEL_ESQ_FRENTE 45
+		#define VEL_ESQ_TRAS -45
 	public:
 		inline void emFrente(){robo.acionarMotores(VEL_ESQ_FRENTE, VEL_DIR_FRENTE);}
 		inline void direita(){robo.acionarMotores(VEL_ESQ_FRENTE, VEL_DIR_TRAS);} 

@@ -15,98 +15,88 @@ void Sala3::executar(){
 
 	// Passando do portal
 	robo.acionarMotores(70, 73);
-	delay(300);
+	delay(200);
  	robo.acionarMotores(30, 33);
 	delay(100);
 	
 	motores.parar(300);
 
-	// CONTANDO "DOIS PASSOS"
-
-	for (int i = 0; i < 2; i++) {
-
-		robo.ligarLed(3);
-		robo.acionarMotores(40, 40);
-		delay(120);
-		robo.desligarLed(3);
-
-	}
-
 	alinharParede();
 
-	for (int i = 0; i < 5; i++) {
-		robo.ligarLed(2);
-		// achou vitima esquerda
-		if (robo.lerSensorSonarEsq() < 10) {
+	
+	float distanciaAtual = 123;
+	int j = 0;
+	
+	float time = millis();
+	while(1){
+		++j;
+		
+		float distanciaAnterior = distanciaAtual;
+		int contErros = 0;
 
-			motores.parar(500);
+		for(int i = 0; i < 10; i++){
 
-			robo.acionarMotores(-40, 40);
-			delay(500);
+			if(contErros > 5) break;
 
-			motores.parar(200);
-
-			// corrigindo posicao
-			while(robo.lerSensorSonarFrontal() > 25) {
-				robo.acionarMotores(30, -30);
-				delay(100);
-				motores.parar(800);
-			}
-
-			robo.ligarTodosLeds();
-			motores.parar(500);
-			robo.desligarTodosLeds();
-
-			while(robo.lerSensorSonarFrontal() > 5) {
-				robo.acionarMotores(30, 33);	
-			}
-
-			while(1){ motores.parar(500); }
-		} 
-		// achou vitima direita
-		else if (robo.lerSensorSonarDir() < 10) {
-
-			motores.parar(500);
-
-			robo.acionarMotores(40, -40);
-			delay(500);
-
-			motores.parar(200);
-
-			// corrigindo posicao
-			while(robo.lerSensorSonarFrontal() > 25) {
-				robo.acionarMotores(30, -30);
-				delay(100);
-				motores.parar(800);
-			}
-
-			robo.ligarTodosLeds();
-			motores.parar(500);
-			robo.desligarTodosLeds();
-
-			while(robo.lerSensorSonarFrontal() > 5) {
-				robo.acionarMotores(30, 33);	
-			}
-
-			while(1){ motores.parar(1); }
-
-		}
-		else if (robo.lerSensorSonarFrontal() < 4) {
+			float leitura = robo.lerSensorSonarEsq();	
 			
-			while(1){ motores.parar(0); }
+			if(leitura > 70){
+				i--;
+				contErros++;
+			}else{
+				distanciaAtual += leitura;
+			}
 
-		} 
-		else {
-			robo.acionarMotores(30, 33);
+
 		}
-		robo.ligarLed(1);
+		
+		distanciaAtual /= 10;
+		
+		
+		if (j == 1) {
+			robo.acionarMotores(25, 28);
+			delay(50);
+			robo.acionarMotores(0, 0);
+			delay(100);
+		} else {
+			robo.acionarMotores(25, 28);	
+		}
+
+		float miniDistanciaAtual = 123;
+		if((distanciaAtual - distanciaAnterior) > 3.3)
+		{
+			robo.ligarLed(3);
+			robo.acionarMotores(-40, 40);
+			delay(450);
+
+			distanciaAnterior = miniDistanciaAtual;
+
+			miniDistanciaAtual = robo.lerSensorSonarFrontal();
+
+			while(miniDistanciaAtual > 10){
+
+				//distanciaAnterior = miniDistanciaAtual;
+				robo.ligarLed(2);
+				robo.acionarMotores(25, 27);
+				//delay(50);
+				//robo.desligarLed(2);
+				//motores.parar(100);
+				
+				miniDistanciaAtual  = robo.lerSensorSonarFrontal();
+
+			}
+			break;	
+		}
+		if((millis() - time) > 3100) {
+			robo.ligarLed(1);
+			motores.parar(1);
+			while(1);	
+		}
 	}
 
-	robo.desligarLed(1);
-	robo.desligarLed(2);
-
-	motores.parar(0);
-	while(1) {}
+	motores.parar(1);
+	robo.ligarTodosLeds();
+	while(1);
 
 }
 
@@ -119,7 +109,12 @@ void Sala3::alinharParede(){
 
 	motores.parar(500);
 
+	encostarRobo();
+
 	robo.acionarMotores(30, 33);
+	delay(100);
+
+	/*robo.acionarMotores(30, 33);
 	delay(800);
 
 	robo.ligarTodosLeds();
@@ -134,21 +129,21 @@ void Sala3::alinharParede(){
 	robo.desligarTodosLeds();
 
 	robo.acionarMotores(-40, 40);
-	delay(200);
+	delay(450);
 
-	encostarRobo();
+	encostarRobo();*/
 }
 
 void Sala3::encostarRobo() {
 	
 	robo.acionarMotores(-35, -35);
-	delay(1000);
+	delay(1200);
 
 	robo.acionarMotores(30, 30);
 	delay(250);
 
 	robo.acionarMotores(-30, -30);
-	delay(1000);	
+	delay(1200);	
 
 	motores.parar(500);
 
