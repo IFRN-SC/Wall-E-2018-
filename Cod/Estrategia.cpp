@@ -29,7 +29,7 @@ void Estrategia::verificar(){
 		    //delay(1000);
 		}
 		robo.desligarLed(1);
-		sala3.executar();
+		sala3.portal();
   	}	
 }
 void Estrategia::passeEncruzilhada_Direita(){
@@ -233,7 +233,7 @@ void Estrategia::miniSeguirLinha(){
 	robo.desligarLed(2);
 	motores.emFrenteRampa();
 	delay(150);
-	sala3.executar();
+	sala3.portal();
 }
 void Estrategia::miniSeguirLinha(int n){
 
@@ -278,7 +278,7 @@ void Estrategia::miniSeguirLinha(int n){
 	else if ((sensor.preto_preto_preto_preto()) || 
 			(!sensor.viuRampa()))
 	{
-			sala3.executar();
+			sala3.portal();
 	}
 	else {
 		//robo.acionarMotores(85, 85);
