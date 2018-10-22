@@ -84,7 +84,8 @@ void Sala3::executar(){
 
 			miniDistanciaAtual = robo.lerSensorSonarFrontal();
 
-			while(miniDistanciaAtual > 10){
+			float max_time = millis();
+			while((miniDistanciaAtual > 10) || ((millis() - time) > 500)){
 
 				//distanciaAnterior = miniDistanciaAtual;
 				robo.ligarLed(2);
@@ -95,13 +96,23 @@ void Sala3::executar(){
 				
 				miniDistanciaAtual  = robo.lerSensorSonarFrontal();
 
-			}
+			} 
 
-			viu_bola = true;
+			if (miniDistanciaAtual < 10) {
+				viu_bola = true;	
+			} else {
+				/* procurar bola por um tempo...
+				senao achou, voltar para a parede e procurar novamente*/
+				// executar()?
+			}
 
 			break;	
 		}
 		if((millis() - time) > 3100) {
+			
+			robo.ligarLed(1);
+			motores.parar(1);
+
 			if (!viu_bola) {
 				
  				// inverte alinhamento anterior
@@ -111,10 +122,10 @@ void Sala3::executar(){
 				alinharParede(1);
 
 				executar();
+			} else {
+				while(1);	
 			}
-			robo.ligarLed(1);
-			motores.parar(1);
-			while(1);	
+				
 		}
 	}
 
@@ -136,8 +147,17 @@ void Sala3::alinharParede(int qnt){
 			fator_esq = 1;
 			fator_dir = -1;
 		}	
-	}
+	} else {
 	
+		// prepara o giro de 270
+		motores.parar(500);
+
+		robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
+		delay(450);				
+
+		motores.parar(500);
+
+	}
 
 	motores.parar(500);
 
@@ -148,9 +168,9 @@ void Sala3::alinharParede(int qnt){
 
 	encostarRobo();
 
-	// why?
+	/*
 	robo.acionarMotores(30, 33);
-	delay(100);
+	delay(100);*/
 
 	/*robo.acionarMotores(30, 33);
 	delay(800);
