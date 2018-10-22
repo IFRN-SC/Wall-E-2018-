@@ -3,6 +3,10 @@
 Sala3::Sala3() {
 	limite_lateral = 0;
 	limite_frontal = 0;
+	fator_esq = 1;
+	fator_dir = 1;
+
+	viu_bola = false;
 }
 
 void Sala3::setLimiteLateral(float valorLido) { limite_lateral = valorLido; }
@@ -11,8 +15,7 @@ void Sala3::setLimiteFrontal(float valorLido) { limite_frontal = valorLido; }
 float Sala3::getLimiteLateral() { return limite_lateral; }
 float Sala3::getLimiteFrontal() { return limite_frontal; }
 
-void Sala3::executar(){
-
+void Sala3::portal() {
 	// Passando do portal
 	robo.acionarMotores(70, 73);
 	delay(200);
@@ -20,14 +23,19 @@ void Sala3::executar(){
 	delay(100);
 	
 	motores.parar(300);
+}
 
-	alinharParede();
+void Sala3::executar(){
 
+	alinharParede(0);
 	
 	float distanciaAtual = 123;
 	int j = 0;
 	
 	float time = millis();
+
+	float leitura = 0;
+
 	while(1){
 		++j;
 		
@@ -38,7 +46,12 @@ void Sala3::executar(){
 
 			if(contErros > 5) break;
 
-			float leitura = robo.lerSensorSonarEsq();	
+			// se o lado da rampa for a direita em relacao a frente da sala3
+			if (fator_esq == -1) {
+				leitura = robo.lerSensorSonarEsq();	
+			} else {
+				leitura = robo.lerSensorSonarDir();
+			}	
 			
 			if(leitura > 70){
 				i--;
@@ -47,11 +60,9 @@ void Sala3::executar(){
 				distanciaAtual += leitura;
 			}
 
-
 		}
 		
 		distanciaAtual /= 10;
-		
 		
 		if (j == 1) {
 			robo.acionarMotores(25, 28);
@@ -66,7 +77,7 @@ void Sala3::executar(){
 		if((distanciaAtual - distanciaAnterior) > 3.3)
 		{
 			robo.ligarLed(3);
-			robo.acionarMotores(-40, 40);
+			robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 			delay(450);
 
 			distanciaAnterior = miniDistanciaAtual;
@@ -85,9 +96,22 @@ void Sala3::executar(){
 				miniDistanciaAtual  = robo.lerSensorSonarFrontal();
 
 			}
+
+			viu_bola = true;
+
 			break;	
 		}
 		if((millis() - time) > 3100) {
+			if (!viu_bola) {
+				
+ 				// inverte alinhamento anterior
+				fator_esq *= -1;
+				fator_dir *= -1;
+
+				alinharParede(1);
+
+				executar();
+			}
 			robo.ligarLed(1);
 			motores.parar(1);
 			while(1);	
@@ -100,17 +124,31 @@ void Sala3::executar(){
 
 }
 
-void Sala3::alinharParede(){
+void Sala3::alinharParede(int qnt){
+
+	// se qnt for 0, entao é a primeira vez que o robo alinha
+	if (qnt == 0) {
+		// lado da rampa posicionado a direita em relacao a frente da sala 3
+		if (robo.lerSensorSonarEsq() > robo.lerSensorSonarDir()) {
+			fator_esq = -1;
+			fator_dir = 1;
+		} else {
+			fator_esq = 1;
+			fator_dir = -1;
+		}	
+	}
+	
 
 	motores.parar(500);
-	
-	robo.acionarMotores(40, -40);
+
+	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 	delay(450);
 
 	motores.parar(500);
 
 	encostarRobo();
 
+	// why?
 	robo.acionarMotores(30, 33);
 	delay(100);
 
