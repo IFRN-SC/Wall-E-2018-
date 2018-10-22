@@ -10,15 +10,23 @@ class Sala3 {
 		float limite_lateral;
 		float limite_frontal;
 
+		// Dependendo da posicao da rampa
+		int fator_esq;
+		int fator_dir;
+
+		bool viu_bola;
+
 		Motores motores;
 
-		void alinharParede();
+		void alinharParede(int qnt);
 
 		void encostarRobo();
 
 	public:
 
 		Sala3();
+
+		void portal();
 
 		void executar();
 
