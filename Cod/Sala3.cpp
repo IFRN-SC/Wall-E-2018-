@@ -58,24 +58,27 @@ void Sala3::executar(){
 			}	
 			
 			if(leitura > 70){
+				robo.ligarLed(2);
 				i--;
 				contErros++;
 			}else{
 				distanciaAtual += leitura;
 			}
 
+			robo.desligarLed(2);
+
 		}
 		
 		distanciaAtual /= 10;
 		
-		/*if (j == 1) {
+		if (j == 1) {
 			robo.acionarMotores(25, 28);
 			delay(50);
 			robo.acionarMotores(0, 0);
 			delay(100);
 		} else {
 			robo.acionarMotores(25, 28);	
-		}*/
+		}
 
 		robo.acionarMotores(25, 28);
 
@@ -83,15 +86,18 @@ void Sala3::executar(){
 		if((distanciaAtual - distanciaAnterior) > 3.3)
 		{
 			robo.ligarLed(3);
-			robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
-			delay(450);
+			// !! fatores invertidos
+			robo.acionarMotores(40 * fator_dir, 40 * fator_esq);
+			delay(500);
 
 			distanciaAnterior = miniDistanciaAtual;
 
 			miniDistanciaAtual = robo.lerSensorSonarFrontal();
 
 			float max_time = millis();
-			while((miniDistanciaAtual > 10) || ((millis() - time) > 500)){
+			while((miniDistanciaAtual > 10) || ((millis() - max_time) > 500)){
+
+				motores.parar(500);
 
 				//distanciaAnterior = miniDistanciaAtual;
 				robo.ligarLed(2);
@@ -103,6 +109,13 @@ void Sala3::executar(){
 				miniDistanciaAtual  = robo.lerSensorSonarFrontal();
 
 			} 
+
+			robo.desligarTodosLeds();
+			robo.ligarLed(1);
+
+			while(1) {
+				robo.acionarMotores(0, 0);
+			}
 
 			if (miniDistanciaAtual < 10) {
 				viu_bola = true;	
