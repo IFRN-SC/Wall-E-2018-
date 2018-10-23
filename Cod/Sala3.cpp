@@ -76,24 +76,35 @@ void Sala3::executar(){
 			delay(50);
 			robo.acionarMotores(0, 0);
 			delay(100);
-		} else {
-			robo.acionarMotores(25, 28);	
 		}
 
 		robo.acionarMotores(25, 28);
 
 		float miniDistanciaAtual = 123;
+
+		int velEsq = 40;
+		int velDir = 40;
+
 		if((distanciaAtual - distanciaAnterior) > 3.3)
 		{
 			robo.ligarLed(3);
-			// !! fatores invertidos
-			robo.acionarMotores(40 * fator_dir, 40 * fator_esq);
+
+			// testando pneu parado e outro girando
+			if(fator_esq == -1) {
+				velEsq = 0;
+			} else {
+				velDir = 0;
+			}
+
+			// !! fatores invertidos	
+			robo.acionarMotores(velEsq * fator_dir, velDir * fator_esq);
 			delay(500);
 
 			distanciaAnterior = miniDistanciaAtual;
 
 			miniDistanciaAtual = robo.lerSensorSonarFrontal();
 
+			// testando tempo max de procura
 			float max_time = millis();
 			while((miniDistanciaAtual > 10) || ((millis() - max_time) > 500)){
 
@@ -101,7 +112,56 @@ void Sala3::executar(){
 
 				//distanciaAnterior = miniDistanciaAtual;
 				robo.ligarLed(2);
-				robo.acionarMotores(25, 27);
+
+				// procurar duas vezes e voltar
+				for (int i = 0; i < 2; i++) {
+
+					robo.acionarMotores(25, 27);
+					motores.parar(500);
+
+					// procurando para esq
+					for (int j = 0; j < 3; j++) {
+						robo.acionarMotores(-30, 0);
+						motores.parar(300); // + 300
+
+						if (robo.lerSensorSonarFrontal() < 3.3) {
+							motores.parar(0);
+							robo.ligarTodosLeds();
+							while(1);
+						}
+
+						voltar
+						if (j == 3) {
+
+						}	
+
+					}
+
+					// procurando para dir
+					for (int j = 0; j < 3; j++) {
+						robo.acionarMotores(-30, 0);
+						motores.parar(300); // + 300
+
+						if (robo.lerSensorSonarFrontal() < 3.3) {
+							motores.parar(0);
+							robo.ligarTodosLeds();
+							while(1);
+						}	
+
+					}
+
+					delay(300); // + 30
+				}
+
+				// se nao achou
+				robo.acionarMotores(-30, -30);
+				delay(1200);
+
+				motores.parar(0);
+				robo.ligarTodosLeds();
+				while(1);				
+
+
 				//delay(50);
 				//robo.desligarLed(2);
 				//motores.parar(100);
