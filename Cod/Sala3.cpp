@@ -23,12 +23,14 @@ void Sala3::portal() {
 	delay(100);
 	
 	motores.parar(300);
+
+	alinharParede(0);
+
+	executar();
 }
 
 void Sala3::executar(){
 
-	alinharParede(0);
-	
 	float distanciaAtual = 123;
 	int j = 0;
 	
@@ -47,9 +49,11 @@ void Sala3::executar(){
 			if(contErros > 5) break;
 
 			// se o lado da rampa for a direita em relacao a frente da sala3
-			if (fator_esq == -1) {
+			if (fator_esq == 1) {
+				robo.ligarLed(3);
 				leitura = robo.lerSensorSonarEsq();	
 			} else {
+				robo.ligarLed(1);
 				leitura = robo.lerSensorSonarDir();
 			}	
 			
@@ -64,14 +68,16 @@ void Sala3::executar(){
 		
 		distanciaAtual /= 10;
 		
-		if (j == 1) {
+		/*if (j == 1) {
 			robo.acionarMotores(25, 28);
 			delay(50);
 			robo.acionarMotores(0, 0);
 			delay(100);
 		} else {
 			robo.acionarMotores(25, 28);	
-		}
+		}*/
+
+		robo.acionarMotores(25, 28);
 
 		float miniDistanciaAtual = 123;
 		if((distanciaAtual - distanciaAnterior) > 3.3)
@@ -114,6 +120,8 @@ void Sala3::executar(){
 			motores.parar(1);
 
 			if (!viu_bola) {
+
+				robo.desligarTodosLeds();
 				
  				// inverte alinhamento anterior
 				fator_esq *= -1;
@@ -139,6 +147,7 @@ void Sala3::alinharParede(int qnt){
 
 	// se qnt for 0, entao é a primeira vez que o robo alinha
 	if (qnt == 0) {
+
 		// lado da rampa posicionado a direita em relacao a frente da sala 3
 		if (robo.lerSensorSonarEsq() > robo.lerSensorSonarDir()) {
 			fator_esq = -1;
@@ -154,6 +163,11 @@ void Sala3::alinharParede(int qnt){
 
 		robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 		delay(450);				
+
+		motores.parar(500);
+
+		robo.acionarMotores(40, 40);
+		delay(300);				
 
 		motores.parar(500);
 
