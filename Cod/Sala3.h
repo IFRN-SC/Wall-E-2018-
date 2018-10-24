@@ -9,7 +9,9 @@ class Sala3 {
 		float limite_lateral;
 		float limite_frontal;
 
+		float distanciaAnterior;
 		float distanciaAtual;
+		float miniDistanciaAtual;
 
 		// Dependendo da posicao da rampa
 		int fator_esq;
@@ -21,9 +23,14 @@ class Sala3 {
 
 		void alinharParede(int qnt);
 
-		void procurarBola();
+		void procurarBola(int time);
+		void pegarBola();
 
 		void encostarRobo();
+
+		void filtrarErros();
+
+		void loop();
 
 	public:
 

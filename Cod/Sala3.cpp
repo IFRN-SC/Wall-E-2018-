@@ -7,6 +7,7 @@ Sala3::Sala3() {
 	fator_dir = 1;
 
 	distanciaAtual = 170;
+	miniDistanciaAtual = 170;
 
 	viu_bola = false;
 }
@@ -33,118 +34,38 @@ void Sala3::portal() {
 
 void Sala3::executar(int args){
 
-	if (args != 0) {
+	/*if (args != 0) {
 		// se o lado da rampa for a direita em relacao a frente da sala3
 		if (fator_esq == 1) {
 			distanciaAtual = robo.lerSensorSonarEsq();	
 		} else {
 			distanciaAtual = robo.lerSensorSonarDir();
 		}	
-	} else {
-		robo.acionarMotores(0, 0);
-		while(1) {
-
-		}
-	}
+	}*/
 
 	int j = 0;
-	
-	float time = millis();
 
-	float leitura = 0;
-
-	while(1){
+	while(1) {
 		++j;
 		
-		float distanciaAnterior = distanciaAtual;
-		int contErros = 0;
+		distanciaAnterior = distanciaAtual;
+		
 
-		for(int i = 0; i < 10; i++){
-
-			if(contErros > 5) break;
-
-			// se o lado da rampa for a direita em relacao a frente da sala3
-			if (fator_esq == 1) {
-				leitura = robo.lerSensorSonarEsq();	
-			} else {
-				leitura = robo.lerSensorSonarDir();
-			}	
-			
-			if(leitura > 60){
-				robo.ligarLed(2);
-				i--;
-				contErros++;
-			}else{
-				distanciaAtual += leitura;
-			}
-
-			robo.desligarLed(2);
-
-		}
+		filtrarErros();
 		
 		distanciaAtual /= 10;
 		
-		if (j == 1) {
-			robo.acionarMotores(25, 28);
-			delay(50);
-			robo.acionarMotores(0, 0);
-			delay(100);
-		}
-
+		// erro inicio da procura
 		robo.acionarMotores(25, 28);
-
-		float miniDistanciaAtual = 123;
-
-		int velEsq = 40;
-		int velDir = 40;
-
-		if((distanciaAtual - distanciaAnterior) > 3.3)
-		{
-			robo.ligarLed(3);
-
-			// testando pneu parado e outro girando
-			if(fator_esq == -1) {
-				velEsq = 0;
-			} else {
-				velDir = 0;
-			}
-
-			// !! fatores invertidos	
-			robo.acionarMotores(velEsq * fator_dir, velDir * fator_esq);
-			delay(500);
-
-			distanciaAnterior = miniDistanciaAtual;
-
-			miniDistanciaAtual = robo.lerSensorSonarFrontal();
-
-			procurarBola();
-
-			robo.desligarTodosLeds();
-			robo.ligarLed(1);
-				
-		}
-		if((millis() - time) > 3100) {
-
-			robo.ligarTodosLeds();
-
-			motores.parar(0);
-
-			if (!viu_bola) {
-
-				robo.desligarTodosLeds();
-				
- 				// inverte alinhamento anterior
-				fator_esq *= -1;
-				fator_dir *= -1;
-
-				alinharParede(1);
-
-				executar(1);
-			} else {
-				while(1);	
-			}
-				
-		}
+		delay(60);
+		robo.acionarMotores(0, 0);
+		delay(300);
+		
+		robo.acionarMotores(25, 28);
+		float time = millis(); // tempo atual de execução
+		// procurando bola
+		procurarBola(time);		
+		
 	}
 
 	motores.parar(1);
@@ -153,7 +74,99 @@ void Sala3::executar(int args){
 
 }
 
-void Sala3::procurarBola() {
+void Sala3::filtrarErros() {
+
+	int contErros = 0;
+
+	float leitura = 0;
+
+	for(int i = 0; i < 10; i++) {
+
+		if(contErros > 5) break;
+
+		// se o lado da rampa a direita em relacao a frente da sala3 for (int i = 0; i < count; ++i)
+		{
+			/* code */
+		} 
+		if (fator_esq == 1) {
+			leitura = robo.lerSensorSonarEsq();	
+		} else {
+			leitura = robo.lerSensorSonarDir();
+		}	
+		
+		if(leitura > 90) {
+			robo.ligarLed(2);
+			delay(200);
+			robo.desligarLed(2);
+			i--;
+			contErros++;
+		} else {
+			distanciaAtual += leitura;
+		}
+
+	}
+
+	robo.desligarLed(2);
+}
+
+
+void Sala3::procurarBola(int time) {
+
+	int velEsq = 40;
+	int velDir = 40;
+
+	if((distanciaAtual - distanciaAnterior) > 3.3) {
+
+		loop();
+
+		// testando pneu parado e outro girando
+		if(fator_esq == -1) {
+			velEsq = 0;
+		} else {
+			velDir = 0;
+		}
+
+		// !! fatores invertidos	
+		robo.acionarMotores(velEsq * fator_dir, velDir * fator_esq);
+		delay(500);
+
+		distanciaAnterior = miniDistanciaAtual;
+
+		miniDistanciaAtual = robo.lerSensorSonarFrontal();
+
+		pegarBola();
+
+		robo.desligarTodosLeds();
+		robo.ligarLed(1);
+			
+	} 
+	else if((millis() - time) > 3100) {
+
+		robo.ligarTodosLeds();
+
+		motores.parar(0);
+
+		if (!viu_bola) {
+
+			robo.desligarTodosLeds();
+			
+				// inverte alinhamento anterior
+			fator_esq *= -1;
+			fator_dir *= -1;
+
+			alinharParede(1);
+
+			executar(1);
+		} else {
+			while(1);	
+		}
+			
+	} else {
+		procurarBola(time);
+	}
+}
+
+void Sala3::pegarBola() {
 	// testando tempo max de procura
 	float max_time = millis();
 	while((miniDistanciaAtual > 10) || ((millis() - max_time) > 500)){
@@ -309,4 +322,10 @@ void Sala3::encostarRobo() {
 
 	motores.parar(500);
 
+}
+
+void Sala3::loop(){ 
+	robo.acionarMotores(0, 0);
+	robo.ligarTodosLeds();
+	while(1);
 }
