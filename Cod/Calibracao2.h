@@ -20,8 +20,6 @@ private:
 
 	void posicionar_sensores();
 	void posicionar_sala3();
-	
-	
 
 	void esperarParaLer();
 	void calibrarBranco();

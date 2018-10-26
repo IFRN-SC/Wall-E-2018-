@@ -6,8 +6,9 @@
 
 class Sala3 {
 	private:
+		/* @Depreciating...
 		float limite_lateral;
-		float limite_frontal;
+		float limite_frontal;*/
 
 		float distanciaAnterior;
 		float distanciaAtual;
@@ -40,11 +41,12 @@ class Sala3 {
 
 		void executar(int args);
 
+		/* @Depreciating...
 		void setLimiteLateral(float valorLido);
 		void setLimiteFrontal(float valorLido);
 		
 		float getLimiteLateral();
-		float getLimiteFrontal();
+		float getLimiteFrontal();*/
 
 };
 

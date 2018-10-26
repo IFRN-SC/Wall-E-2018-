@@ -1,8 +1,9 @@
 #include "Sala3.h"
 
 Sala3::Sala3() {
+	/* @Depreciating...
 	limite_lateral = 0;
-	limite_frontal = 0;
+	limite_frontal = 0;*/
 	fator_esq = 1;
 	fator_dir = 1;
 
@@ -12,14 +13,16 @@ Sala3::Sala3() {
 	viu_bola = false;
 }
 
+/* @Depreciating...
 void Sala3::setLimiteLateral(float valorLido) { limite_lateral = valorLido; }
 void Sala3::setLimiteFrontal(float valorLido) { limite_frontal = valorLido; }
 
 float Sala3::getLimiteLateral() { return limite_lateral; }
-float Sala3::getLimiteFrontal() { return limite_frontal; }
+float Sala3::getLimiteFrontal() { return limite_frontal; }*/
 
 void Sala3::portal() {
-	// Passando do portal
+
+	// passando do portal
 	robo.acionarMotores(70, 73);
 	delay(200);
  	robo.acionarMotores(30, 33);
@@ -28,8 +31,79 @@ void Sala3::portal() {
 	motores.parar(300);
 
 	alinharParede(0);
-
 	executar(0);
+}
+
+void Sala3::alinharParede(int qnt){
+
+	// se qnt for 0, entao é a primeira vez que o robo alinha
+	if (qnt == 0) {
+		
+		robo.desligarTodosLeds();
+
+		// se o lado da rampa estiver posicionado a direita em relacao a frente da sala 3
+		if (robo.lerSensorSonarEsq() > robo.lerSensorSonarDir()) {
+			
+			fator_esq = -1;
+			fator_dir = 1;
+
+			// sinaliza a escolha
+			robo.ligarLed(1);
+			delay(300);
+			robo.desligarLed(1);//
+		
+		} else { // lado da rampa: esquerda
+			
+			fator_esq = 1;
+			fator_dir = -1;
+
+			// sinaliza a escolha
+			robo.ligarLed(3);
+			delay(300);
+			robo.desligarLed(3);//
+
+		}	 
+	} else { // outros alinhamentos
+	
+		// prepara o giro de 270
+		motores.parar(500);
+
+		robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
+		delay(450);				
+
+		motores.parar(500);
+
+		robo.acionarMotores(40, 40);
+		delay(300);				
+
+		motores.parar(500);//
+
+	}
+
+	motores.parar(500);
+
+	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
+	delay(450);
+
+	motores.parar(500);
+
+	encostarRobo();
+}
+
+void Sala3::encostarRobo() {
+	
+	// duo-step: ajuda possivel falha no alinhamento
+	robo.acionarMotores(-35, -35);
+	delay(1200);
+
+	robo.acionarMotores(30, 30);
+	delay(250);
+
+	robo.acionarMotores(-30, -30);
+	delay(1200);	
+
+	motores.parar(500);//
+
 }
 
 void Sala3::executar(int args){
@@ -43,13 +117,12 @@ void Sala3::executar(int args){
 		}	
 	}*/
 
-	int j = 0;
+	//int j = 0;
 
 	while(1) {
-		++j;
+		//++j;
 		
 		distanciaAnterior = distanciaAtual;
-		
 
 		filtrarErros();
 		
@@ -61,10 +134,12 @@ void Sala3::executar(int args){
 		robo.acionarMotores(0, 0);
 		delay(300);
 		
-		robo.acionarMotores(25, 28);
+		
+
 		float time = millis(); // tempo atual de execução
+		
 		// procurando bola
-		procurarBola(time);		
+		procurarBola(time); // loop usando recursion		
 		
 	}
 
@@ -112,17 +187,22 @@ void Sala3::filtrarErros() {
 
 void Sala3::procurarBola(int time) {
 
+	robo.acionarMotores(25, 28);
+
+	// para testar pneu parado e outro girando
 	int velEsq = 40;
-	int velDir = 40;
+	int velDir = 40; //
 
-	if((distanciaAtual - distanciaAnterior) > 3.3) {
+	int dif = distanciaAtual - distanciaAnterior;
 
-		loop();
+	
+	// ACHOU A BOLA!
+	if(dif > 3.3 && dif < 30) { // testar if reduzido para a identificacao da bola
 
 		// testando pneu parado e outro girando
-		if(fator_esq == -1) {
+		if(fator_esq == -1) { // lado da rampa direita
 			velEsq = 0;
-		} else {
+		} else { // esquerda
 			velDir = 0;
 		}
 
@@ -244,84 +324,6 @@ void Sala3::pegarBola() {
 		senao achou, voltar para a parede e procurar novamente*/
 		// executar()?
 	}
-}
-
-void Sala3::alinharParede(int qnt){
-
-	// se qnt for 0, entao é a primeira vez que o robo alinha
-	if (qnt == 0) {
-
-		// lado da rampa posicionado a direita em relacao a frente da sala 3
-		if (robo.lerSensorSonarEsq() > robo.lerSensorSonarDir()) {
-			fator_esq = -1;
-			fator_dir = 1;
-		} else {
-			fator_esq = 1;
-			fator_dir = -1;
-		}	
-	} else {
-	
-		// prepara o giro de 270
-		motores.parar(500);
-
-		robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
-		delay(450);				
-
-		motores.parar(500);
-
-		robo.acionarMotores(40, 40);
-		delay(300);				
-
-		motores.parar(500);
-
-	}
-
-	motores.parar(500);
-
-	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
-	delay(450);
-
-	motores.parar(500);
-
-	encostarRobo();
-
-	/*
-	robo.acionarMotores(30, 33);
-	delay(100);*/
-
-	/*robo.acionarMotores(30, 33);
-	delay(800);
-
-	robo.ligarTodosLeds();
-	delay(100);
-	robo.desligarTodosLeds();
-
-	robo.acionarMotores(30, 33);
-	delay(350);
-
-	robo.ligarTodosLeds();
-	while(robo.lerSensorSonarDir() < 20) { robo.acionarMotores(-40, 40); }
-	robo.desligarTodosLeds();
-
-	robo.acionarMotores(-40, 40);
-	delay(450);
-
-	encostarRobo();*/
-}
-
-void Sala3::encostarRobo() {
-	
-	robo.acionarMotores(-35, -35);
-	delay(1200);
-
-	robo.acionarMotores(30, 30);
-	delay(250);
-
-	robo.acionarMotores(-30, -30);
-	delay(1200);	
-
-	motores.parar(500);
-
 }
 
 void Sala3::loop(){ 

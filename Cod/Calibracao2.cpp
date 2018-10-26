@@ -7,7 +7,7 @@ Calibracao2::Calibracao2() {
 	escolhaMenu = ' ';
 	escolhaBranco = ' ';
 	escolhaPreto = ' ';
-	escolhaSala3 = ' ';
+	//escolhaSala3 = ' '; @Depreciating...
 
 }
 
@@ -249,6 +249,7 @@ void Calibracao2::posicionar_sensores() {
 	}
 }
 
+/* @Depreciating...
 void Calibracao2::posicionar_sala3() {
 
 	Serial.println(F("\nINSIRA ALGO NO SERIAL QUANDO O ROBÔ ESTIVER POSICIONADO CORRETAMENTE.\n"));
@@ -273,8 +274,9 @@ void Calibracao2::posicionar_sala3() {
 
 	}
 
-}
+}*/
 
+/* @Depreciating...
 void Calibracao2::calibrarSala3() {
 
 	while (escolhaSala3 != SAIDA) {
@@ -307,7 +309,7 @@ void Calibracao2::calibrarSala3() {
 
 	}
 
-}
+}*/
 
 void Calibracao2::Menu_calibrar() {
 
@@ -331,7 +333,7 @@ void Calibracao2::Menu_calibrar() {
 				Serial.println(F("\n[B] Calibrar BRANCO REFLETÂNCIA"));
 				Serial.println(F("[P] Calibrar PRETO REFLETÂNCIA"));
 				Serial.println(F("[C] Calibrar COR"));
-				Serial.println(F("[T] Sala 3"));
+				// Serial.println(F("[T] Sala 3")); @Depreciating...
 				Serial.println(F("[S] SAIR"));
 
 				esperarParaLer();
@@ -349,8 +351,8 @@ void Calibracao2::Menu_calibrar() {
 					case 'C':
 						calibrarCor();
 						break;
-					case 'T':
-						calibrarSala3();
+					/*case 'T': @Depreciating...
+						calibrarSala3();*/
 				}
 
 			}
@@ -380,10 +382,10 @@ void Calibracao2::Menu_calibrar() {
 			cali.verdeEsq = corEsquerdo.getVerde();
 			cali.verdeDir = corDireito.getVerde();
 
-			// SALA 3
+			/* // SALA 3 @Depreciating...
 
 			cali.sala3_limiteLateral = sala3.getLimiteLateral();
-			cali.sala3_limiteFrontal = sala3.getLimiteFrontal();
+			cali.sala3_limiteFrontal = sala3.getLimiteFrontal();*/
 
 			robo.salvarCalibracao(cali);
 
@@ -421,14 +423,15 @@ void Calibracao2::Menu_calibrar() {
 	  Serial.print(F("		---		"));
 	  Serial.print(refletancia_dir2.getSeparacao());
 
+	  /* @Depreciating...
 	  sala3.setLimiteLateral(cali.sala3_limiteLateral);
 	  sala3.setLimiteFrontal(cali.sala3_limiteFrontal);
-
+	  
 	  Serial.println(F("\n\nSALA3:\n"));
 	  Serial.println(F("(limiteLateral)	---		(limiteFrontal)\n"));
 	  Serial.print(sala3.getLimiteLateral());
 	  Serial.print(F("		---		"));
-	  Serial.print(sala3.getLimiteFrontal());
+	  Serial.print(sala3.getLimiteFrontal());*/
 
 
  }
