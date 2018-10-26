@@ -68,6 +68,7 @@ void Sala3::alinharParede(int qnt){
 		// prepara o giro de 270
 		motores.parar(500);
 
+		// @? testar roda parada e outra girando
 		robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 		delay(450);				
 
@@ -82,6 +83,7 @@ void Sala3::alinharParede(int qnt){
 
 	motores.parar(500);
 
+	// vai um pouco para frente antes de se alinhar
 	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 	delay(450);
 
@@ -103,7 +105,6 @@ void Sala3::encostarRobo() {
 	delay(1200);	
 
 	motores.parar(500);//
-
 }
 
 void Sala3::executar(int args){
@@ -124,29 +125,24 @@ void Sala3::executar(int args){
 		
 		distanciaAnterior = distanciaAtual;
 
-		filtrarErros();
+		filtrarErros(); // for {} ... média dos valores
 		
-		distanciaAtual /= 10;
-		
-		// erro inicio da procura
+		// erro início da procura
 		robo.acionarMotores(25, 28);
 		delay(60);
 		robo.acionarMotores(0, 0);
 		delay(300);
 		
-		
-
 		float time = millis(); // tempo atual de execução
 		
 		// procurando bola
-		procurarBola(time); // loop usando recursion		
+		procurarBola(time); // loop {} usando recursion		
 		
 	}
 
 	motores.parar(1);
 	robo.ligarTodosLeds();
 	while(1);
-
 }
 
 void Sala3::filtrarErros() {
@@ -182,8 +178,9 @@ void Sala3::filtrarErros() {
 	}
 
 	robo.desligarLed(2);
-}
 
+	distanciaAtual /= 10;
+}
 
 void Sala3::procurarBola(int time) {
 
@@ -220,7 +217,7 @@ void Sala3::procurarBola(int time) {
 		robo.ligarLed(1);
 			
 	} 
-	else if((millis() - time) > 3100) {
+	else if((millis() - time) > 3100) { // calibrar esse tempo
 
 		robo.ligarTodosLeds();
 
@@ -230,7 +227,7 @@ void Sala3::procurarBola(int time) {
 
 			robo.desligarTodosLeds();
 			
-				// inverte alinhamento anterior
+			// inverte alinhamento anterior
 			fator_esq *= -1;
 			fator_dir *= -1;
 
@@ -238,15 +235,17 @@ void Sala3::procurarBola(int time) {
 
 			executar(1);
 		} else {
-			while(1);	
+			// ?	
 		}
-			
 	} else {
 		procurarBola(time);
 	}
 }
 
 void Sala3::pegarBola() {
+	
+	robo.desligarTodosLeds();
+
 	// testando tempo max de procura
 	float max_time = millis();
 	while((miniDistanciaAtual > 10) || ((millis() - max_time) > 500)){
@@ -264,65 +263,51 @@ void Sala3::pegarBola() {
 
 			// procurando para esq
 			for (int j = 0; j < 3; j++) {
+				
+				// sentinela esq
+				robo.ligarLed(3);
 				robo.acionarMotores(-30, 0);
-				motores.parar(300); // + 300
+				motores.parar(300); // + 300 * j
+				robo.desligarLed(3);//
 
 				if (robo.lerSensorSonarFrontal() < 3.3) {
-					motores.parar(0);
-					robo.ligarTodosLeds();
-					while(1);
+					loop(); // ...?
 				}
-
-				//voltar
-				if (j == 3) {
-
-				}	
 
 			}
 
 			// procurando para dir
 			for (int j = 0; j < 3; j++) {
+
+				// sentinela dir
+				robo.ligarLed(1);
 				robo.acionarMotores(-30, 0);
-				motores.parar(300); // + 300
+				motores.parar(300); // + 300 * j
+				robo.desligarLed(1);// 
 
 				if (robo.lerSensorSonarFrontal() < 3.3) {
-					motores.parar(0);
-					robo.ligarTodosLeds();
-					while(1);
+					achouBola = true;
+					loop(); // ...?
 				}	
 
 			}
 
-			delay(300); // + 30
+			delay(300); // + 300 * j
 		}
 
-		// se nao achou
-		robo.acionarMotores(-30, -30);
-		delay(1200);
+				
 
-		motores.parar(0);
-		robo.ligarTodosLeds();
-		while(1);				
-
-
-		//delay(50);
-		//robo.desligarLed(2);
-		//motores.parar(100);
-		
 		miniDistanciaAtual  = robo.lerSensorSonarFrontal();
 
 	}
 
-	while(1) {
-		robo.acionarMotores(0, 0);
-	}
-
-	if (miniDistanciaAtual < 10) {
-		viu_bola = true;	
+	if (!achouBola) {
+		// voltar e se alinhar
+		robo.acionarMotores(-30, -30);
+		delay(1200); // ? ++	
 	} else {
-		/* procurar bola por um tempo...
-		senao achou, voltar para a parede e procurar novamente*/
-		// executar()?
+		loop();
+		//salvarBola();
 	}
 }
 
