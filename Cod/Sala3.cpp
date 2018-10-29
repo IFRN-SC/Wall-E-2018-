@@ -98,29 +98,12 @@ void Sala3::encostarRobo() {
 
 void Sala3::executar(int args){
 
-	/*if (args != 0) {
-		// se o lado da rampa for a direita em relacao a frente da sala3
-		if (fator_esq == 1) {
-			distanciaAtual = robo.lerSensorSonarEsq();	
-		} else {
-			distanciaAtual = robo.lerSensorSonarDir();
-		}	
-	}*/
+	float tInicial = millis();
+	float tAtual = millis();
 
-	//int j = 0;
-
-	while(1) {
-		//++j;
-
-		filtrarErros(); // for {} ... média dos valores
-		
-		float time = millis(); // tempo atual de execução
-		
-		// procurando bola
-		procurarBola(time); // loop {} usando recursion		
-		
-		//if (salvouVitima) break;
-
+	while ((tAtual - tInicial) < 3100) {
+		robo.acionarMotores(28, 30);
+		tAtual = millis();
 	}
 
 	loop();
@@ -128,6 +111,7 @@ void Sala3::executar(int args){
 }
 
 void Sala3::filtrarErros() {
+
 
 	// evita erros
 	ledSinal(2);
