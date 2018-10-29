@@ -18,6 +18,8 @@ class Sala3 {
 		int fator_esq;
 		int fator_dir;
 
+		int time_parede;
+
 		bool viu_bola;
 
 		Motores motores;
@@ -30,6 +32,7 @@ class Sala3 {
 		void encostarRobo();
 
 		void filtrarErros();
+		void ledSinal(int i);
 
 		void loop();
 

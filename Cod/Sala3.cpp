@@ -1,24 +1,16 @@
 #include "Sala3.h"
 
 Sala3::Sala3() {
-	/* @Depreciating...
-	limite_lateral = 0;
-	limite_frontal = 0;*/
 	fator_esq = 1;
 	fator_dir = 1;
 
 	distanciaAtual = 170;
 	miniDistanciaAtual = 170;
 
+	time_parede = 3100;
+
 	viu_bola = false;
 }
-
-/* @Depreciating...
-void Sala3::setLimiteLateral(float valorLido) { limite_lateral = valorLido; }
-void Sala3::setLimiteFrontal(float valorLido) { limite_frontal = valorLido; }
-
-float Sala3::getLimiteLateral() { return limite_lateral; }
-float Sala3::getLimiteFrontal() { return limite_frontal; }*/
 
 void Sala3::portal() {
 
@@ -47,22 +39,21 @@ void Sala3::alinharParede(int qnt){
 			fator_esq = -1;
 			fator_dir = 1;
 
-			// sinaliza a escolha
-			robo.ligarLed(1);
-			delay(300);
-			robo.desligarLed(1);//
+			// sinaliza o lado
+			ledSinal(1);
 		
 		} else { // lado da rampa: esquerda
 			
 			fator_esq = 1;
 			fator_dir = -1;
 
-			// sinaliza a escolha
-			robo.ligarLed(3);
-			delay(300);
-			robo.desligarLed(3);//
+			// sinaliza o lado
+			ledSinal(3);
 
-		}	 
+		}
+
+		motores.parar(500);
+		
 	} else { // outros alinhamentos
 	
 		// prepara o giro de 270
@@ -81,9 +72,7 @@ void Sala3::alinharParede(int qnt){
 
 	}
 
-	motores.parar(500);
-
-	// vai um pouco para frente antes de se alinhar
+	// gira pro alinhamento
 	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 	delay(450);
 
@@ -122,102 +111,150 @@ void Sala3::executar(int args){
 
 	while(1) {
 		//++j;
-		
-		distanciaAnterior = distanciaAtual;
 
 		filtrarErros(); // for {} ... média dos valores
-		
-		// erro início da procura
-		robo.acionarMotores(25, 28);
-		delay(60);
-		robo.acionarMotores(0, 0);
-		delay(300);
 		
 		float time = millis(); // tempo atual de execução
 		
 		// procurando bola
 		procurarBola(time); // loop {} usando recursion		
 		
+		//if (salvouVitima) break;
+
 	}
 
-	motores.parar(1);
-	robo.ligarTodosLeds();
-	while(1);
+	loop();
+
 }
 
 void Sala3::filtrarErros() {
+
+	// evita erros
+	ledSinal(2);
+	robo.acionarMotores(30, 30);
+	delay(30);//
 
 	int contErros = 0;
 
 	float leitura = 0;
 
+	// sinalizacao do filtro
+	robo.ligarLed(2);
+	motores.parar(150);
+	robo.ligarLed(1);
+	robo.desligarLed(2);
+	delay(30);
+	robo.desligarLed(1);//
+
 	for(int i = 0; i < 10; i++) {
 
-		if(contErros > 5) break;
+		if(contErros > 5) {
+			robo.desligarTodosLeds();
+			robo.acionarMotores(30, 30);
+			delay(20);
+			robo.acionarMotores(0, 0);
+			--contErros;
+		}
 
-		// se o lado da rampa a direita em relacao a frente da sala3 for (int i = 0; i < count; ++i)
-		{
-			/* code */
-		} 
+		// se o lado da rampa a direita em relacao a frente da sala3 
 		if (fator_esq == 1) {
+			ledSinal(3);
 			leitura = robo.lerSensorSonarEsq();	
 		} else {
+			ledSinal(1);
 			leitura = robo.lerSensorSonarDir();
 		}	
 		
-		if(leitura > 90) {
-			robo.ligarLed(2);
-			delay(200);
-			robo.desligarLed(2);
+		if(leitura > 70) {
+			ledSinal(2);
 			i--;
 			contErros++;
 		} else {
+			ledSinal(1);
 			distanciaAtual += leitura;
 		}
 
 	}
 
-	robo.desligarLed(2);
+	robo.desligarTodosLeds();
 
 	distanciaAtual /= 10;
 }
 
 void Sala3::procurarBola(int time) {
 
+	robo.desligarTodosLeds();
+
 	robo.acionarMotores(25, 28);
 
 	// para testar pneu parado e outro girando
 	int velEsq = 40;
-	int velDir = 40; //
+	int velDir = 40;//
 
-	int dif = distanciaAtual - distanciaAnterior;
+	distanciaAnterior = distanciaAtual;
 
+	// se o lado da rampa a direita em relacao a frente da sala3 
+	if (fator_esq == 1) {
+		robo.ligarLed(3);
+		distanciaAtual = robo.lerSensorSonarEsq();
+	} else {
+		robo.ligarLed(1);
+		distanciaAtual = robo.lerSensorSonarDir();
+	}
+
+	float dif = distanciaAtual - distanciaAnterior;
 	
 	// ACHOU A BOLA!
-	if(dif > 3.3 && dif < 30) { // testar if reduzido para a identificacao da bola
-
-		// testando pneu parado e outro girando
-		if(fator_esq == -1) { // lado da rampa direita
-			velEsq = 0;
-		} else { // esquerda
-			velDir = 0;
-		}
-
-		// !! fatores invertidos	
-		robo.acionarMotores(velEsq * fator_dir, velDir * fator_esq);
-		delay(500);
-
-		distanciaAnterior = miniDistanciaAtual;
-
-		miniDistanciaAtual = robo.lerSensorSonarFrontal();
-
-		pegarBola();
+	if(dif > 3.3 && dif < 10) { // testar if reduzido para a identificacao da bola	
 
 		robo.desligarTodosLeds();
-		robo.ligarLed(1);
+		motores.parar(200);
+
+		// se o lado da rampa a direita em relacao a frente da sala3 
+		
+		distanciaAnterior = distanciaAtual;
+
+		if (fator_esq == 1) {
+			robo.ligarLed(3);
+			miniDistanciaAtual = robo.lerSensorSonarEsq();
+		} else {
+			robo.ligarLed(1);
+			miniDistanciaAtual = robo.lerSensorSonarDir();
+		}
+
+		robo.acionarMotores(-30, -30);
+		delay(20);
+		time_parede += 100;
+
+		dif = miniDistanciaAtual - distanciaAnterior;
+
+		if (dif > 3.3 && dif < 10) {
+			// testando pneu parado e outro girando
+			if(fator_esq == -1) { // lado da rampa direita
+				velEsq = 0;
+			} else { // esquerda
+				velDir = 0;
+			}
+
+			// !! fatores invertidos	
+			robo.acionarMotores(velEsq * fator_dir, velDir * fator_esq);
+			delay(500);
+
+			distanciaAnterior = miniDistanciaAtual;
+
+			miniDistanciaAtual = robo.lerSensorSonarFrontal();
+
+			pegarBola();
+
+			robo.desligarTodosLeds();
+			robo.ligarLed(1);	
+		} else {
+			ledSinal(2);
+			procurarBola(time);
+		}
 			
 	} 
-	else if((millis() - time) > 3100) { // calibrar esse tempo
+	else if((millis() - time) > time_parede) { // calibrar esse tempo
 
 		robo.ligarTodosLeds();
 
@@ -234,11 +271,9 @@ void Sala3::procurarBola(int time) {
 			alinharParede(1);
 
 			executar(1);
-		} else {
-			// ?	
-		}
+		} 
 	} else {
-		procurarBola(time);
+		procurarBola(time); // foi mial recursion
 	}
 }
 
@@ -286,7 +321,7 @@ void Sala3::pegarBola() {
 				robo.desligarLed(1);// 
 
 				if (robo.lerSensorSonarFrontal() < 3.3) {
-					achouBola = true;
+					viu_bola = true;
 					loop(); // ...?
 				}	
 
@@ -301,7 +336,7 @@ void Sala3::pegarBola() {
 
 	}
 
-	if (!achouBola) {
+	if (!viu_bola) {
 		// voltar e se alinhar
 		robo.acionarMotores(-30, -30);
 		delay(1200); // ? ++	
@@ -309,6 +344,12 @@ void Sala3::pegarBola() {
 		loop();
 		//salvarBola();
 	}
+}
+
+void Sala3::ledSinal(int i) {
+	robo.ligarLed(i);
+	delay(200);
+	robo.desligarLed(i);
 }
 
 void Sala3::loop(){ 
