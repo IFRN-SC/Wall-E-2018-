@@ -203,7 +203,7 @@ void Estrategia::passeObstaculo(){
 }
 
 void Estrategia::miniSeguirLinha(){
-	while(!sensor.preto_preto_preto_preto()){
+	while(sensor.viuRampa()){
 		if (sensor.branco_branco_branco_branco()) {
 			motores.emFrenteRampa();
 		}
@@ -226,8 +226,9 @@ void Estrategia::miniSeguirLinha(){
 		}
 	}
 	robo.desligarLed(2);
-	motores.emFrenteRampa();
-	delay(100);
+	robo.ligarLed(1);
+	motores.parar(400);
+	robo.desligarLed(1);
 }
 
 void Estrategia::resgate(){

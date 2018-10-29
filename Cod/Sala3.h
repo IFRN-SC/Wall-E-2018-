@@ -3,26 +3,29 @@
 
 #include <robo_hardware2.h>
 #include "Motores.h"
+#include "Garra.h"
 
 class Sala3 {
 	private:
-		/* @Depreciating...
-		float limite_lateral;
-		float limite_frontal;*/
-
-		float distanciaAnterior;
-		float distanciaAtual;
-		float miniDistanciaAtual;
 
 		// Dependendo da posicao da rampa
 		int fator_esq;
 		int fator_dir;
 
-		int time_parede;
+		bool ladoA;
+		bool ladoB;
+		bool ladoC;
+
+		// area de resgate
+		int qntVerificoes;
+
+		int qntExecucoes;
+		int tParede;
 
 		bool viu_bola;
 
 		Motores motores;
+		Garra garra;
 
 		void alinharParede(int qnt);
 
@@ -43,13 +46,6 @@ class Sala3 {
 		void portal();
 
 		void executar(int args);
-
-		/* @Depreciating...
-		void setLimiteLateral(float valorLido);
-		void setLimiteFrontal(float valorLido);
-		
-		float getLimiteLateral();
-		float getLimiteFrontal();*/
 
 };
 
