@@ -425,7 +425,7 @@ void Estrategia::executar(){
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
-		sala3.executar();
+		sala3.portal();
 	}else if(sensor.viuObstaculo()){
 		passeObstaculo();
 	}else if(sensor.super_branco()){
