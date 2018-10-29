@@ -1,4 +1,4 @@
-#ifndef SALA3_H
+#ifndef SALA3_H	
 #define SALA3_H
 
 #include <robo_hardware2.h>
@@ -6,29 +6,50 @@
 
 class Sala3 {
 	private:
+		/* @Depreciating...
 		float limite_lateral;
-		float limite_frontal;
+		float limite_frontal;*/
 
-		char ladoRampa;
+		float distanciaAnterior;
+		float distanciaAtual;
+		float miniDistanciaAtual;
+
+		// Dependendo da posicao da rampa
+		int fator_esq;
+		int fator_dir;
+
+		int time_parede;
+
+		bool viu_bola;
 
 		Motores motores;
 
-		void alinharParede();
-		void alinharParede2();
+		void alinharParede(int qnt);
+
+		void procurarBola(int time);
+		void pegarBola();
 
 		void encostarRobo();
+
+		void filtrarErros();
+		void ledSinal(int i);
+
+		void loop();
 
 	public:
 
 		Sala3();
 
-		void executar();
+		void portal();
 
+		void executar(int args);
+
+		/* @Depreciating...
 		void setLimiteLateral(float valorLido);
 		void setLimiteFrontal(float valorLido);
 		
 		float getLimiteLateral();
-		float getLimiteFrontal();
+		float getLimiteFrontal();*/
 
 };
 
