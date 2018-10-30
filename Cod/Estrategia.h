@@ -13,7 +13,7 @@ class Estrategia {
 		Estrategia();
 		void executar();
 		void calibrar();
-		
+		void verificar();
 		void configurar();
 	private:
 		// bool realizarCali;
@@ -47,6 +47,7 @@ class Estrategia {
     	void passeVerdeOuRedutor();
     	void piscarLeds(int vezes);
     	
+
     	void alinhaEsquerda();
     	void alinhaDireita();
     	void vireDireita(bool temVerde);
