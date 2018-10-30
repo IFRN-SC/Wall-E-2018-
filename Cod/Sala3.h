@@ -29,9 +29,13 @@ class Sala3 {
 
 		void alinharParede(int qnt);
 
-		void procurarBola(int time);
-		void pegarBola();
+		void acharArea(int lado);
 
+		void sentinela();
+
+		void procurarBola(int time);
+		void salvarBola();
+		//void pegarBola();
 		void encostarRobo();
 
 		void filtrarErros();

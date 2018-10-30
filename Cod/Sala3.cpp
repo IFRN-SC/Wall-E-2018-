@@ -11,7 +11,7 @@ Sala3::Sala3() {
 	qntVerificoes = 0;
 	qntExecucoes = 0;
 
-	tParede = 3700;
+	tParede = 4200;
 
 	viu_bola = false;
 }
@@ -24,8 +24,16 @@ void Sala3::portal() {
 	
 	motores.parar(300);
 
-	acharArea(1);
 	alinharParede(0);
+	
+	// saindo da parede
+	robo.acionarMotores(30, 30);
+	delay(30);
+	robo.acionarMotores(0, 0);//
+
+	acharArea(1);
+	acharArea(2);
+
 	executar(0);
 }
 
@@ -84,13 +92,17 @@ void Sala3::alinharParede(int qnt){
 
 	}
 
+	//acharArea(2);
+
 	// gira pro alinhamento
 	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
 	delay(450);
 
 	motores.parar(500);
-
 	encostarRobo();
+
+	//acharArea(1);
+	
 }
 
 void Sala3::encostarRobo() {
@@ -108,24 +120,29 @@ void Sala3::encostarRobo() {
 	motores.parar(500);//
 }
 
-void Sala3::acharArea(int canto) {
+void Sala3::acharArea(int lado) {
 
 	++qntVerificoes;
+
+	robo.ligarTodosLeds();
+	delay(1000);
+	robo.desligarTodosLeds();
 	
 	if (!ladoA && !ladoB && !ladoC) {
 		
 		float valorLido = 0;
 
 		for (int i = 0; i < 2; i++) {
-			if (canto == 1) { // ladoA
-				valorLido += robo.lerSensorSonarFrontal();
+			if (lado == 1) { // ladoA
+				valorLido += robo.lerSensorSonarEsq();
 			} else { // ladoB
-				valorLido += robo.lerSensorSonarDir();
+				valorLido += robo.lerSensorSonarFrontal();
 			}
+			delay(300);
 		}
 
 		if ((valorLido/2) >= 70) { // entao achou a area
-			if (canto == 1) { //ladoA
+			if (lado == 1) { //ladoA
 				ledSinal(1);
 				ladoA = true;
 			} else { // ladoB
@@ -133,13 +150,16 @@ void Sala3::acharArea(int canto) {
 				ladoB = true;
 			}
 		} else {
-			if (qntVerificoes == 2) {
+			if (qntVerificoes == 1) { // entao ladoC
 				ledSinal(3);
 				ladoC = true;
 			}
 		}
 
 	}
+
+	delay(1000);
+	robo.desligarTodosLeds();
 }
 
 void Sala3::executar(int args){
@@ -149,41 +169,149 @@ void Sala3::executar(int args){
 	float tInicial = millis();
 	float tAtual = millis();
 
-	/*garra.abrir();
-	garra.baixar();*/
+	garra.abrir();
+	garra.baixar();
+
+	if (ladoB) {
+		tParede -= 500;
+	}
 
 	while ((tAtual - tInicial) < tParede) {
 		robo.acionarMotores(20, 24);
 		tAtual = millis();
 	}
 
-	/*garra.fechar();
-	garra.abrir();
-	garra.subir();*/
+	garra.fechar();
 
 	// ir um pouco para tras e verificar a bola na garra
 	robo.ligarLed(2);
 	motores.parar(400);
 	robo.acionarMotores(-25, -27);
-	delay(200);
+	delay(800);
 	robo.desligarLed(2);//
 
-	if (robo.lerSensorSonarFrontal() < 3.3) {
-		ledSinal(1);
+	motores.parar(300);
+
+	garra.abrir();
+	garra.subir();
+
+	if (robo.lerSensorSonarFrontal() <= 10) {
 		viu_bola = true;
-	} else {
-		ledSinal(2);
 	}
 
 	if (viu_bola) {
-		loop();
-		//area_resgate();
+		salvarBola();
 	} else {
+
+		sentinela();
+
+		robo.acionarMotores(28, 30);
+		delay(200);
+
 		alinharParede(qntExecucoes);
 		executar(1);
 	}
 
 }
+
+void Sala3::salvarBola() {
+
+	garra.baixar();
+	garra.fechar();
+	garra.subir();
+
+	fator_esq *= -1;
+	fator_dir *= -1;
+
+	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
+	delay(400);
+
+	float tInicial = millis();
+	float tAtual = millis();
+
+	while ((tAtual - tInicial) < 600) {
+		robo.acionarMotores(20, 24);
+		tAtual = millis();
+	}
+
+	motores.parar(300);
+
+	if (ladoA) {
+		robo.acionarMotores(40 , -40);
+		delay(450);
+	} /*else if (ladoB) {
+		robo.acionarMotores(-40, 40);
+		delay(450);
+	} */else {
+		robo.acionarMotores(-40, 40);
+		delay(450);
+	}
+
+	encostarRobo();
+
+	robo.acionarMotores(28, 30);
+	delay(400);
+
+	motores.parar(300);
+
+	robo.acionarMotores(40 * fator_esq, 40 * fator_dir);
+	delay(800);
+
+	motores.parar(300);
+
+	garra.baixar();
+	garra.abrir();
+
+	loop(); //  :)))))))))))))))))))))))))
+
+}
+
+void Sala3::sentinela() {
+	// procurar duas vezes e voltar
+	for (int i = 0; i < 2; i++) {
+
+		// procurando para esq
+		for (int j = 0; j < 3; j++) {
+			
+			// sentinela esq
+			robo.ligarLed(3);
+			robo.acionarMotores(-30, 30);
+			delay(200);
+			motores.parar(300);
+			robo.desligarLed(3);//
+
+			if (robo.lerSensorSonarFrontal() < 3.3) {
+				viu_bola = true;
+				ledSinal(3);
+			}
+
+		}
+
+		// procurando para dir
+		for (int j = 0; j < 3; j++) {
+
+			// sentinela dir
+			robo.ligarLed(1);
+			robo.acionarMotores(30, -30);
+			delay(200);
+			motores.parar(400);
+			robo.desligarLed(1);// 
+
+			if (robo.lerSensorSonarFrontal() < 3.3) {
+				viu_bola = true;
+				ledSinal(1);
+			}	
+
+		}
+
+		delay(300);
+	}
+
+	if (viu_bola) {
+		salvarBola();
+	}
+}
+
 /*
 void Sala3::filtrarErros() {
 
