@@ -179,10 +179,10 @@ void Calibracao2::calibrarBranco(){
     escolhaBranco = Serial.read();
 
     if (escolhaBranco == 'C') {
-	  refletancia_dir.setBrancoMini(robo.lerSensorLinhaDir());
-	  refletancia_dir2.setBrancoMini(robo.lerSensorLinhaMaisDir());
-	  refletancia_esq.setBrancoMini(robo.lerSensorLinhaEsq());
-	  refletancia_esq2.setBrancoMini(robo.lerSensorLinhaMaisEsq());
+	  refletancia_dir.setBrancoMini(robo.lerSensorLinhaDirSemRuido());
+	  refletancia_dir2.setBrancoMini(robo.lerSensorLinhaMaisDirSemRuido());
+	  refletancia_esq.setBrancoMini(robo.lerSensorLinhaEsqSemRuido());
+	  refletancia_esq2.setBrancoMini(robo.lerSensorLinhaMaisEsqSemRuido());
 
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));
@@ -229,10 +229,10 @@ void Calibracao2::calibrarPreto(){
 		escolhaPreto = Serial.read();
 
     if (escolhaPreto == 'C') {
-	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDir());
-	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaMaisDir());
-	  refletancia_esq.setPretoMax(robo.lerSensorLinhaEsq());
-	  refletancia_esq2.setPretoMax(robo.lerSensorLinhaMaisEsq());
+	  refletancia_dir.setPretoMax(robo.lerSensorLinhaDirSemRuido());
+	  refletancia_dir2.setPretoMax(robo.lerSensorLinhaMaisDirSemRuido());
+	  refletancia_esq.setPretoMax(robo.lerSensorLinhaEsqSemRuido());
+	  refletancia_esq2.setPretoMax(robo.lerSensorLinhaMaisEsqSemRuido());
 	  
 	  Serial.println("  ");
       Serial.println(F("Valores lidos: "));
@@ -271,13 +271,13 @@ void Calibracao2::esperarPosicionamento() {
 	Serial.println(F("INSIRA ALGO NO SERIAL QUANDO TODOS OS SENSORES ESTIVEREM POSICIONADOS CORRETAMENTE.\n"));
 	Serial.println(F("(maisEsq)	---		(Esq)		---		(Dir)		---		(maisDir)\n"));
 	while(1) {
-		Serial.print(robo.lerSensorLinhaMaisEsq());
+		Serial.print(robo.lerSensorLinhaMaisEsqSemRuido());
 		Serial.print(F("		---		"));
-		Serial.print(robo.lerSensorLinhaEsq());
+		Serial.print(robo.lerSensorLinhaEsqSemRuido());
 		Serial.print(F("		---		"));
-		Serial.print(robo.lerSensorLinhaDir());
+		Serial.print(robo.lerSensorLinhaDirSemRuido());
 		Serial.print(F("		---		"));
-		Serial.print(robo.lerSensorLinhaMaisDir());
+		Serial.print(robo.lerSensorLinhaMaisDirSemRuido());
 		Serial.println();
 		delay(1000);
 
@@ -347,11 +347,18 @@ void Calibracao2::Menu_calibrar() {
 	  refletancia_esq.calculeMedia();
 	  refletancia_dir.calculeMedia();
 	  refletancia_dir2.calculeMedia();
-	  
+	
 	  cali.refletanciaDir = refletancia_dir.getSeparacao();
 	  cali.refletanciaMaisDir = refletancia_dir2.getSeparacao();
 	  cali.refletanciaEsq = refletancia_esq.getSeparacao();
 	  cali.refletanciaMaisEsq = refletancia_esq2.getSeparacao();
+	
+	  /*
+	  cali.refletanciaDir = 4.0;
+	  cali.refletanciaMaisDir = 5.0;
+	  cali.refletanciaEsq = 4.0;
+	  cali.refletanciaMaisEsq = 5.0;
+	  */
 	
 	  cali.brancoEsq = corEsquerdo.getBranco();
 	  cali.brancoDir = corDireito.getBranco();

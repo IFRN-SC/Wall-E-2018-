@@ -31,5 +31,5 @@ float Refletancia::getSeparacao() {
 }
 
 void Refletancia::calculeMedia(){
-	media = calcule.media(maximoPreto,minimoBranco, 0.3);
+	media = calcule.media(maximoPreto,minimoBranco, 0.5);
 }

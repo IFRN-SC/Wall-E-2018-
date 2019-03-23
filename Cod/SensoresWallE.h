@@ -43,14 +43,14 @@ class Sensores: public Calibracao2 {
 	 bool preto_preto_branco_preto();
 	 bool preto_branco_preto_preto();
 	
-	 bool maisEsq_Branco(); // Mais esquerdo branco
-	 bool maisEsq_Preto(); // Mais esquerdo preto
-	 bool Esq_Branco();      // Esquerdo branco
-	 bool Esq_Preto();       // Esquerdo preto
-	 bool Dir_Branco();       // Dreito branco
-	 bool Dir_Preto();      // Direito preto
-	 bool maisDir_Branco(); // Mais direito branco
-	 bool maisDir_Preto(); // Mais direito preto
+	 bool maisEsq_Branco(bool comErro=false); // Mais esquerdo branco
+	 bool maisEsq_Preto(bool comErro=false); // Mais esquerdo preto
+	 bool Esq_Branco(bool comErro=false);      // Esquerdo branco
+	 bool Esq_Preto(bool comErro=false);       // Esquerdo preto
+	 bool Dir_Branco(bool comErro=false);       // Dreito branco
+	 bool Dir_Preto(bool comErro=false);      // Direito preto
+	 bool maisDir_Branco(bool comErro=false); // Mais direito branco
+	 bool maisDir_Preto(bool comErro=false); // Mais direito preto
 
 	 bool maisEsq_super();
 	 bool esq_super();

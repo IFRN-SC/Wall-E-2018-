@@ -7,8 +7,7 @@ float valorSensorEsq;
 void setup(){
   Serial.begin(9600);
   robo.configurar(false);
-  robo.habilitaTCS34();
-  
+  robo.habilitaTCS34(); 
 }
 
 void loop(){
@@ -22,7 +21,7 @@ void loop(){
       testeMotores();
       break;
     case 'R':
-        testeRefletancia();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+      testeRefletancia(false);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
       break;
     case 'S':
       testeSonar();
@@ -72,19 +71,33 @@ void testeMotores(){
   }
 }
 
-void testeRefletancia(){
-  while(Serial.read() != 'X'){
-    Serial.println("+direito     direito     esquerdo     +esquerdo ");
-    Serial.print(robo.lerSensorLinhaMaisDir()); //Imprime o valor do sensor pela porta serial
-    Serial.print("       ");
-    Serial.print(robo.lerSensorLinhaDir());
-    Serial.print("       ");
-    Serial.print(robo.lerSensorLinhaEsq());
-    Serial.print("       ");
-    Serial.println(robo.lerSensorLinhaMaisEsq());
-    
-    delay(1000);
+void testeRefletancia(bool comRuido){
+  if(comRuido){
+    while(Serial.read() != 'X'){
+      Serial.println("+direito     direito     esquerdo     +esquerdo ");
+      Serial.print(robo.lerSensorLinhaMaisDir()); //Imprime o valor do sensor pela porta serial
+      Serial.print("       ");
+      Serial.print(robo.lerSensorLinhaDir());
+      Serial.print("       ");
+      Serial.print(robo.lerSensorLinhaEsq());
+      Serial.print("       ");
+      Serial.println(robo.lerSensorLinhaMaisEsq()); 
+      delay(1000);
+    }
+  }else{
+    while(Serial.read() != 'X'){
+      Serial.println("+direito     direito     esquerdo     +esquerdo ");
+      Serial.print(robo.lerSensorLinhaMaisDirSemRuido()); //Imprime o valor do sensor pela porta serial
+      Serial.print("       ");
+      Serial.print(robo.lerSensorLinhaDirSemRuido());
+      Serial.print("       ");
+      Serial.print(robo.lerSensorLinhaEsqSemRuido());
+      Serial.print("       ");
+      Serial.println(robo.lerSensorLinhaMaisEsqSemRuido()); 
+      delay(1000);
+    }
   }
+  
 }
 void testeSonar(){
  

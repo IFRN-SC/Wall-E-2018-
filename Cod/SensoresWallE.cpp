@@ -6,75 +6,67 @@ Sensores::Sensores(){}
 //  cali.Menu_calibrar();
 //}
 
-bool Sensores::maisEsq_Branco(){
-  if (robo.lerSensorLinhaMaisEsq() > refletancia_esq2.getSeparacao()){
-    return true;  
-  }
-  else {
-    return false;
-  }
-}
-
-bool Sensores::maisEsq_Preto(){
-  if (robo.lerSensorLinhaMaisEsq() < refletancia_esq2.getSeparacao()) {
-    return true;
-  }
-  else {
-    return false;
+bool Sensores::maisEsq_Branco(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaMaisEsq() > refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaMaisEsqSemRuido() > refletancia_esq2.getSeparacao();
   }
 }
 
-bool Sensores::Esq_Branco(){
-  if (robo.lerSensorLinhaEsq() > refletancia_esq.getSeparacao()) {
-    return true;  
-  }
-  else {
-    return false;
-  }
-}
-
-bool Sensores::Esq_Preto(){
-  if (robo.lerSensorLinhaEsq() < refletancia_esq.getSeparacao()) {
-    return true;  
-  }
-  else {
-    return false;
+bool Sensores::maisEsq_Preto(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaMaisEsq() < refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaMaisEsqSemRuido() < refletancia_esq2.getSeparacao();
   }
 }
 
-bool Sensores::Dir_Branco(){
-  if(robo.lerSensorLinhaDir() > refletancia_dir.getSeparacao()){
-    return true;
+bool Sensores::Esq_Branco(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaEsq() > refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaEsqSemRuido() > refletancia_esq2.getSeparacao();
   }
-  else {
-    return false;
-  } 
 }
 
-bool Sensores::Dir_Preto(){
-  if(robo.lerSensorLinhaDir() < refletancia_dir.getSeparacao()){
-    return true;
+bool Sensores::Esq_Preto(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaEsq() < refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaEsqSemRuido() < refletancia_esq2.getSeparacao();
   }
-  else {
-    return false;
-  }   
 }
 
-bool Sensores::maisDir_Branco(){
-  if(robo.lerSensorLinhaMaisDir() > refletancia_dir2.getSeparacao()){
-    return true;
+bool Sensores::Dir_Branco(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaDir() > refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaDirSemRuido() > refletancia_esq2.getSeparacao();
   }
-  else {
-    return false;
+}
+
+bool Sensores::Dir_Preto(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaDir() < refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaDirSemRuido() < refletancia_esq2.getSeparacao();
+  }  
+}
+
+bool Sensores::maisDir_Branco(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaMaisDir() > refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaMaisDirSemRuido() > refletancia_esq2.getSeparacao();
   } 
 }   
 
-bool Sensores::maisDir_Preto(){
-  if(robo.lerSensorLinhaMaisDir() < refletancia_dir2.getSeparacao()){
-    return true;
-  }
-  else {
-    return false;
+bool Sensores::maisDir_Preto(bool comErro=false){
+  if(comErro){
+    return robo.lerSensorLinhaMaisDir() < refletancia_esq2.getSeparacao();
+  }else{
+    return robo.lerSensorLinhaMaisDirSemRuido() < refletancia_esq2.getSeparacao();
   }
 }
 

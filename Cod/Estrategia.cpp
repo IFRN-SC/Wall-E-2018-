@@ -365,16 +365,16 @@ void Estrategia::sigaLinha(){
 	else if(sensor.preto_preto_branco_branco() ||
 		sensor.preto_preto_preto_branco()) {
 		
-		alinhaEsquerda();
+		//alinhaEsquerda();
 		motores.parar(200);
-		vireEsquerda(sensor.corEsq_verde()); 
+		vireEsquerda(/*sensor.corEsq_verde()*/); 
 	}
 	else if(sensor.branco_branco_preto_preto() ||
 		sensor.branco_preto_preto_preto()) {
 		
-		alinhaDireita();
+		//alinhaDireita();
 		motores.parar(200);
-		vireDireita(sensor.corDir_verde());
+		vireDireita(/*sensor.corDir_verde()*/);
 	} 
 	// *********************************************
 
@@ -433,7 +433,6 @@ void Estrategia::pareInfinito(int led=3){
 	}
 }
 void Estrategia::executar(){ 
-	//robo.acionarServoGarra2(190);
 	if(sensor.viuRampa()){
 		robo.ligarLed(2);
 		miniSeguirLinha();
