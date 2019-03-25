@@ -366,24 +366,26 @@ void Estrategia::sigaLinha(){
 		sensor.preto_preto_preto_branco()) {
 		
 		//alinhaEsquerda();
-		motores.parar(200);
+		//motores.parar(200);
 		vireEsquerda(/*sensor.corEsq_verde()*/); 
 	}
 	else if(sensor.branco_branco_preto_preto() ||
 		sensor.branco_preto_preto_preto()) {
 		
 		//alinhaDireita();
-		motores.parar(200);
+		//motores.parar(200);
 		vireDireita(/*sensor.corDir_verde()*/);
 	} 
 	// *********************************************
 
 	// correções
 	else if (sensor.branco_preto_branco_branco()){
-		motores.esquerda();
+		//motores.esquerda();
+		robo.acionarMotores(20, 50);
 	}
 	else if (sensor.branco_branco_preto_branco()){
-		motores.direita();
+		//motores.direita();
+		robo.acionarMotores(50, 20);
 	}
 	// **********************************************
 
