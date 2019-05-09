@@ -17,7 +17,7 @@ class Estrategia {
 		void configurar();
 	private:
 		// bool realizarCali;
-		
+
 		#define FIM_DE_CURSO 12
 
 		Botao fimDeCurso;
@@ -34,10 +34,11 @@ class Estrategia {
 
 		int contAlternadas = 0;
 		int indicador;
-		bool desalinhado(); 
+		bool desalinhado();
 		bool viuObstaculo();
-		
-		//void para(int tempo); !! 
+		bool temPretoDireita();
+		bool temPretoEsquerda();
+		//void para(int tempo); !!
 		void passeVerde();
 		void alinharEncruzilhada();
 		void alinharObstaculo();
@@ -46,7 +47,7 @@ class Estrategia {
 		void passeObstaculo();
     	void passeVerdeOuRedutor();
     	void piscarLeds(int vezes);
-    	
+
 
     	void alinhaEsquerda();
     	void alinhaDireita();
@@ -57,7 +58,7 @@ class Estrategia {
     	void procuraBola();
 
     	void boySala3();
-    	void resgate();	
+    	void resgate();
 
     	void sigaLinha();
 		void miniSeguirLinha();
