@@ -18,9 +18,6 @@ class Estrategia {
 	private:
 		// bool realizarCali;
 
-		#define FIM_DE_CURSO 12
-
-		Botao fimDeCurso;
 		Motores motores;
 		Sensores sensor;
 

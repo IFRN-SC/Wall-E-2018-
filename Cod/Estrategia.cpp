@@ -1,5 +1,5 @@
 #include "Estrategia.h"
-Estrategia::Estrategia():fimDeCurso(FIM_DE_CURSO){
+Estrategia::Estrategia(){
 
 }
 
