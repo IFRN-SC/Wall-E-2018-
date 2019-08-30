@@ -29,7 +29,8 @@ void Estrategia::verificar(){
 			robo.acionarMotores(50, 57);
 		}
 		robo.desligarLed(1);
-		sala3.portal();
+		//sala3.portal();
+		this->estou_sala3 = true;
 	}
 }
 

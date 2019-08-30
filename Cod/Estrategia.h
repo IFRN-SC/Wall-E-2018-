@@ -14,6 +14,9 @@ class Estrategia {
 		void executar();
 		void calibrar();
 		void verificar();
+		
+		bool isSala3() { return this->estou_sala3; }
+
 		void configurar();
 	private:
 		// bool realizarCali;
@@ -28,9 +31,10 @@ class Estrategia {
 
 		/****/
 
-
 		int contAlternadas = 0;
 		int indicador;
+		bool estou_sala3 = false;
+		
 		bool desalinhado();
 		bool viuObstaculo();
 		bool temPretoDireita();
