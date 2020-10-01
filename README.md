@@ -36,27 +36,27 @@ Com os ensinamentos dos mestres [Lennedy Campos](https://github.com/lennedy) e [
 
 
 <div style="display: flex; margin-bottom: 40px">
-    <img src="https://user-images.githubusercontent.com/31678236/94839273-218db680-03ed-11eb-9c15-3a52a866baa6.png" width="33%">
-    <img src="https://user-images.githubusercontent.com/31678236/94826043-49751e00-03dd-11eb-931a-83c8e2fb9699.png" width="35%">
-    <img src="https://user-images.githubusercontent.com/31678236/94839477-6f0a2380-03ed-11eb-8fcc-06eed482c643.png" width="33%"> 
+    <img src="https://user-images.githubusercontent.com/31678236/94839273-218db680-03ed-11eb-9c15-3a52a866baa6.png" width="33%" height="300"></img>
+    <img src="https://user-images.githubusercontent.com/31678236/94826043-49751e00-03dd-11eb-931a-83c8e2fb9699.png" width="35%" height="300"></img>
+    <img src="https://user-images.githubusercontent.com/31678236/94839477-6f0a2380-03ed-11eb-8fcc-06eed482c643.png" width="33%" height="300"></img> 
 </div>
 
-<div style="display: flex; margin-bottom: 40px; align-items: center">
-No ano de 2019, a equipe participou do projeto Byakugan: Visão Computacional, fazendo a equipe ter de refazer toda a estrutura do robô, pois o projeto visava acoplar uma câmera ao robô para usar das tecnologias de visão computacional para cumprir as tarefas propostas pela OBR. Com bastante esforço e dedicação, toda estrutura eletrônica, mecânica e todo o código foi refeito para atingir um bom resultado. Além da câmera, foi introduzido o microprocessador Raspberry PI para o processamentos das imagens capturadas, visto que não era possível o fazer apenas com o Arduino.  
+
+<p>No ano de 2019, a equipe participou do projeto Byakugan: Visão Computacional, fazendo a equipe ter de refazer toda a estrutura do robô, pois o projeto visava acoplar uma câmera ao robô para usar das tecnologias de visão computacional para cumprir as tarefas propostas pela OBR. Com bastante esforço e dedicação, toda estrutura eletrônica, mecânica e todo o código foi refeito para atingir um bom resultado. Além da câmera, foi introduzido o microprocessador Raspberry PI para o processamentos das imagens capturadas, visto que não era possível o fazer apenas com o Arduino.</p>
 
 <img src="https://user-images.githubusercontent.com/31678236/94826507-c1434880-03dd-11eb-8217-676c4dd79733.png" width="25%">
-</div>
 
 ### Premiação OBR 2019 
 
 Com todo o trabalho feito, a equipe foi premiada na OBR de 2019 com o prêmio de "Inovação", por ser a única equipe utilizando de uma proposta diferente para cumprir os desafios propostos. Tais desafios são usualmente abordados com sensores de distância, luminosidade, som, entre outros. 
 
 <div style="display: flex;">
-    <img src="https://user-images.githubusercontent.com/31678236/94827836-4418d300-03df-11eb-90a7-3cedbbe40cfb.png" width="50%">
-    <img src="https://user-images.githubusercontent.com/31678236/94827912-572ba300-03df-11eb-8f9f-8295af6e8ab5.png" width="50%">
+    <img src="https://user-images.githubusercontent.com/31678236/94827836-4418d300-03df-11eb-90a7-3cedbbe40cfb.png" width="250px" height="300px">
+    <img src="https://user-images.githubusercontent.com/31678236/94827912-572ba300-03df-11eb-8f9f-8295af6e8ab5.png" width="250px" height="300px">
+    <img src="https://user-images.githubusercontent.com/31678236/94829400-de2d4b00-03e0-11eb-81d5-fe148d7cb243.png" width="500px" height="400px">
 </div>
 
-![image](https://user-images.githubusercontent.com/31678236/94829400-de2d4b00-03e0-11eb-81d5-fe148d7cb243.png)
+
 
 ## Mais Detalhes
 
