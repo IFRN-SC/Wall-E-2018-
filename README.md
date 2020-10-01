@@ -8,7 +8,7 @@
 - [Evolução e Resultados](#evolução-e-resultados)
     - [Premiação OBR 2019](#premiação-obr-2019)
 - [Mais Detalhes](#mais-detalhes)
-    - [Componentes eletrônicos](##componentes-eletrônicos)
+    - [Componentes eletrônicos](#componentes-eletrônicos)
 - [Autores](#autores)
 
 
