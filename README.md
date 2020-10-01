@@ -1,7 +1,7 @@
 # Equipe Wall-E
 
 ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)
- ![License](https://img.shields.io/github/license/PauloVLB/byakuganv2)
+ ![License](https://img.shields.io/github/license/IFRN-SC/Wall-E-2018-)
 
 - [Resumo](#resumo)
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
