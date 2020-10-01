@@ -34,11 +34,10 @@ Já passaram pela equipe: Abmael Anderton, [Isaac Marlon](https://github.com/isa
 
 Com os ensinamentos dos mestres [Lennedy Campos](https://github.com/lennedy) e [Lucileide Dantas](https://github.com/lucileidedantas), a equipe começou em 2017, com o básico de eletrônica digital e programação, sendo introduzida aos diferentes componentes eletrônicos, e às plataformas citadas em [Tecnologias Utilizadas](##tecnologias-utilizadas).  Passaram-se várias abordagens, testes, estratégias, estudos, noites de discussão, momentos "Eureka!" e interações com todo o grupo do Laboratório de Robótica do IFRN-SC até a última versão de Wall-E:
 
-
-<div style="display: flex; margin-bottom: 40px">
-    <img src="https://user-images.githubusercontent.com/31678236/94839273-218db680-03ed-11eb-9c15-3a52a866baa6.png" width="33%" height="300"></img>
-    <img src="https://user-images.githubusercontent.com/31678236/94826043-49751e00-03dd-11eb-931a-83c8e2fb9699.png" width="35%" height="300"></img>
-    <img src="https://user-images.githubusercontent.com/31678236/94839477-6f0a2380-03ed-11eb-8fcc-06eed482c643.png" width="33%" height="300"></img> 
+<div style="display: flex;">
+    <img src="https://user-images.githubusercontent.com/31678236/94839273-218db680-03ed-11eb-9c15-3a52a866baa6.png" width="250px" height="300px">
+    <img src="https://user-images.githubusercontent.com/31678236/94826043-49751e00-03dd-11eb-931a-83c8e2fb9699.png" width="250px" height="300px">
+    <img src="https://user-images.githubusercontent.com/31678236/94839477-6f0a2380-03ed-11eb-8fcc-06eed482c643.png" width="500px" height="400px">
 </div>
 
 
